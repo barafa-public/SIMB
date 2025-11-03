@@ -1,445 +1,581 @@
 * {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
 }
 
 body {
-  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
-  line-height: 1.6;
-  color: #333;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    line-height: 1.6;
+    color: #333;
 }
 
-/* Header & Navigation */
+/* Header & Hero Combined */
+.hero-section {
+    position: relative;
+    min-height: 100vh;
+    background: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)), 
+                url('/assets/perencanaan.png') center/cover;
+    background-attachment: fixed;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    color: white;
+    margin-bottom: 0;
+}
+
+/* Navigation */
 .navbar {
-  background: rgba(0, 0, 0, 0.9);
-  padding: 1rem 0;
-  position: sticky;
-  top: 0;
-  z-index: 100;
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    background: rgba(0, 0, 0, 0.3);
+    backdrop-filter: blur(10px);
+    padding: 1.5rem 0;
+    position: relative;
+    z-index: 100;
+    transition: background 0.3s ease;
+}
+
+.navbar:hover {
+    background: rgba(0, 0, 0, 0.5);
 }
 
 .nav-container {
-  max-width: 1200px;
-  margin: 0 auto;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 0 2rem;
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 2rem;
 }
 
 .logo {
-  color: #fff;
-  font-size: 1.5rem;
-  font-weight: bold;
+    color: #fff;
+    font-size: 1.8rem;
+    font-weight: bold;
+    letter-spacing: 1px;
 }
 
 .nav-menu {
-  display: flex;
-  gap: 2rem;
+    display: flex;
+    gap: 1rem;
 }
 
 .nav-link {
-  color: #fff;
-  text-decoration: none;
-  padding: 0.5rem 1rem;
-  border-radius: 20px;
-  background: #ff9800;
-  font-size: 0.9rem;
-  transition: background 0.3s ease;
+    color: #fff;
+    text-decoration: none;
+    padding: 0.7rem 1.2rem;
+    border-radius: 25px;
+    background: #ff9800;
+    font-size: 0.9rem;
+    font-weight: 500;
+    transition: all 0.3s ease;
 }
 
 .nav-link:hover {
-  background: #e68900;
+    background: #e68900;
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(255, 152, 0, 0.4);
 }
 
-/* Hero Section */
-.hero-section {
-  position: relative;
-  height: 500px;
-  background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),
-    url("assets/buatan.png") center/cover;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: white;
-  text-align: center;
-  margin-bottom: 3rem;
-}
-
-.hero-overlay {
-  position: absolute;
-  bottom: -20px;
-  left: 0;
-  right: 0;
-  height: 40px;
-  background: white;
-  clip-path: polygon(0 50%, 100% 0, 100% 100%, 0 100%);
-}
-
+/* Hero Content */
 .hero-content {
-  position: relative;
-  z-index: 10;
-  max-width: 800px;
-  padding: 2rem;
+    flex-grow: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 3rem 2rem;
 }
 
 .hero-content h1 {
-  font-size: 3rem;
-  margin-bottom: 1rem;
-  font-weight: bold;
+    font-size: 3.5rem;
+    margin-bottom: 1.5rem;
+    font-weight: bold;
+    text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.7);
 }
 
 .hero-content p {
-  font-size: 1rem;
-  line-height: 1.8;
+    font-size: 1.1rem;
+    line-height: 1.8;
+    max-width: 700px;
+    margin: 0 auto;
+    text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.7);
+}
+
+.hero-overlay {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 60px;
+    background: white;
+    clip-path: polygon(0 50%, 100% 0, 100% 100%, 0 100%);
 }
 
 /* Jenis-Jenis Gempa Section */
 .jenis-gempa-section {
-  padding: 3rem 2rem;
-  max-width: 1200px;
-  margin: 0 auto;
-  text-align: center;
+    padding: 4rem 2rem;
+    max-width: 1200px;
+    margin: 0 auto;
+    text-align: center;
 }
 
 .jenis-gempa-section h2 {
-  font-size: 2.5rem;
-  margin-bottom: 2rem;
-  color: #333;
+    font-size: 2.5rem;
+    margin-bottom: 3rem;
+    color: #333;
+    font-weight: 700;
 }
 
 .gempa-cards {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-  gap: 2rem;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 2.5rem;
 }
 
 .card {
-  background: white;
-  border-radius: 15px;
-  overflow: hidden;
-  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
-  cursor: pointer;
+    position: relative;
+    border-radius: 15px;
+    overflow: hidden;
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    cursor: pointer;
+    height: 350px;
 }
 
 .card:hover {
-  transform: translateY(-10px);
-  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+    transform: translateY(-15px);
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.25);
 }
 
 .card-image {
-  height: 200px;
-  background-size: cover;
-  background-position: center;
-  position: relative;
+    height: 100%;
+    background-size: cover;
+    background-position: center;
+    position: relative;
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+}
+
+.card-image::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(to bottom, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0.7) 100%);
+    z-index: 1;
 }
 
 .card-image.tektonik {
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    background-image: url('assets/tektonik.png');
 }
 
 .card-image.vulkanik {
-  background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+    background-image: url('assets/vulkanik.png');
 }
 
 .card-image.buatan {
-  background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+    background-image: url('assets/buatan.png');
 }
 
 .card h3 {
-  padding: 1.5rem;
-  color: #333;
-  font-size: 1.2rem;
+    position: relative;
+    z-index: 2;
+    color: white;
+    font-size: 1.4rem;
+    font-weight: 600;
+    padding-bottom: 2rem;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
 }
 
 /* Dampak Section */
 .dampak-section {
-  padding: 3rem 2rem;
-  background: #f9f9f9;
-  max-width: 1200px;
-  margin: 0 auto;
+    padding: 4rem 2rem;
+    background: #f9f9f9;
+    max-width: 1200px;
+    margin: 0 auto;
 }
 
 .dampak-section h2 {
-  font-size: 2.5rem;
-  margin-bottom: 2rem;
-  text-align: center;
-  color: #333;
+    font-size: 2.5rem;
+    margin-bottom: 3rem;
+    text-align: center;
+    color: #333;
+    font-weight: 700;
 }
 
 .dampak-container {
-  display: grid;
-  grid-template-columns: 1fr auto 1fr;
-  gap: 2rem;
-  align-items: center;
+    display: grid;
+    grid-template-columns: 1fr auto 1fr;
+    gap: 2rem;
+    align-items: center;
 }
 
 .dampak-item {
-  display: flex;
-  gap: 1.5rem;
-  align-items: center;
+    display: flex;
+    gap: 2rem;
+    align-items: center;
 }
 
 .dampak-positif {
-  flex-direction: row-reverse;
+    flex-direction: row-reverse;
 }
 
 .dampak-image {
-  width: 300px;
-  height: 250px;
-  border-radius: 10px;
-  background-size: cover;
-  background-position: center;
-  flex-shrink: 0;
+    width: 300px;
+    height: 250px;
+    border-radius: 10px;
+    background-size: cover;
+    background-position: center;
+    flex-shrink: 0;
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
 }
 
 .dampak-image.positif {
-  background: linear-gradient(135deg, #a8edea 0%, #fed6e3 100%);
+    background: linear-gradient(135deg, #a8edea 0%, #fed6e3 100%);
 }
 
 .dampak-image.negatif {
-  background: linear-gradient(135deg, #ff9a56 0%, #ff6a88 100%);
+    background: linear-gradient(135deg, #ff9a56 0%, #ff6a88 100%);
 }
 
 .dampak-content h3 {
-  font-size: 1.5rem;
-  margin-bottom: 1rem;
-  color: #333;
+    font-size: 1.6rem;
+    margin-bottom: 1rem;
+    color: #333;
+    font-weight: 600;
 }
 
 .dampak-content p {
-  line-height: 1.8;
-  color: #555;
+    line-height: 1.8;
+    color: #555;
+    font-size: 1rem;
 }
 
 .dampak-divider {
-  width: 4px;
-  height: 200px;
-  background: linear-gradient(to bottom, #ff9800, transparent);
-  border-radius: 2px;
+    width: 5px;
+    height: 220px;
+    background: linear-gradient(to bottom, #ff9800, #ffc107);
+    border-radius: 3px;
 }
 
 /* Pencegahan Section */
 .pencegahan-section {
-  padding: 3rem 2rem;
-  max-width: 1200px;
-  margin: 0 auto;
-  background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),
-    url("assets/perencanaa.png") center/cover;
-  color: white;
-  text-align: center;
-  border-radius: 10px;
+    padding: 4rem 2rem;
+    max-width: 1200px;
+    margin: 0 auto;
+    background: linear-gradient(rgba(0, 0, 0, 0.55), rgba(0, 0, 0, 0.55)), 
+                url('assets/perencanaa.png') center/cover;
+    color: white;
+    text-align: center;
+    border-radius: 15px;
+    box-shadow: 0 10px 35px rgba(0, 0, 0, 0.2);
 }
 
 .pencegahan-section h2 {
-  font-size: 2rem;
-  margin-bottom: 1rem;
+    font-size: 2.2rem;
+    margin-bottom: 1.5rem;
+    font-weight: 700;
 }
 
 .pencegahan-section p {
-  margin-bottom: 1.5rem;
-  font-size: 1rem;
+    margin-bottom: 2rem;
+    font-size: 1.1rem;
+    max-width: 600px;
+    margin-left: auto;
+    margin-right: auto;
 }
 
 .btn-perencanaan {
-  background: #ff9800;
-  color: white;
-  border: none;
-  padding: 0.8rem 2rem;
-  border-radius: 25px;
-  font-size: 1rem;
-  cursor: pointer;
-  transition: background 0.3s ease;
+    background: #ff9800;
+    color: white;
+    border: none;
+    padding: 1rem 2.5rem;
+    border-radius: 30px;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 5px 15px rgba(255, 152, 0, 0.4);
 }
 
 .btn-perencanaan:hover {
-  background: #e68900;
+    background: #e68900;
+    transform: translateY(-3px);
+    box-shadow: 0 8px 20px rgba(255, 152, 0, 0.6);
 }
 
 /* Informasi Section */
 .informasi-section {
-  padding: 3rem 2rem;
-  max-width: 1200px;
-  margin: 0 auto;
+    padding: 4rem 2rem;
+    max-width: 1200px;
+    margin: 0 auto;
 }
 
 .informasi-section h2 {
-  font-size: 2rem;
-  margin-bottom: 2rem;
-  text-align: center;
-  color: #333;
+    font-size: 2.5rem;
+    margin-bottom: 2rem;
+    text-align: center;
+    color: #333;
+    font-weight: 700;
 }
 
 .peta-gempa {
-  border: 3px solid #ddd;
-  border-radius: 10px;
-  overflow: hidden;
+    border-radius: 15px;
+    overflow: hidden;
+    box-shadow: 0 10px 35px rgba(0, 0, 0, 0.15);
+    height: 500px;
+    position: relative;
 }
 
 .peta-gempa img {
-  width: 100%;
-  height: auto;
-  display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+
+.peta-loading {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    background: #f5f5f5;
+    color: #666;
+    font-size: 1.1rem;
 }
 
 /* Tabel Gempa */
 .tabel-gempa-section {
-  padding: 3rem 2rem;
-  background: #f9f9f9;
-  max-width: 1200px;
-  margin: 0 auto;
+    padding: 4rem 2rem;
+    background: #f9f9f9;
+    max-width: 1200px;
+    margin: 0 auto;
 }
 
 .tabel-gempa-section h2 {
-  font-size: 2rem;
-  margin-bottom: 2rem;
-  text-align: center;
-  color: #333;
+    font-size: 2.5rem;
+    margin-bottom: 2rem;
+    text-align: center;
+    color: #333;
+    font-weight: 700;
 }
 
 .tabel-wrapper {
-  overflow-x: auto;
+    overflow-x: auto;
+    border-radius: 15px;
+    box-shadow: 0 10px 35px rgba(0, 0, 0, 0.1);
 }
 
 .tabel-gempa {
-  width: 100%;
-  border-collapse: collapse;
-  background: white;
-  border-radius: 10px;
-  overflow: hidden;
-  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    border-collapse: collapse;
+    background: white;
+    font-size: 0.95rem;
 }
 
 .tabel-gempa thead {
-  background: #333;
-  color: white;
+    background: linear-gradient(135deg, #333 0%, #555 100%);
+    color: white;
 }
 
 .tabel-gempa th {
-  padding: 1rem;
-  text-align: left;
-  font-weight: 600;
+    padding: 1.2rem;
+    text-align: left;
+    font-weight: 600;
+    letter-spacing: 0.5px;
 }
 
 .tabel-gempa td {
-  padding: 1rem;
-  border-bottom: 1px solid #eee;
+    padding: 1rem 1.2rem;
+    border-bottom: 1px solid #eee;
+}
+
+.tabel-gempa tbody tr {
+    transition: background 0.3s ease;
 }
 
 .tabel-gempa tbody tr:hover {
-  background: #f5f5f5;
+    background: #f0f8ff;
+}
+
+.magnitudo-badge {
+    display: inline-block;
+    padding: 0.4rem 0.8rem;
+    border-radius: 20px;
+    font-weight: 600;
+    color: white;
+    font-size: 0.9rem;
+}
+
+.magnitudo-low {
+    background: #4caf50;
+}
+
+.magnitudo-medium {
+    background: #ff9800;
+}
+
+.magnitudo-high {
+    background: #f44336;
+}
+
+.tabel-loading,
+.tabel-error {
+    text-align: center;
+    padding: 2rem;
+    color: #666;
+    font-size: 1.1rem;
+}
+
+.tabel-error {
+    color: #d32f2f;
 }
 
 /* Dibalik Layar Section */
 .dibalik-layar-section {
-  padding: 3rem 2rem;
-  max-width: 1200px;
-  margin: 0 auto;
+    padding: 4rem 2rem;
+    max-width: 1200px;
+    margin: 0 auto;
 }
 
 .dibalik-layar-section h2 {
-  font-size: 2rem;
-  margin-bottom: 2rem;
-  text-align: center;
-  color: #333;
+    font-size: 2.5rem;
+    margin-bottom: 3rem;
+    text-align: center;
+    color: #333;
+    font-weight: 700;
 }
 
 .dibalik-container {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-  gap: 1.5rem;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 2rem;
 }
 
 .dibalik-item {
-  height: 150px;
-  background: linear-gradient(135deg, #a8a8a8 0%, #5a5a5a 100%);
-  border-radius: 10px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  cursor: pointer;
-  transition: transform 0.3s ease;
+    height: 150px;
+    background: linear-gradient(135deg, #a8a8a8 0%, #5a5a5a 100%);
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.15);
 }
 
 .dibalik-item:hover {
-  transform: scale(1.05);
+    transform: scale(1.05);
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.25);
 }
 
 .dibalik-label {
-  color: white;
-  font-size: 1.2rem;
-  font-weight: bold;
-  text-align: center;
+    color: white;
+    font-size: 1.3rem;
+    font-weight: 700;
+    text-align: center;
+    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5);
 }
 
 /* Footer */
 .footer {
-  background: #2c3e50;
-  color: white;
-  text-align: center;
-  padding: 2rem;
-  margin-top: 3rem;
+    background: #2c3e50;
+    color: white;
+    text-align: center;
+    padding: 3rem 2rem;
+    margin-top: 4rem;
 }
 
 .kata-kata {
-  margin-bottom: 1rem;
+    margin-bottom: 1.5rem;
 }
 
 .kata-kata h3 {
-  font-size: 1.5rem;
-  margin-bottom: 0.5rem;
+    font-size: 1.5rem;
+    margin-bottom: 0.5rem;
+    font-weight: 700;
 }
 
 .kata-kata p {
-  font-size: 1.1rem;
-  font-style: italic;
+    font-size: 1.2rem;
+    font-style: italic;
+    color: #fff;
 }
 
 .copyright {
-  border-top: 1px solid rgba(255, 255, 255, 0.2);
-  padding-top: 1rem;
-  font-size: 0.9rem;
+    border-top: 1px solid rgba(255, 255, 255, 0.2);
+    padding-top: 1rem;
+    font-size: 0.95rem;
+    color: #bbb;
 }
 
 /* Responsive */
 @media (max-width: 768px) {
-  .hero-content h1 {
-    font-size: 2rem;
-  }
+    .hero-content h1 {
+        font-size: 2.2rem;
+    }
 
-  .dampak-container {
-    grid-template-columns: 1fr;
-  }
+    .hero-content p {
+        font-size: 1rem;
+    }
 
-  .dampak-divider {
-    display: none;
-  }
+    .jenis-gempa-section h2,
+    .dampak-section h2,
+    .tabel-gempa-section h2,
+    .dibalik-layar-section h2 {
+        font-size: 1.8rem;
+    }
 
-  .dampak-item {
-    flex-direction: column;
-  }
+    .dampak-container {
+        grid-template-columns: 1fr;
+    }
 
-  .dampak-positif {
-    flex-direction: column;
-  }
+    .dampak-divider {
+        display: none;
+    }
 
-  .hero-section {
-    height: 300px;
-  }
+    .dampak-item {
+        flex-direction: column !important;
+    }
 
-  .gempa-cards {
-    grid-template-columns: 1fr;
-  }
+    .gempa-cards {
+        grid-template-columns: 1fr;
+    }
 
-  .nav-menu {
-    gap: 0.5rem;
-  }
+    .card {
+        height: 300px;
+    }
 
-  .nav-link {
-    padding: 0.4rem 0.8rem;
-    font-size: 0.8rem;
-  }
+    .nav-menu {
+        gap: 0.5rem;
+    }
+
+    .nav-link {
+        padding: 0.5rem 1rem;
+        font-size: 0.85rem;
+    }
+
+    .peta-gempa {
+        height: 300px;
+    }
+
+    .tabel-gempa {
+        font-size: 0.85rem;
+    }
+
+    .tabel-gempa th,
+    .tabel-gempa td {
+        padding: 0.8rem;
+    }
+
+    .pencegahan-section {
+        padding: 2.5rem 1.5rem;
+    }
+
+    .pencegahan-section h2 {
+        font-size: 1.6rem;
+    }
 }

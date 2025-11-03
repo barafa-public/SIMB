@@ -7,26 +7,30 @@
     <link rel="stylesheet" href="/CSS/dashboard.css">
 </head>
 <body>
-    <!-- Header Navigation -->
-    <header class="navbar">
-        <div class="nav-container">
-            <div class="logo">SeismoTech</div>
-            <nav class="nav-menu">
-                <a href="#beranda" class="nav-link">Beranda</a>
-                <a href="#gempa" class="nav-link">Gempa</a>
-                <a href="#dampak" class="nav-link">Dampak</a>
-                <a href="#pencegahan" class="nav-link">Pencegahan</a>
-                <a href="#informasi" class="nav-link">Informasi</a>
-            </nav>
-        </div>
-    </header>
+    <!-- Header & Hero Section Combined -->
+    <section class="hero-section">
+        <!-- Navigation -->
+        <header class="navbar">
+            <div class="nav-container">
+                <div class="logo">SeismoTech</div>
+                <nav class="nav-menu">
+                    <a href="#beranda" class="nav-link">Beranda</a>
+                    <a href="#gempa" class="nav-link">Gempa</a>
+                    <a href="#dampak" class="nav-link">Dampak</a>
+                    <a href="#pencegahan" class="nav-link">Pencegahan</a>
+                    <a href="#informasi" class="nav-link">Informasi</a>
+                </nav>
+            </div>
+        </header>
 
-    <!-- Hero Section - Gempa Bumi -->
-    <section id="gempa" class="hero-section">
+        <!-- Hero Content -->
         <div class="hero-content">
-            <h1>Gempa Bumi</h1>
-            <p>Gempa bumi merupakan gejala alam yang ditimbulkan oleh tiba-tiba bergeraknya lempeng tektonik di dalam bumi. Gempa bumi dapat terjadi karena adanya pergerakan magma di dalam bumi, namun penyebab utama adalah kegiatan pergerakan lempeng tektonik bumi yang terus bergerak di atas mantel bumi yang panas.</p>
+            <div>
+                <h1>Gempa Bumi</h1>
+                <p>Gempa bumi merupakan gejala alam yang ditimbulkan oleh tiba-tiba bergeraknya lempeng tektonik di dalam bumi. Gempa bumi dapat terjadi karena adanya pergerakan magma di dalam bumi, namun penyebab utama adalah kegiatan pergerakan lempeng tektonik bumi yang terus bergerak di atas mantel bumi yang panas.</p>
+            </div>
         </div>
+
         <div class="hero-overlay"></div>
     </section>
 
@@ -35,16 +39,22 @@
         <h2>Jenis-Jenis Gempa</h2>
         <div class="gempa-cards">
             <div class="card">
-                <div class="card-image tektonik"></div>
-                <h3>Gempa Tektonik</h3>
+                <div class="card-image tektonik">
+                    <img src="/assets/tektonik.png" alt="">
+                    <h3>Gempa Tektonik</h3>
+                </div>
             </div>
             <div class="card">
-                <div class="card-image vulkanik"></div>
-                <h3>Gempa Vulkanik</h3>
+                <div class="card-image vulkanik">
+                    <img src="/assets/vulkanik.png" alt="">
+                    <h3>Gempa Vulkanik</h3>
+                </div>
             </div>
             <div class="card">
-                <div class="card-image buatan"></div>
-                <h3>Gempa Buatan</h3>
+                <div class="card-image buatan">
+                    <img src="/assets/buatan.png" alt="">
+                    <h3>Gempa Buatan</h3>
+                </div>
             </div>
         </div>
     </section>
@@ -84,7 +94,8 @@
     <section id="informasi" class="informasi-section">
         <h2>Informasi Gempa Bumi Real-Time</h2>
         <div class="peta-gempa">
-            <img src="assets/perencanaa.png" alt="Peta Gempa Indonesia">
+            <div class="peta-loading" id="peta-loading">Memuat peta gempa...</div>
+            <img id="peta-img" src="assets/perencanaa.png" alt="Peta Gempa Indonesia" style="display: none;">
         </div>
     </section>
 
@@ -92,10 +103,12 @@
     <section class="tabel-gempa-section">
         <h2>Beberapa Gempa Bumi Real-Time</h2>
         <div class="tabel-wrapper">
-            <table class="tabel-gempa">
+            <div id="tabel-status" class="tabel-loading">Memuat data gempa...</div>
+            <table class="tabel-gempa" id="tabel-gempa" style="display: none;">
                 <thead>
                     <tr>
                         <th>#</th>
+                        <th>Waktu</th>
                         <th>Lokasi</th>
                         <th>Magnitudo</th>
                         <th>Kedalaman</th>
@@ -103,47 +116,7 @@
                         <th>Wilayah</th>
                     </tr>
                 </thead>
-                <tbody>
-                    <tr>
-                        <td>1</td>
-                        <td>Medan</td>
-                        <td>Magnitudo</td>
-                        <td>Kedalaman</td>
-                        <td>Koordinat</td>
-                        <td>Wilayah</td>
-                    </tr>
-                    <tr>
-                        <td>2</td>
-                        <td>Medan</td>
-                        <td>Magnitudo</td>
-                        <td>Kedalaman</td>
-                        <td>Koordinat</td>
-                        <td>Wilayah</td>
-                    </tr>
-                    <tr>
-                        <td>3</td>
-                        <td>Medan</td>
-                        <td>Magnitudo</td>
-                        <td>Kedalaman</td>
-                        <td>Koordinat</td>
-                        <td>Wilayah</td>
-                    </tr>
-                    <tr>
-                        <td>4</td>
-                        <td>Medan</td>
-                        <td>Magnitudo</td>
-                        <td>Kedalaman</td>
-                        <td>Koordinat</td>
-                        <td>Wilayah</td>
-                    </tr>
-                    <tr>
-                        <td>5</td>
-                        <td>Medan</td>
-                        <td>Magnitudo</td>
-                        <td>Kedalaman</td>
-                        <td>Koordinat</td>
-                        <td>Wilayah</td>
-                    </tr>
+                <tbody id="tabel-body">
                 </tbody>
             </table>
         </div>
@@ -181,5 +154,100 @@
             <p>Copyright 2025. All rights Reserved</p>
         </div>
     </footer>
+
+    <script>
+        // Fungsi untuk fetch data gempa dari API BMKG
+        async function loadGempaData() {
+            try {
+                const response = await fetch('https://data.bmkg.go.id/DataMfukBMKG/WAVEBMKG/gempa_terkini.json');
+                
+                if (!response.ok) {
+                    throw new Error('Gagal mengambil data');
+                }
+
+                const data = await response.json();
+                
+                // Tampilkan peta
+                if (data.Infogempa.gempa.Image) {
+                    document.getElementById('peta-img').src = data.Infogempa.gempa.Image;
+                    document.getElementById('peta-img').style.display = 'block';
+                    document.getElementById('peta-loading').style.display = 'none';
+                }
+
+                // Ambil data gempa terkini
+                const gempaTerkini = data.Infogempa.gempa;
+                
+                // Ambil data gempa 24 jam terakhir (maksimal 15 gempa)
+                const gempaLengkap = data.Infogempa.gempa_siaga || [];
+                const gempaList = Array.isArray(gempaLengkap) ? gempaLengkap : [];
+
+                // Jika ada, tambahkan gempa terkini ke awal list
+                if (gempaTerkini) {
+                    gempaList.unshift(gempaTerkini);
+                }
+
+                // Batasi hingga 10 gempa
+                const gempaBatasSepuluh = gempaList.slice(0, 10);
+
+                if (gempaBatasSepuluh.length === 0) {
+                    document.getElementById('tabel-status').innerHTML = 'Tidak ada data gempa tersedia';
+                    return;
+                }
+
+                // Populate tabel
+                const tbody = document.getElementById('tabel-body');
+                tbody.innerHTML = '';
+
+                gempaBatasSepuluh.forEach((gempa, index) => {
+                    const row = document.createElement('tr');
+                    
+                    // Parse data gempa
+                    const tanggal = gempa.Tanggal || 'N/A';
+                    const jam = gempa.Jam || 'N/A';
+                    const lokasi = gempa.Wilayah || 'N/A';
+                    const magnitudo = parseFloat(gempa.Magnitude) || 0;
+                    const kedalaman = gempa.Kedalaman || 'N/A';
+                    const lintang = gempa.Lintang || 'N/A';
+                    const bujur = gempa.Bujur || 'N/A';
+                    
+                    // Tentukan class magnitudo
+                    let magClass = 'magnitudo-low';
+                    if (magnitudo >= 6) {
+                        magClass = 'magnitudo-high';
+                    } else if (magnitudo >= 5) {
+                        magClass = 'magnitudo-medium';
+                    }
+
+                    row.innerHTML = `
+                        <td>${index + 1}</td>
+                        <td>${tanggal} ${jam}</td>
+                        <td>${lokasi}</td>
+                        <td><span class="magnitudo-badge ${magClass}">${magnitudo}</span></td>
+                        <td>${kedalaman}</td>
+                        <td>${lintang}°, ${bujur}°</td>
+                        <td>${gempa.Wilayah || 'N/A'}</td>
+                    `;
+                    
+                    tbody.appendChild(row);
+                });
+
+                // Tampilkan tabel dan sembunyikan loading
+                document.getElementById('tabel-gempa').style.display = 'table';
+                document.getElementById('tabel-status').style.display = 'none';
+
+            } catch (error) {
+                console.error('Error:', error);
+                document.getElementById('tabel-status').innerHTML = `<div class="tabel-error">⚠️ Gagal memuat data gempa. Silakan refresh halaman.</div>`;
+                document.getElementById('peta-loading').innerHTML = 'Gagal memuat peta. Menampilkan peta default...';
+                document.getElementById('peta-img').style.display = 'block';
+            }
+        }
+
+        // Load data saat halaman selesai
+        document.addEventListener('DOMContentLoaded', loadGempaData);
+
+        // Refresh data setiap 5 menit
+        setInterval(loadGempaData, 300000);
+    </script>
 </body>
 </html>
