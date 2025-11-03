@@ -1,73 +1,185 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="id">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gempa Bumi - SeismoTech</title>
     <link rel="stylesheet" href="/CSS/dashboard.css">
-    <title>Dashboard</title>
 </head>
-
 <body>
-    <div class="container">
-        <div class="headline">
-            <div class="nav">
-                <div class="title">SeismoTech</div>
-                <ul class="nav-links">
-                    <li><a href="#about">About</a></li>
-                    <li><a href="#project">Project</a></li>
-                    <li><a href="#blog">Blog</a></li>
-                </ul>
-                <button>Contact us</button>
+    <!-- Header Navigation -->
+    <header class="navbar">
+        <div class="nav-container">
+            <div class="logo">SeismoTech</div>
+            <nav class="nav-menu">
+                <a href="#beranda" class="nav-link">Beranda</a>
+                <a href="#gempa" class="nav-link">Gempa</a>
+                <a href="#dampak" class="nav-link">Dampak</a>
+                <a href="#pencegahan" class="nav-link">Pencegahan</a>
+                <a href="#informasi" class="nav-link">Informasi</a>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Hero Section - Gempa Bumi -->
+    <section id="gempa" class="hero-section">
+        <div class="hero-content">
+            <h1>Gempa Bumi</h1>
+            <p>Gempa bumi merupakan gejala alam yang ditimbulkan oleh tiba-tiba bergeraknya lempeng tektonik di dalam bumi. Gempa bumi dapat terjadi karena adanya pergerakan magma di dalam bumi, namun penyebab utama adalah kegiatan pergerakan lempeng tektonik bumi yang terus bergerak di atas mantel bumi yang panas.</p>
+        </div>
+        <div class="hero-overlay"></div>
+    </section>
+
+    <!-- Jenis-Jenis Gempa Section -->
+    <section id="jenis-gempa" class="jenis-gempa-section">
+        <h2>Jenis-Jenis Gempa</h2>
+        <div class="gempa-cards">
+            <div class="card">
+                <div class="card-image tektonik"></div>
+                <h3>Gempa Tektonik</h3>
             </div>
-            <div class="explaining">
-                <p>Gempa Bumi</p>
-                <p>Gempa Bumi adalah .......</p>
+            <div class="card">
+                <div class="card-image vulkanik"></div>
+                <h3>Gempa Vulkanik</h3>
             </div>
-            <div class="nav-footer">
-                <div class="footer">
-                    <p>Sensing the Earth, Securing the Future</p>
-                    <button>Browse</button>
+            <div class="card">
+                <div class="card-image buatan"></div>
+                <h3>Gempa Buatan</h3>
+            </div>
+        </div>
+    </section>
+
+    <!-- Dampak Section -->
+    <section id="dampak" class="dampak-section">
+        <h2>Dampak</h2>
+        <div class="dampak-container">
+            <div class="dampak-item dampak-positif">
+                <div class="dampak-image positif"></div>
+                <div class="dampak-content">
+                    <h3>Dampak Positif</h3>
+                    <p>Mengurangi jumlah gas dalam lapisan (intes) di dari reaktor. Membantu menahan gerakan terhadap beban tekanan. Memberikan data dan informasi alam untuk pelintasan. Meningkatkan penggunaan energi konvensional</p>
                 </div>
             </div>
-        </div>
+            
+            <div class="dampak-divider"></div>
 
-    <section id="about" class="about">
-        <p>
-            We are a group of people that passionate about earthquake research - exploring seismic activity, studying its patterns, and striving to understand how the Earth's movement shape our world. Our mission is contribute to safer community through knowledge 
-        </p>
-        <div class="profile">
-            <div class="profilel"><img src="" alt=""></div>
-            <div class="profile2"><img src="" alt=""></div>
-            <div class="profile3"><img src="" alt=""></div>
-            <div class="profile4"><img src="" alt=""></div>
-            <div class="profile5"><img src="" alt=""></div>
+            <div class="dampak-item dampak-negatif">
+                <div class="dampak-content">
+                    <h3>Dampak Negatif</h3>
+                    <p>Merusak bangunan-bangunan di lokasi, kerusakan bangunan dan infrastruktur, banyak bangunan pertokoan rusakan tidak dapat digunakan. Korban jiwa dapat terjadi.</p>
+                </div>
+                <div class="dampak-image negatif"></div>
+            </div>
         </div>
     </section>
 
-    
-    <section id="project" class="project">
-        <h1>Earthquake</h1>
-        <div class="earthquake1">
-            <p>Gempa Tektonik</p>
-            <img src="" alt="">
-        </div>
-        <div class="earthquake2">
-            <p>Gempa Vulkanik</p>
-            <img src="" alt="">
-        </div>
-        <div class="earthquake3">
-            <p>Gempa Buatan</p>
-            <img src="" alt="">
+    <!-- Perencanaan Tindakan Bencana -->
+    <section id="pencegahan" class="pencegahan-section">
+        <h2>Perencanaan Tindakan Bencana Gempa Bumi</h2>
+        <p>Kita dapat Persiapkan dengan rekonstruksi dan pengorganisasian baik itu persiapan sebelum gempa terjadi</p>
+        <button class="btn-perencanaan">Selengkapnya ></button>
+    </section>
+
+    <!-- Informasi Gempa Real-Time -->
+    <section id="informasi" class="informasi-section">
+        <h2>Informasi Gempa Bumi Real-Time</h2>
+        <div class="peta-gempa">
+            <img src="assets/perencanaa.png" alt="Peta Gempa Indonesia">
         </div>
     </section>
 
+    <!-- Tabel Beberapa Gempa -->
+    <section class="tabel-gempa-section">
+        <h2>Beberapa Gempa Bumi Real-Time</h2>
+        <div class="tabel-wrapper">
+            <table class="tabel-gempa">
+                <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>Lokasi</th>
+                        <th>Magnitudo</th>
+                        <th>Kedalaman</th>
+                        <th>Koordinat</th>
+                        <th>Wilayah</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>1</td>
+                        <td>Medan</td>
+                        <td>Magnitudo</td>
+                        <td>Kedalaman</td>
+                        <td>Koordinat</td>
+                        <td>Wilayah</td>
+                    </tr>
+                    <tr>
+                        <td>2</td>
+                        <td>Medan</td>
+                        <td>Magnitudo</td>
+                        <td>Kedalaman</td>
+                        <td>Koordinat</td>
+                        <td>Wilayah</td>
+                    </tr>
+                    <tr>
+                        <td>3</td>
+                        <td>Medan</td>
+                        <td>Magnitudo</td>
+                        <td>Kedalaman</td>
+                        <td>Koordinat</td>
+                        <td>Wilayah</td>
+                    </tr>
+                    <tr>
+                        <td>4</td>
+                        <td>Medan</td>
+                        <td>Magnitudo</td>
+                        <td>Kedalaman</td>
+                        <td>Koordinat</td>
+                        <td>Wilayah</td>
+                    </tr>
+                    <tr>
+                        <td>5</td>
+                        <td>Medan</td>
+                        <td>Magnitudo</td>
+                        <td>Kedalaman</td>
+                        <td>Koordinat</td>
+                        <td>Wilayah</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </section>
+
+    <!-- Dibalik Layar Section -->
+    <section class="dibalik-layar-section">
+        <h2>Dibalik Layar</h2>
+        <div class="dibalik-container">
+            <div class="dibalik-item">
+                <div class="dibalik-label">Tectik</div>
+            </div>
+            <div class="dibalik-item">
+                <div class="dibalik-label">Kime</div>
+            </div>
+            <div class="dibalik-item">
+                <div class="dibalik-label">Alimito</div>
+            </div>
+            <div class="dibalik-item">
+                <div class="dibalik-label">Togo</div>
+            </div>
+            <div class="dibalik-item">
+                <div class="dibalik-label">Argel</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
     <footer class="footer">
-        <p class="footer-title">SeismoTech</p>
-        <div class="social-media">
-            <div class="ig"></div>
-            <div class="linkind"></div>
+        <div class="kata-kata">
+            <h3>Kata - Kata</h3>
+            <p>"Sensing The Earth, Securing The Future"</p>
+        </div>
+        <div class="copyright">
+            <p>Copyright 2025. All rights Reserved</p>
         </div>
     </footer>
-    </div>
 </body>
 </html>
