@@ -299,7 +299,7 @@ html {
     max-width: 1200px;
     margin: 0 auto;
     background: linear-gradient(rgba(0, 0, 0, 0.55), rgba(0, 0, 0, 0.55)), 
-                url('assets/perencanaa.png') center/cover;
+                url('/assets/gempa/perencanaan.png') center/cover;
     color: white;
     text-align: center;
     border-radius: 15px;
@@ -459,7 +459,7 @@ html {
     color: #d32f2f;
 }
 
-/* ✅ PERBAIKAN: Dibalik Layar Section - Lingkaran Sempurna */
+/* ✅ PERBAIKAN: Dibalik Layar Section - Lingkaran dengan Nama di Bawah */
 .dibalik-layar-section {
     padding: 4rem 2rem;
     max-width: 1200px;
@@ -486,12 +486,14 @@ html {
     background: linear-gradient(135deg, #a8a8a8 0%, #5a5a5a 100%);
     border-radius: 50%;
     display: flex;
-    align-items: center;
+    align-items: flex-end;
     justify-content: center;
     cursor: pointer;
     transition: all 0.3s ease;
     box-shadow: 0 5px 15px rgba(0, 0, 0, 0.15);
     margin: 0 auto;
+    position: relative;
+    overflow: hidden;
 }
 
 .dibalik-item:hover {
@@ -499,12 +501,29 @@ html {
     box-shadow: 0 12px 30px rgba(0, 0, 0, 0.3);
 }
 
+/* Styling untuk foto anggota */
+.dibalik-item img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    position: absolute;
+    top: 0;
+    left: 0;
+    border-radius: 50%;
+}
+
 .dibalik-label {
     color: white;
-    font-size: 1.3rem;
+    font-size: 1.2rem;
     font-weight: 700;
     text-align: center;
-    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5);
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);
+    background: linear-gradient(to top, rgba(0, 0, 0, 0.8) 0%, rgba(0, 0, 0, 0.4) 70%, transparent 100%);
+    padding: 1.5rem 0.5rem 0.8rem 0.5rem;
+    width: 100%;
+    position: relative;
+    z-index: 2;
+    border-radius: 0 0 100px 100px;
 }
 
 /* Footer */
