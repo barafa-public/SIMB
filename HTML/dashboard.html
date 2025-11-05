@@ -43,10 +43,49 @@
             font-style: italic;
         }
 
+        /* Styling untuk tombol Selengkapnya */
+        .btn-load-more {
+            background: linear-gradient(135deg, #ff9800 0%, #ff6b35 100%);
+            color: white;
+            border: none;
+            padding: 1rem 2.5rem;
+            border-radius: 30px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 15px rgba(255, 152, 0, 0.4);
+            margin: 2rem auto;
+            display: block;
+        }
+
+        .btn-load-more:hover {
+            background: linear-gradient(135deg, #e68900 0%, #e65a25 100%);
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(255, 152, 0, 0.6);
+        }
+
+        .btn-load-more:disabled {
+            background: #ccc;
+            cursor: not-allowed;
+            transform: none;
+            box-shadow: none;
+        }
+
+        .btn-load-more:disabled:hover {
+            background: #ccc;
+            transform: none;
+        }
+
         @media (max-width: 768px) {
             .peta-container {
                 padding: 1rem;
                 border-radius: 10px;
+            }
+
+            .btn-load-more {
+                width: 90%;
+                padding: 0.9rem 2rem;
             }
         }
     </style>
@@ -192,6 +231,9 @@
                 <tbody id="tabel-body"></tbody>
             </table>
         </div>
+        <button class="btn-load-more" id="btn-load-more" onclick="loadMoreData()" style="display: none;">
+            Selengkapnya
+        </button>
     </section>
 
     <!-- Dibalik Layar Section -->
@@ -232,10 +274,56 @@
     </footer>
 
     <script>
+        // Variable global untuk menyimpan data gempa
+        let allGempaData = [];
+        let currentDisplayCount = 10;
+        const itemsPerPage = 10;
+
         function updateLastRefreshTime() {
             const now = new Date();
             const timeString = now.toLocaleTimeString('id-ID', { hour: '2-digit', minute: '2-digit', second: '2-digit' });
             document.getElementById('last-update').textContent = `Terakhir diperbarui: ${timeString}`;
+        }
+
+        function renderGempaTable(startIndex, endIndex) {
+            const tbody = document.getElementById('tabel-body');
+            const dataToRender = allGempaData.slice(startIndex, endIndex);
+
+            dataToRender.forEach((gempa, index) => {
+                const magnitudo = parseFloat(gempa.Magnitude) || 0;
+                let magClass = 'magnitudo-low';
+                if (magnitudo >= 6) magClass = 'magnitudo-high';
+                else if (magnitudo >= 5) magClass = 'magnitudo-medium';
+
+                const row = document.createElement('tr');
+                row.innerHTML = `
+                    <td>${startIndex + index + 1}</td>
+                    <td>${gempa.Tanggal || '-'} ${gempa.Jam || '-'}</td>
+                    <td>${gempa.Wilayah || '-'}</td>
+                    <td><span class="magnitudo-badge ${magClass}">${magnitudo}</span></td>
+                    <td>${gempa.Kedalaman || '-'}</td>
+                    <td>${gempa.Lintang || '-'}, ${gempa.Bujur || '-'}</td>
+                    <td>${gempa.Wilayah || '-'}</td>
+                `;
+                tbody.appendChild(row);
+            });
+        }
+
+        function loadMoreData() {
+            const tbody = document.getElementById('tabel-body');
+            const btnLoadMore = document.getElementById('btn-load-more');
+            
+            // Tampilkan 10 data berikutnya
+            const startIndex = currentDisplayCount;
+            const endIndex = Math.min(currentDisplayCount + itemsPerPage, allGempaData.length);
+            
+            renderGempaTable(startIndex, endIndex);
+            currentDisplayCount = endIndex;
+
+            // Sembunyikan tombol jika sudah tidak ada data lagi
+            if (currentDisplayCount >= allGempaData.length) {
+                btnLoadMore.style.display = 'none';
+            }
         }
 
         async function loadGempaData() {
@@ -246,6 +334,7 @@
             const petaCaption = document.getElementById('peta-caption');
             const tabelGempa = document.getElementById('tabel-gempa');
             const tbody = document.getElementById('tabel-body');
+            const btnLoadMore = document.getElementById('btn-load-more');
 
             try {
                 const [resTerkini, resTerbaru] = await Promise.all([
@@ -259,6 +348,7 @@
                 const dataTerbaru = await resTerbaru.json();
                 const gempaTerkini = dataTerkini.Infogempa?.gempa || null;
 
+                // Update peta
                 if (gempaTerkini?.Shakemap) {
                     const imageUrl = `https://data.bmkg.go.id/DataMKG/TEWS/${gempaTerkini.Shakemap}?t=${timestamp}`;
                     petaImg.src = imageUrl;
@@ -267,35 +357,34 @@
                     petaCaption.textContent = `${gempaTerkini.Wilayah || '-'} | Magnitudo: ${gempaTerkini.Magnitude} | Kedalaman: ${gempaTerkini.Kedalaman}`;
                 }
 
-                let gempaList = [];
-                if (gempaTerkini) gempaList.push(gempaTerkini);
+                // Gabungkan semua data gempa
+                allGempaData = [];
+                if (gempaTerkini) allGempaData.push(gempaTerkini);
+                
                 const daftarGempa = Array.isArray(dataTerbaru.Infogempa?.gempa)
                     ? dataTerbaru.Infogempa.gempa
                     : [dataTerbaru.Infogempa?.gempa];
-                gempaList.push(...daftarGempa.slice(0, 9));
+                
+                allGempaData.push(...daftarGempa.filter(g => g)); // Filter null/undefined
 
+                // Reset tabel dan counter
                 tbody.innerHTML = '';
-                gempaList.slice(0, 10).forEach((gempa, index) => {
-                    const magnitudo = parseFloat(gempa.Magnitude) || 0;
-                    let magClass = 'magnitudo-low';
-                    if (magnitudo >= 6) magClass = 'magnitudo-high';
-                    else if (magnitudo >= 5) magClass = 'magnitudo-medium';
+                currentDisplayCount = 10;
 
-                    const row = document.createElement('tr');
-                    row.innerHTML = `
-                        <td>${index + 1}</td>
-                        <td>${gempa.Tanggal || '-'} ${gempa.Jam || '-'}</td>
-                        <td>${gempa.Wilayah || '-'}</td>
-                        <td><span class="magnitudo-badge ${magClass}">${magnitudo}</span></td>
-                        <td>${gempa.Kedalaman || '-'}</td>
-                        <td>${gempa.Lintang || '-'}, ${gempa.Bujur || '-'}</td>
-                        <td>${gempa.Wilayah || '-'}</td>
-                    `;
-                    tbody.appendChild(row);
-                });
+                // Render 10 data pertama
+                renderGempaTable(0, currentDisplayCount);
 
+                // Tampilkan tabel
                 tabelGempa.style.display = 'table';
                 tabelStatus.style.display = 'none';
+
+                // Tampilkan tombol "Selengkapnya" jika data lebih dari 10
+                if (allGempaData.length > currentDisplayCount) {
+                    btnLoadMore.style.display = 'block';
+                } else {
+                    btnLoadMore.style.display = 'none';
+                }
+
                 updateLastRefreshTime();
 
             } catch (err) {
@@ -303,6 +392,7 @@
                 tabelStatus.innerHTML = '<p>⚠️ Tidak dapat memuat data gempa terkini.</p>';
                 petaLoading.innerHTML = '<p>Gagal memuat peta, menampilkan cadangan...</p>';
                 petaImg.style.display = 'block';
+                btnLoadMore.style.display = 'none';
             }
         }
 
