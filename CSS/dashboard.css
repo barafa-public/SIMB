@@ -57,10 +57,9 @@ html {
 }
 
 .nav-link.active {
-    color: #0077ff; /* ubah sesuai tema kamu */
+    color: #0077ff;
     border-bottom: 2px solid #0077ff;
 }
-
 
 .logo {
     color: #fff;
@@ -239,6 +238,7 @@ html {
     flex-direction: row-reverse;
 }
 
+/* ✅ PERBAIKAN: Styling untuk foto dampak */
 .dampak-image {
     width: 300px;
     height: 250px;
@@ -247,6 +247,22 @@ html {
     background-position: center;
     flex-shrink: 0;
     box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+    position: relative;
+    overflow: hidden;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.dampak-image:hover {
+    transform: scale(1.05);
+    box-shadow: 0 12px 35px rgba(0, 0, 0, 0.2);
+}
+
+/* Styling untuk gambar di dalam dampak-image */
+.dampak-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
 }
 
 .dampak-image.positif {
@@ -443,7 +459,7 @@ html {
     color: #d32f2f;
 }
 
-/* Dibalik Layar Section */
+/* ✅ PERBAIKAN: Dibalik Layar Section - Lingkaran Sempurna */
 .dibalik-layar-section {
     padding: 4rem 2rem;
     max-width: 1200px;
@@ -465,20 +481,22 @@ html {
 }
 
 .dibalik-item {
-    height: 150px;
+    width: 200px;
+    height: 200px;
     background: linear-gradient(135deg, #a8a8a8 0%, #5a5a5a 100%);
-    border-radius: 10px;
+    border-radius: 50%;
     display: flex;
     align-items: center;
     justify-content: center;
     cursor: pointer;
     transition: all 0.3s ease;
     box-shadow: 0 5px 15px rgba(0, 0, 0, 0.15);
+    margin: 0 auto;
 }
 
 .dibalik-item:hover {
-    transform: scale(1.05);
-    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.25);
+    transform: scale(1.08) rotate(5deg);
+    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.3);
 }
 
 .dibalik-label {
@@ -550,6 +568,11 @@ html {
         flex-direction: column !important;
     }
 
+    .dampak-image {
+        width: 100%;
+        max-width: 350px;
+    }
+
     .gempa-cards {
         grid-template-columns: 1fr;
     }
@@ -586,6 +609,15 @@ html {
 
     .pencegahan-section h2 {
         font-size: 1.6rem;
+    }
+
+    .dibalik-item {
+        width: 150px;
+        height: 150px;
+    }
+
+    .dibalik-label {
+        font-size: 1.1rem;
     }
 }
 
