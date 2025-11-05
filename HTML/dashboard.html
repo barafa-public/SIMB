@@ -110,7 +110,7 @@
                 <div class="dampak-image positif"></div>
                 <div class="dampak-content">
                     <h3>Dampak Positif</h3>
-                    <p>Mengurangi jumlah gas dalam lapisan dalam bumi dan memberikan informasi geologi penting untuk studi alam. Beberapa wilayah juga mendapat sumber energi panas bumi baru akibat aktivitas seismik.</p>
+                    <p>Munculnya sumber daya alam baru seperti mata air dan mineral. mendorong inovasi teknologi mitigasi bencana, terbentuknya daratan atau pulau baru, dan menambah pengetahuan ilmiah</p>
                 </div>
             </div>
             
@@ -202,88 +202,115 @@
         </div>
     </footer>
 
-<script>
-    function updateLastRefreshTime() {
-        const now = new Date();
-        const timeString = now.toLocaleTimeString('id-ID', { hour: '2-digit', minute: '2-digit', second: '2-digit' });
-        document.getElementById('last-update').textContent = `Terakhir diperbarui: ${timeString}`;
-    }
-
-    async function loadGempaData() {
-        const timestamp = new Date().getTime();
-        const tabelStatus = document.getElementById('tabel-status');
-        const petaImg = document.getElementById('peta-img');
-        const petaLoading = document.getElementById('peta-loading');
-        const petaCaption = document.getElementById('peta-caption');
-        const tabelGempa = document.getElementById('tabel-gempa');
-        const tbody = document.getElementById('tabel-body');
-
-        try {
-            const [resTerkini, resTerbaru] = await Promise.all([
-                fetch(`https://data.bmkg.go.id/DataMKG/TEWS/autogempa.json?t=${timestamp}`, { cache: 'no-store' }),
-                fetch(`https://data.bmkg.go.id/DataMKG/TEWS/gempaterkini.json?t=${timestamp}`, { cache: 'no-store' })
-            ]);
-
-            if (!resTerkini.ok || !resTerbaru.ok) throw new Error('Gagal memuat data BMKG');
-
-            const dataTerkini = await resTerkini.json();
-            const dataTerbaru = await resTerbaru.json();
-            const gempaTerkini = dataTerkini.Infogempa?.gempa || null;
-
-            if (gempaTerkini?.Shakemap) {
-                const imageUrl = `https://data.bmkg.go.id/DataMKG/TEWS/${gempaTerkini.Shakemap}?t=${timestamp}`;
-                petaImg.src = imageUrl;
-                petaImg.style.display = 'block';
-                petaLoading.style.display = 'none';
-                petaCaption.textContent = `${gempaTerkini.Wilayah || '-'} | Magnitudo: ${gempaTerkini.Magnitude} | Kedalaman: ${gempaTerkini.Kedalaman}`;
-            }
-
-            let gempaList = [];
-            if (gempaTerkini) gempaList.push(gempaTerkini);
-            const daftarGempa = Array.isArray(dataTerbaru.Infogempa?.gempa)
-                ? dataTerbaru.Infogempa.gempa
-                : [dataTerbaru.Infogempa?.gempa];
-            gempaList.push(...daftarGempa.slice(0, 9));
-
-            tbody.innerHTML = '';
-            gempaList.slice(0, 10).forEach((gempa, index) => {
-                const magnitudo = parseFloat(gempa.Magnitude) || 0;
-                let magClass = 'magnitudo-low';
-                if (magnitudo >= 6) magClass = 'magnitudo-high';
-                else if (magnitudo >= 5) magClass = 'magnitudo-medium';
-
-                const row = document.createElement('tr');
-                row.innerHTML = `
-                    <td>${index + 1}</td>
-                    <td>${gempa.Tanggal || '-'} ${gempa.Jam || '-'}</td>
-                    <td>${gempa.Wilayah || '-'}</td>
-                    <td><span class="magnitudo-badge ${magClass}">${magnitudo}</span></td>
-                    <td>${gempa.Kedalaman || '-'}</td>
-                    <td>${gempa.Lintang || '-'}, ${gempa.Bujur || '-'}</td>
-                    <td>${gempa.Wilayah || '-'}</td>
-                `;
-                tbody.appendChild(row);
-            });
-
-            tabelGempa.style.display = 'table';
-            tabelStatus.style.display = 'none';
-            updateLastRefreshTime();
-
-        } catch (err) {
-            console.error('Kesalahan API:', err);
-            tabelStatus.innerHTML = '<p>⚠️ Tidak dapat memuat data gempa terkini.</p>';
-            petaLoading.innerHTML = '<p>Gagal memuat peta, menampilkan cadangan...</p>';
-            petaImg.style.display = 'block';
+    <script>
+        function updateLastRefreshTime() {
+            const now = new Date();
+            const timeString = now.toLocaleTimeString('id-ID', { hour: '2-digit', minute: '2-digit', second: '2-digit' });
+            document.getElementById('last-update').textContent = `Terakhir diperbarui: ${timeString}`;
         }
-    }
 
-    async function startRealtime() {
-        await loadGempaData();
-        setTimeout(startRealtime, 60000);
-    }
+        async function loadGempaData() {
+            const timestamp = new Date().getTime();
+            const tabelStatus = document.getElementById('tabel-status');
+            const petaImg = document.getElementById('peta-img');
+            const petaLoading = document.getElementById('peta-loading');
+            const petaCaption = document.getElementById('peta-caption');
+            const tabelGempa = document.getElementById('tabel-gempa');
+            const tbody = document.getElementById('tabel-body');
 
-    document.addEventListener('DOMContentLoaded', startRealtime);
-</script>
+            try {
+                const [resTerkini, resTerbaru] = await Promise.all([
+                    fetch(`https://data.bmkg.go.id/DataMKG/TEWS/autogempa.json?t=${timestamp}`, { cache: 'no-store' }),
+                    fetch(`https://data.bmkg.go.id/DataMKG/TEWS/gempaterkini.json?t=${timestamp}`, { cache: 'no-store' })
+                ]);
+
+                if (!resTerkini.ok || !resTerbaru.ok) throw new Error('Gagal memuat data BMKG');
+
+                const dataTerkini = await resTerkini.json();
+                const dataTerbaru = await resTerbaru.json();
+                const gempaTerkini = dataTerkini.Infogempa?.gempa || null;
+
+                if (gempaTerkini?.Shakemap) {
+                    const imageUrl = `https://data.bmkg.go.id/DataMKG/TEWS/${gempaTerkini.Shakemap}?t=${timestamp}`;
+                    petaImg.src = imageUrl;
+                    petaImg.style.display = 'block';
+                    petaLoading.style.display = 'none';
+                    petaCaption.textContent = `${gempaTerkini.Wilayah || '-'} | Magnitudo: ${gempaTerkini.Magnitude} | Kedalaman: ${gempaTerkini.Kedalaman}`;
+                }
+
+                let gempaList = [];
+                if (gempaTerkini) gempaList.push(gempaTerkini);
+                const daftarGempa = Array.isArray(dataTerbaru.Infogempa?.gempa)
+                    ? dataTerbaru.Infogempa.gempa
+                    : [dataTerbaru.Infogempa?.gempa];
+                gempaList.push(...daftarGempa.slice(0, 9));
+
+                tbody.innerHTML = '';
+                gempaList.slice(0, 10).forEach((gempa, index) => {
+                    const magnitudo = parseFloat(gempa.Magnitude) || 0;
+                    let magClass = 'magnitudo-low';
+                    if (magnitudo >= 6) magClass = 'magnitudo-high';
+                    else if (magnitudo >= 5) magClass = 'magnitudo-medium';
+
+                    const row = document.createElement('tr');
+                    row.innerHTML = `
+                        <td>${index + 1}</td>
+                        <td>${gempa.Tanggal || '-'} ${gempa.Jam || '-'}</td>
+                        <td>${gempa.Wilayah || '-'}</td>
+                        <td><span class="magnitudo-badge ${magClass}">${magnitudo}</span></td>
+                        <td>${gempa.Kedalaman || '-'}</td>
+                        <td>${gempa.Lintang || '-'}, ${gempa.Bujur || '-'}</td>
+                        <td>${gempa.Wilayah || '-'}</td>
+                    `;
+                    tbody.appendChild(row);
+                });
+
+                tabelGempa.style.display = 'table';
+                tabelStatus.style.display = 'none';
+                updateLastRefreshTime();
+
+            } catch (err) {
+                console.error('Kesalahan API:', err);
+                tabelStatus.innerHTML = '<p>⚠️ Tidak dapat memuat data gempa terkini.</p>';
+                petaLoading.innerHTML = '<p>Gagal memuat peta, menampilkan cadangan...</p>';
+                petaImg.style.display = 'block';
+            }
+        }
+
+        async function startRealtime() {
+            await loadGempaData();
+            setTimeout(startRealtime, 60000);
+        }
+
+        document.addEventListener('DOMContentLoaded', startRealtime);
+    </script>
+
+    <script>
+        // Efek aktif saat diklik
+        const navLinks = document.querySelectorAll('.nav-link');
+
+        navLinks.forEach(link => {
+            link.addEventListener('click', function() {
+                navLinks.forEach(l => l.classList.remove('active'));
+                this.classList.add('active');
+            });
+        });
+
+        // Tandai link aktif saat user scroll manual
+        window.addEventListener('scroll', () => {
+            const scrollY = window.scrollY + 100; // sedikit offset
+            navLinks.forEach(link => {
+                const section = document.querySelector(link.getAttribute('href'));
+                if (
+                    section.offsetTop <= scrollY &&
+                    section.offsetTop + section.offsetHeight > scrollY
+                ) {
+                    navLinks.forEach(l => l.classList.remove('active'));
+                    link.classList.add('active');
+                }
+            });
+        });
+    </script>
 
 </body>
 </html>
