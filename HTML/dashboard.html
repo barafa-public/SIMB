@@ -1,11 +1,13 @@
 <!DOCTYPE html>
 <html lang="id">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Gempa Bumi - SeismoTech</title>
     <link rel="stylesheet" href="/CSS/dashboard.css">
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet">
     <style>
         /* Tambahan gaya untuk peta BMKG */
         .peta-container {
@@ -49,6 +51,7 @@
         }
     </style>
 </head>
+
 <body>
     <!-- Header & Hero Section Combined -->
     <section class="hero-section">
@@ -70,7 +73,10 @@
         <div class="hero-content">
             <div>
                 <h1>Gempa Bumi</h1>
-                <p>Gempa bumi merupakan gejala alam yang ditimbulkan oleh tiba-tiba bergeraknya lempeng tektonik di dalam bumi. Gempa bumi dapat terjadi karena adanya pergerakan magma di dalam bumi, namun penyebab utama adalah kegiatan pergerakan lempeng tektonik bumi yang terus bergerak di atas mantel bumi yang panas.</p>
+                <p>Gempa bumi merupakan gejala alam yang ditimbulkan oleh tiba-tiba bergeraknya lempeng tektonik di
+                    dalam bumi. Gempa bumi dapat terjadi karena adanya pergerakan magma di dalam bumi, namun penyebab
+                    utama adalah kegiatan pergerakan lempeng tektonik bumi yang terus bergerak di atas mantel bumi yang
+                    panas.</p>
             </div>
         </div>
 
@@ -88,10 +94,12 @@
                 </div>
             </div>
             <div class="card">
-                <div class="card-image vulkanik">
-                    <img src="/assets/gempa/vulkanik.png" alt="">
-                    <h3>Gempa Vulkanik</h3>
-                </div>
+                <a href="/JenisGempa/vulkanik.html">
+                    <div class="card-image vulkanik">
+                        <img src="/assets/gempa/vulkanik.png" alt="">
+                        <h3>Gempa Vulkanik</h3>
+                    </div>
+                </a>
             </div>
             <div class="card">
                 <div class="card-image buatan">
@@ -112,16 +120,18 @@
                 </div>
                 <div class="dampak-content">
                     <h3>Dampak Positif</h3>
-                    <p>Munculnya sumber daya alam baru seperti mata air dan mineral. mendorong inovasi teknologi mitigasi bencana, terbentuknya daratan atau pulau baru, dan menambah pengetahuan ilmiah</p>
+                    <p>Munculnya sumber daya alam baru seperti mata air dan mineral. mendorong inovasi teknologi
+                        mitigasi bencana, terbentuknya daratan atau pulau baru, dan menambah pengetahuan ilmiah</p>
                 </div>
             </div>
-            
+
             <div class="dampak-divider"></div>
 
             <div class="dampak-item dampak-negatif">
                 <div class="dampak-content">
                     <h3>Dampak Negatif</h3>
-                    <p>Menimbulkan kerusakan infrastruktur, kehilangan nyawa, dan gangguan sosial ekonomi di wilayah terdampak. Gempa besar juga dapat memicu tsunami di daerah pesisir.</p>
+                    <p>Menimbulkan kerusakan infrastruktur, kehilangan nyawa, dan gangguan sosial ekonomi di wilayah
+                        terdampak. Gempa besar juga dapat memicu tsunami di daerah pesisir.</p>
                 </div>
                 <div class="dampak-image negatif">
                     <img src="/assets/dampak/dampakNegative.jpg" alt="">
@@ -188,11 +198,21 @@
     <section class="dibalik-layar-section">
         <h2>Dibalik Layar</h2>
         <div class="dibalik-container">
-            <div class="dibalik-item"><div class="dibalik-label">Tectik</div></div>
-            <div class="dibalik-item"><div class="dibalik-label">Kime</div></div>
-            <div class="dibalik-item"><div class="dibalik-label">Alimito</div></div>
-            <div class="dibalik-item"><div class="dibalik-label">Togo</div></div>
-            <div class="dibalik-item"><div class="dibalik-label">Argel</div></div>
+            <div class="dibalik-item">
+                <div class="dibalik-label">Tectik</div>
+            </div>
+            <div class="dibalik-item">
+                <div class="dibalik-label">Kime</div>
+            </div>
+            <div class="dibalik-item">
+                <div class="dibalik-label">Alimito</div>
+            </div>
+            <div class="dibalik-item">
+                <div class="dibalik-label">Togo</div>
+            </div>
+            <div class="dibalik-item">
+                <div class="dibalik-label">Argel</div>
+            </div>
         </div>
     </section>
 
@@ -294,7 +314,7 @@
         const navLinks = document.querySelectorAll('.nav-link');
 
         navLinks.forEach(link => {
-            link.addEventListener('click', function() {
+            link.addEventListener('click', function () {
                 navLinks.forEach(l => l.classList.remove('active'));
                 this.classList.add('active');
             });
@@ -317,4 +337,5 @@
     </script>
 
 </body>
+
 </html>
