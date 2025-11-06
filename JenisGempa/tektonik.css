@@ -243,3 +243,72 @@ body {
     padding: 3rem 2rem;
     margin-top: 4rem;
 }
+
+html {
+    scroll-behavior: smooth;
+    overflow-x: hidden;
+    overflow-y: auto;
+}
+
+/* Efek aktif pada navbar saat diklik */
+.nav-link {
+    transition: color 0.3s ease, border-bottom 0.3s ease;
+}
+
+.nav-link.active {
+    color: #0077ff;
+    border-bottom: 2px solid #0077ff;
+}
+
+.logo {
+    color: #000;
+    font-size: 1.8rem;
+    font-weight: bold;
+    letter-spacing: 1px;
+}
+
+.nav-menu {
+    display: flex;
+    gap: 1rem;
+}
+
+.nav-link {
+    color: #fff;
+    text-decoration: none;
+    padding: 0.7rem 1.2rem;
+    border-radius: 25px;
+    background: #ff9800;
+    font-size: 0.9rem;
+    font-weight: 500;
+    transition: all 0.3s ease;
+}
+
+.nav-link:hover {
+    background: #e68900;
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(255, 152, 0, 0.4);
+}
+
+.navbar:hover {
+    background: rgba(0, 0, 0, 0.2);
+    backdrop-filter: blur(5px);
+}
+
+.nav-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 2rem;
+}
+
+/* Navigation */
+.navbar {
+    background: transparent;
+    backdrop-filter: none;
+    padding: 1.5rem 0;
+    position: relative;
+    z-index: 100;
+    transition: background 0.3s ease, backdrop-filter 0.3s ease;
+}
