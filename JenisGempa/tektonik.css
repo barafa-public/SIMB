@@ -234,3 +234,12 @@ body {
 .titik-7 {
     top: 1433.17px;
 }
+
+/* Footer */
+.footer {
+    background: #2c3e50;
+    color: white;
+    text-align: center;
+    padding: 3rem 2rem;
+    margin-top: 4rem;
+}
