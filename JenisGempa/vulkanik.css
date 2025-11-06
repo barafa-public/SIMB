@@ -34,6 +34,7 @@ html {
     scroll-behavior: smooth;
     overflow-x: hidden;
     overflow-y: auto;
+    overscroll-behavior: none;
 }
 
 /* Efek aktif pada navbar saat diklik */
@@ -79,6 +80,8 @@ html {
 body {
     font-family: 'Poppins', sans-serif;
     background: #FBFBFB;
+    margin: 0;
+    padding: 0;
 }
 
 body::before {
@@ -106,11 +109,12 @@ body::before {
 
 .kontainer-utama {
     width: 1280px;
-    height: 2428px;
+    height: auto;
+    min-height: 1500px;
     position: relative;
-    /* background: #FBFBFB; */
-    overflow: hidden;
+    overflow: visible;
     margin: 0 auto;
+    padding-bottom: 100px;
 }
 
 .judul-halaman {
@@ -326,4 +330,94 @@ body::before {
 
 .titik-7 {
     top: 1433.17px;
+}
+
+/* Footer Styles */
+.footer {
+    width: 100vw;
+    max-width: none;
+    height: 500px;
+    position: relative;
+    overflow: hidden;
+    margin: 0 auto;
+    left: 50%;
+    transform: translateX(-50%);
+    margin-bottom: 0;
+}
+
+.footer-border {
+    width: 100%;
+    height: 344px;
+    position: absolute;
+    left: 0;
+    top: 162px;
+    border-top-left-radius: 50px;
+    border-top-right-radius: 50px;
+    border: 5px solid #2E1A08;
+}
+
+.footer-content {
+    width: 100%;
+    height: 327px;
+    position: absolute;
+    left: 0;
+    top: 179px;
+    background: #2E1A08;
+    overflow: hidden;
+    border-top-left-radius: 50px;
+    border-top-right-radius: 50px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 49px 70px 65px;
+}
+
+.footer-tagline {
+    color: white;
+    font-size: 32px;
+    font-family: 'Poppins', sans-serif;
+    font-weight: 600;
+    line-height: 1.25;
+}
+
+.footer-copyright {
+    color: white;
+    font-size: 24px;
+    font-family: 'Poppins', sans-serif;
+    font-weight: 600;
+    text-align: center;
+}
+
+/* Responsive Footer */
+@media (max-width: 1280px) {
+    .footer {
+        max-width: calc(100% - 40px);
+        margin-left: 20px;
+        margin-right: 20px;
+    }
+}
+
+@media (max-width: 768px) {
+    .footer {
+        height: 500px;
+    }
+
+    .footer-border {
+        height: 250px;
+        top: 100px;
+    }
+
+    .footer-content {
+        height: 240px;
+        top: 110px;
+        padding: 30px 40px 40px;
+    }
+
+    .footer-tagline {
+        font-size: 24px;
+    }
+
+    .footer-copyright {
+        font-size: 16px;
+    }
 }
