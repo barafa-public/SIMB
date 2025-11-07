@@ -1,0 +1,271 @@
+        body {
+            margin: 0;
+            padding: 0;
+            background: #FBFBFB;
+            font-family: Poppins, sans-serif;
+            overflow-x: hidden;
+        }
+
+        .container {
+            width: 1280px;
+            height: 1997px;
+            position: relative;
+            background: #FBFBFB;
+            margin: 0 auto;
+        }
+
+        .title {
+            width: 455px;
+            height: 47px;
+            left: 432px;
+            top: 189px;
+            position: absolute;
+            color: black;
+            font-size: 36px;
+            font-weight: 700;
+            word-wrap: break-word;
+        }
+
+        .image-main {
+            width: 474.46px;
+            height: 307px;
+            left: 135px;
+            top: 286px;
+            position: absolute;
+            box-shadow: -25px 25px 4px rgba(0, 0, 0, 0.50);
+            overflow: hidden;
+            border-radius: 30px;
+        }
+
+        .image-main img {
+            width: 514px;
+            height: 520px;
+            left: -25px;
+            top: -129px;
+            position: absolute;
+        }
+
+        .causes {
+            width: 429.37px;
+            height: 247px;
+            left: 740.63px;
+            top: 323px;
+            position: absolute;
+        }
+
+        .causes-title {
+            width: 190px;
+            height: 47px;
+            color: black;
+            font-size: 24px;
+            font-weight: 700;
+            word-wrap: break-word;
+        }
+
+        .causes-text {
+            width: 419px;
+            height: 200px;
+            top: 47px;
+            position: absolute;
+            text-align: justify;
+            color: black;
+            font-size: 16px;
+            font-weight: 500;
+            word-wrap: break-word;
+        }
+
+        .examples-title {
+            width: 369px;
+            height: 87px;
+            left: 455px;
+            top: 743px;
+            position: absolute;
+            text-align: center;
+            color: black;
+            font-size: 24px;
+            font-weight: 700;
+            word-wrap: break-word;
+        }
+
+        .example-card {
+            width: 400px;
+            height: 129px;
+            position: absolute;
+            overflow: hidden;
+            border-radius: 20px;
+            outline: 2px #EE8F13 solid;
+        }
+
+        .example-card img {
+            position: absolute;
+        }
+
+        .example-card .overlay {
+            width: 100%;
+            height: 100%;
+            position: absolute;
+            background: rgba(31.87, 31.87, 31.87, 0.47);
+            border-radius: 20px;
+        }
+
+        .example-card .text {
+            position: absolute;
+            color: white;
+            font-size: 20px;
+            font-weight: 500;
+            word-wrap: break-word;
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%, -50%);
+        }
+
+        .card-1 {
+            left: 100px;
+            top: 860px;
+        }
+
+        .card-1 img {
+            width: 450px;
+            height: 338px;
+            left: -25px;
+            top: -150px;
+        }
+
+        .card-2 {
+            left: 760px;
+            top: 956px;
+        }
+
+        .card-2 img {
+            width: 418px;
+            height: 282px;
+            left: -18px;
+            top: -76px;
+        }
+
+        .card-3 {
+            left: 100px;
+            top: 1069px;
+        }
+
+        .card-3 img {
+            width: 400px;
+            height: 225px;
+            left: 0px;
+            top: -37px;
+        }
+
+        .card-4 {
+            left: 760px;
+            top: 1165px;
+        }
+
+        .card-4 img {
+            width: 412px;
+            height: 247px;
+            left: -6px;
+            top: -59px;
+        }
+
+        .card-5 {
+            left: 100px;
+            top: 1278px;
+        }
+
+        .card-5 img {
+            width: 407px;
+            height: 298px;
+            left: -7px;
+            top: -62px;
+        }
+
+        .card-6 {
+            left: 760px;
+            top: 1374px;
+        }
+
+        .card-6 img {
+            width: 409px;
+            height: 409px;
+            left: -9px;
+            top: -110px;
+        }
+
+        .dot {
+            width: 29.67px;
+            height: 29.86px;
+            left: 615px;
+            position: absolute;
+            background: linear-gradient(180deg, #EE8F13 0%, #BF450C 100%);
+            border-radius: 9999px;
+        }
+
+        .dot-1 { top: 894px; }
+        .dot-2 { top: 983.86px; }
+        .dot-3 { top: 1073.72px; }
+        .dot-4 { top: 1163.58px; }
+        .dot-5 { top: 1253.45px; }
+        .dot-6 { top: 1343.31px; }
+        .dot-7 { top: 1433.17px; }
+
+        .footer {
+            width: 1280px;
+            height: 500px;
+            left: 0px;
+            top: 1503px;
+            position: absolute;
+            overflow: hidden;
+        }
+
+        .footer-shape {
+            width: 1280px;
+            height: 344px;
+            left: 0px;
+            top: 162px;
+            position: absolute;
+            border-top-left-radius: 50px;
+            border-top-right-radius: 50px;
+            border: 5px #2E1A08 solid;
+        }
+
+        .footer-bg {
+            width: 1280px;
+            height: 327px;
+            left: 0px;
+            top: 179px;
+            position: absolute;
+            background: #2E1A08;
+            overflow: hidden;
+            border-top-left-radius: 50px;
+            border-top-right-radius: 50px;
+        }
+
+        .footer-text {
+            width: 339px;
+            height: 80px;
+            left: 70px;
+            top: 49px;
+            position: absolute;
+            justify-content: center;
+            display: flex;
+            flex-direction: column;
+            color: white;
+            font-size: 32px;
+            font-weight: 600;
+            word-wrap: break-word;
+        }
+
+        .footer-copyright {
+            width: 445px;
+            height: 34px;
+            left: 417px;
+            top: 244px;
+            position: absolute;
+            justify-content: center;
+            display: flex;
+            flex-direction: column;
+            color: white;
+            font-size: 24px;
+            font-weight: 600;
+            word-wrap: break-word;
+        }
