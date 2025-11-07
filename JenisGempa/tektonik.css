@@ -6,25 +6,122 @@
     box-sizing: border-box;
 }
 
+/* Navigation */
+.navbar {
+    background: transparent;
+    backdrop-filter: none;
+    padding: 1.5rem 0;
+    position: relative;
+    z-index: 100;
+    transition: background 0.3s ease, backdrop-filter 0.3s ease;
+}
+
+.navbar:hover {
+    background: rgba(0, 0, 0, 0.2);
+    backdrop-filter: blur(5px);
+}
+
+.nav-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 2rem;
+}
+
+html {
+    scroll-behavior: smooth;
+    overflow-x: hidden;
+    overflow-y: auto;
+    overscroll-behavior: none;
+}
+
+/* Efek aktif pada navbar saat diklik */
+.nav-link {
+    transition: color 0.3s ease, border-bottom 0.3s ease;
+}
+
+.nav-link.active {
+    color: #0077ff;
+    border-bottom: 2px solid #0077ff;
+}
+
+.logo {
+    color: #000;
+    font-size: 1.8rem;
+    font-weight: bold;
+    letter-spacing: 1px;
+}
+
+.nav-menu {
+    display: flex;
+    gap: 1rem;
+}
+
+.nav-link {
+    color: #fff;
+    text-decoration: none;
+    padding: 0.7rem 1.2rem;
+    border-radius: 25px;
+    background: #ff9800;
+    font-size: 0.9rem;
+    font-weight: 500;
+    transition: all 0.3s ease;
+}
+
+.nav-link:hover {
+    background: #e68900;
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(255, 152, 0, 0.4);
+}
+
+
 body {
     font-family: 'Poppins', sans-serif;
     background: #FBFBFB;
+    margin: 0;
+    padding: 0;
+}
+
+body::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 850px;
+    /* Sesuaikan sampai sebelum "Contoh Peristiwa Gempa" */
+    background:
+        linear-gradient(to bottom,
+            /* rgba(255, 255, 255, 0.562) 0%,
+            transparent 0%, */
+            rgba(255, 255, 255, 0.719) 70%,
+            rgba(255, 255, 255, 0.95) 90%,
+            #ffffff 100%),
+        url('/assets/gempa/vulkanik/bromo-bg.jpg');
+    background-size: cover;
+    background-position: center center;
+    background-repeat: no-repeat;
+    z-index: -1;
+    pointer-events: none;
 }
 
 .kontainer-utama {
     width: 1280px;
-    height: 2428px;
+    height: auto;
+    min-height: 1500px;
     position: relative;
-    background: #FBFBFB;
-    overflow: hidden;
+    overflow: visible;
     margin: 0 auto;
+    padding-bottom: 100px;
 }
 
 .judul-halaman {
     width: 330px;
     height: 47px;
     left: 475px;
-    top: 189px;
+    top: 100px;
     position: absolute;
     color: black;
     font-size: 36px;
@@ -235,7 +332,7 @@ body {
     top: 1433.17px;
 }
 
-/* Footer */
+/* Footer Styles */
 .footer {
     width: 100vw;
     max-width: none;
@@ -275,7 +372,7 @@ body {
     padding: 49px 70px 65px;
 }
 
-.kata-kata {
+.footer-tagline {
     color: white;
     font-size: 32px;
     font-family: 'Poppins', sans-serif;
@@ -283,7 +380,7 @@ body {
     line-height: 1.25;
 }
 
-.copyright {
+.footer-copyright {
     color: white;
     font-size: 24px;
     font-family: 'Poppins', sans-serif;
@@ -295,72 +392,36 @@ body {
     color: #bbb;
 }
 
-html {
-    scroll-behavior: smooth;
-    overflow-x: hidden;
-    overflow-y: auto;
+/* Responsive Footer */
+@media (max-width: 1280px) {
+    .footer {
+        max-width: calc(100% - 40px);
+        margin-left: 20px;
+        margin-right: 20px;
+    }
 }
 
-/* Efek aktif pada navbar saat diklik */
-.nav-link {
-    transition: color 0.3s ease, border-bottom 0.3s ease;
-}
+@media (max-width: 768px) {
+    .footer {
+        height: 500px;
+    }
 
-.nav-link.active {
-    color: #0077ff;
-    border-bottom: 2px solid #0077ff;
-}
+    .footer-border {
+        height: 250px;
+        top: 100px;
+    }
 
-.logo {
-    color: #000;
-    font-size: 1.8rem;
-    font-weight: bold;
-    letter-spacing: 1px;
-}
+    .footer-content {
+        height: 240px;
+        top: 110px;
+        padding: 30px 40px 40px;
+    }
 
-.nav-menu {
-    display: flex;
-    gap: 1rem;
-}
+    .footer-tagline {
+        font-size: 24px;
+    }
 
-.nav-link {
-    color: #fff;
-    text-decoration: none;
-    padding: 0.7rem 1.2rem;
-    border-radius: 25px;
-    background: #ff9800;
-    font-size: 0.9rem;
-    font-weight: 500;
-    transition: all 0.3s ease;
+    .footer-copyright {
+        font-size: 16px;
+    }
 }
-
-.nav-link:hover {
-    background: #e68900;
-    transform: translateY(-2px);
-    box-shadow: 0 5px 15px rgba(255, 152, 0, 0.4);
-}
-
-.navbar:hover {
-    background: rgba(0, 0, 0, 0.2);
-    backdrop-filter: blur(5px);
-}
-
-.nav-container {
-    max-width: 1200px;
-    margin: 0 auto;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 0 2rem;
-}
-
-/* Navigation */
-.navbar {
-    background: transparent;
-    backdrop-filter: none;
-    padding: 1.5rem 0;
-    position: relative;
-    z-index: 100;
-    transition: background 0.3s ease, backdrop-filter 0.3s ease;
-}
-/* footer */
