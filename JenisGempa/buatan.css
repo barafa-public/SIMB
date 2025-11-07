@@ -1,271 +1,427 @@
-        body {
-            margin: 0;
-            padding: 0;
-            background: #FBFBFB;
-            font-family: Poppins, sans-serif;
-            overflow-x: hidden;
-        }
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
 
-        .container {
-            width: 1280px;
-            height: 1997px;
-            position: relative;
-            background: #FBFBFB;
-            margin: 0 auto;
-        }
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
 
-        .title {
-            width: 455px;
-            height: 47px;
-            left: 432px;
-            top: 189px;
-            position: absolute;
-            color: black;
-            font-size: 36px;
-            font-weight: 700;
-            word-wrap: break-word;
-        }
+/* Navigation */
+.navbar {
+    background: transparent;
+    backdrop-filter: none;
+    padding: 1.5rem 0;
+    position: relative;
+    z-index: 100;
+    transition: background 0.3s ease, backdrop-filter 0.3s ease;
+}
 
-        .image-main {
-            width: 474.46px;
-            height: 307px;
-            left: 135px;
-            top: 286px;
-            position: absolute;
-            box-shadow: -25px 25px 4px rgba(0, 0, 0, 0.50);
-            overflow: hidden;
-            border-radius: 30px;
-        }
+.navbar:hover {
+    background: rgba(0, 0, 0, 0.2);
+    backdrop-filter: blur(5px);
+}
 
-        .image-main img {
-            width: 514px;
-            height: 520px;
-            left: -25px;
-            top: -129px;
-            position: absolute;
-        }
+.nav-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 2rem;
+}
 
-        .causes {
-            width: 429.37px;
-            height: 247px;
-            left: 740.63px;
-            top: 323px;
-            position: absolute;
-        }
+html {
+    scroll-behavior: smooth;
+    overflow-x: hidden;
+    overflow-y: auto;
+    overscroll-behavior: none;
+}
 
-        .causes-title {
-            width: 190px;
-            height: 47px;
-            color: black;
-            font-size: 24px;
-            font-weight: 700;
-            word-wrap: break-word;
-        }
+/* Efek aktif pada navbar saat diklik */
+.nav-link {
+    transition: color 0.3s ease, border-bottom 0.3s ease;
+}
 
-        .causes-text {
-            width: 419px;
-            height: 200px;
-            top: 47px;
-            position: absolute;
-            text-align: justify;
-            color: black;
-            font-size: 16px;
-            font-weight: 500;
-            word-wrap: break-word;
-        }
+.nav-link.active {
+    color: #0077ff;
+    border-bottom: 2px solid #0077ff;
+}
 
-        .examples-title {
-            width: 369px;
-            height: 87px;
-            left: 455px;
-            top: 743px;
-            position: absolute;
-            text-align: center;
-            color: black;
-            font-size: 24px;
-            font-weight: 700;
-            word-wrap: break-word;
-        }
+.logo {
+    color: #000;
+    font-size: 1.8rem;
+    font-weight: bold;
+    letter-spacing: 1px;
+}
 
-        .example-card {
-            width: 400px;
-            height: 129px;
-            position: absolute;
-            overflow: hidden;
-            border-radius: 20px;
-            outline: 2px #EE8F13 solid;
-        }
+.nav-menu {
+    display: flex;
+    gap: 1rem;
+}
 
-        .example-card img {
-            position: absolute;
-        }
+.nav-link {
+    color: #fff;
+    text-decoration: none;
+    padding: 0.7rem 1.2rem;
+    border-radius: 25px;
+    background: #ff9800;
+    font-size: 0.9rem;
+    font-weight: 500;
+    transition: all 0.3s ease;
+}
 
-        .example-card .overlay {
-            width: 100%;
-            height: 100%;
-            position: absolute;
-            background: rgba(31.87, 31.87, 31.87, 0.47);
-            border-radius: 20px;
-        }
+.nav-link:hover {
+    background: #e68900;
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(255, 152, 0, 0.4);
+}
 
-        .example-card .text {
-            position: absolute;
-            color: white;
-            font-size: 20px;
-            font-weight: 500;
-            word-wrap: break-word;
-            left: 50%;
-            top: 50%;
-            transform: translate(-50%, -50%);
-        }
 
-        .card-1 {
-            left: 100px;
-            top: 860px;
-        }
+body {
+    font-family: 'Poppins', sans-serif;
+    background: #FBFBFB;
+    margin: 0;
+    padding: 0;
+}
 
-        .card-1 img {
-            width: 450px;
-            height: 338px;
-            left: -25px;
-            top: -150px;
-        }
+body::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 850px;
+    /* Sesuaikan sampai sebelum "Contoh Peristiwa Gempa" */
+    background:
+        linear-gradient(to bottom,
+            /* rgba(255, 255, 255, 0.562) 0%,
+            transparent 0%, */
+            rgba(255, 255, 255, 0.719) 70%,
+            rgba(255, 255, 255, 0.95) 90%,
+            #ffffff 100%),
+        url('/assets/gempa/vulkanik/bromo-bg.jpg');
+    background-size: cover;
+    background-position: center center;
+    background-repeat: no-repeat;
+    z-index: -1;
+    pointer-events: none;
+}
 
-        .card-2 {
-            left: 760px;
-            top: 956px;
-        }
+.kontainer-utama {
+    width: 1280px;
+    height: auto;
+    min-height: 1500px;
+    position: relative;
+    overflow: visible;
+    margin: 0 auto;
+    padding-bottom: 100px;
+}
 
-        .card-2 img {
-            width: 418px;
-            height: 282px;
-            left: -18px;
-            top: -76px;
-        }
+.judul-halaman {
+    width: 330px;
+    height: 47px;
+    left: 475px;
+    top: 100px;
+    position: absolute;
+    color: black;
+    font-size: 36px;
+    font-weight: 700;
+}
 
-        .card-3 {
-            left: 100px;
-            top: 1069px;
-        }
+.gambar-utama {
+    width: 474.46px;
+    height: 307px;
+    left: 135px;
+    top: 286px;
+    position: absolute;
+    box-shadow: -25px 25px 4px rgba(0, 0, 0, 0.50);
+    overflow: hidden;
+    border-radius: 30px;
+}
 
-        .card-3 img {
-            width: 400px;
-            height: 225px;
-            left: 0px;
-            top: -37px;
-        }
+.gambar-utama img {
+    width: 647px;
+    height: 432px;
+    left: -92px;
+    top: -85px;
+    position: absolute;
+}
 
-        .card-4 {
-            left: 760px;
-            top: 1165px;
-        }
+.kontainer-penyebab {
+    width: 429.37px;
+    height: 247px;
+    left: 740.63px;
+    top: 323px;
+    position: absolute;
+}
 
-        .card-4 img {
-            width: 412px;
-            height: 247px;
-            left: -6px;
-            top: -59px;
-        }
+.judul-penyebab {
+    width: 190px;
+    height: 47px;
+    color: black;
+    font-size: 24px;
+    font-weight: 700;
+    margin-bottom: 47px;
+}
 
-        .card-5 {
-            left: 100px;
-            top: 1278px;
-        }
+.teks-penyebab {
+    width: 419px;
+    height: 200px;
+    text-align: justify;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    color: black;
+    font-size: 16px;
+    font-weight: 500;
+}
 
-        .card-5 img {
-            width: 407px;
-            height: 298px;
-            left: -7px;
-            top: -62px;
-        }
+.judul-contoh {
+    width: 369px;
+    height: 87px;
+    left: 455px;
+    top: 743px;
+    position: absolute;
+    text-align: center;
+    color: black;
+    font-size: 24px;
+    font-weight: 700;
+}
 
-        .card-6 {
-            left: 760px;
-            top: 1374px;
-        }
+.kartu-contoh {
+    width: 400px;
+    height: 129px;
+    position: absolute;
+    overflow: hidden;
+    border-radius: 20px;
+    outline: 2px #EE8F13 solid;
+}
 
-        .card-6 img {
-            width: 409px;
-            height: 409px;
-            left: -9px;
-            top: -110px;
-        }
+.kartu-contoh-1 {
+    left: 110px;
+    top: 860px;
+}
 
-        .dot {
-            width: 29.67px;
-            height: 29.86px;
-            left: 615px;
-            position: absolute;
-            background: linear-gradient(180deg, #EE8F13 0%, #BF450C 100%);
-            border-radius: 9999px;
-        }
+.kartu-contoh-2 {
+    left: 770px;
+    top: 956px;
+}
 
-        .dot-1 { top: 894px; }
-        .dot-2 { top: 983.86px; }
-        .dot-3 { top: 1073.72px; }
-        .dot-4 { top: 1163.58px; }
-        .dot-5 { top: 1253.45px; }
-        .dot-6 { top: 1343.31px; }
-        .dot-7 { top: 1433.17px; }
+.kartu-contoh-3 {
+    left: 110px;
+    top: 1068px;
+}
 
-        .footer {
-            width: 1280px;
-            height: 500px;
-            left: 0px;
-            top: 1503px;
-            position: absolute;
-            overflow: hidden;
-        }
+.kartu-contoh-4 {
+    left: 770px;
+    top: 1165px;
+}
 
-        .footer-shape {
-            width: 1280px;
-            height: 344px;
-            left: 0px;
-            top: 162px;
-            position: absolute;
-            border-top-left-radius: 50px;
-            border-top-right-radius: 50px;
-            border: 5px #2E1A08 solid;
-        }
+.kartu-contoh-5 {
+    left: 110px;
+    top: 1278px;
+}
 
-        .footer-bg {
-            width: 1280px;
-            height: 327px;
-            left: 0px;
-            top: 179px;
-            position: absolute;
-            background: #2E1A08;
-            overflow: hidden;
-            border-top-left-radius: 50px;
-            border-top-right-radius: 50px;
-        }
+.kartu-contoh-6 {
+    left: 770px;
+    top: 1374px;
+}
 
-        .footer-text {
-            width: 339px;
-            height: 80px;
-            left: 70px;
-            top: 49px;
-            position: absolute;
-            justify-content: center;
-            display: flex;
-            flex-direction: column;
-            color: white;
-            font-size: 32px;
-            font-weight: 600;
-            word-wrap: break-word;
-        }
+.kartu-contoh img {
+    position: absolute;
+}
 
-        .footer-copyright {
-            width: 445px;
-            height: 34px;
-            left: 417px;
-            top: 244px;
-            position: absolute;
-            justify-content: center;
-            display: flex;
-            flex-direction: column;
-            color: white;
-            font-size: 24px;
-            font-weight: 600;
-            word-wrap: break-word;
-        }
+.kartu-contoh-1 img {
+    width: 417px;
+    height: 362px;
+    left: -9px;
+    top: -102px;
+}
+
+.kartu-contoh-2 img {
+    width: 418px;
+    height: 297px;
+    left: -18px;
+    top: -168px;
+}
+
+.kartu-contoh-3 img {
+    width: 404px;
+    height: 222px;
+    left: -4px;
+    top: -20px;
+}
+
+.kartu-contoh-4 img {
+    width: 413px;
+    height: 275px;
+    left: -13px;
+    top: -43px;
+}
+
+.kartu-contoh-5 img {
+    width: 406px;
+    height: 304px;
+    left: -6px;
+    top: -97px;
+}
+
+.kartu-contoh-6 img {
+    width: 405px;
+    height: 269px;
+    left: -5px;
+    top: -111px;
+}
+
+.overlay-kartu {
+    width: 400px;
+    height: 129px;
+    left: 0px;
+    top: 0px;
+    position: absolute;
+    background: rgba(31.87, 31.87, 31.87, 0.47);
+    border-radius: 20px;
+}
+
+.teks-kartu {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    color: white;
+    font-size: 20px;
+    font-weight: 500;
+    text-align: center;
+    white-space: nowrap;
+}
+
+.titik-timeline {
+    width: 29.67px;
+    height: 29.86px;
+    position: absolute;
+    background: linear-gradient(180deg, #EE8F13 0%, #BF450C 100%);
+    border-radius: 9999px;
+    left: 626px;
+}
+
+.titik-1 {
+    top: 894px;
+}
+
+.titik-2 {
+    top: 983.86px;
+}
+
+.titik-3 {
+    top: 1073.72px;
+}
+
+.titik-4 {
+    top: 1163.58px;
+}
+
+.titik-5 {
+    top: 1253.45px;
+}
+
+.titik-6 {
+    top: 1343.31px;
+}
+
+.titik-7 {
+    top: 1433.17px;
+}
+
+/* Footer Styles */
+.footer {
+    width: 100vw;
+    max-width: none;
+    height: 500px;
+    position: relative;
+    overflow: hidden;
+    margin: 0 auto;
+    left: 50%;
+    transform: translateX(-50%);
+    margin-bottom: 0;
+}
+
+.footer-border {
+    width: 100%;
+    height: 344px;
+    position: absolute;
+    left: 0;
+    top: 162px;
+    border-top-left-radius: 50px;
+    border-top-right-radius: 50px;
+    border: 5px solid #2E1A08;
+}
+
+.footer-content {
+    width: 100%;
+    height: 327px;
+    position: absolute;
+    left: 0;
+    top: 179px;
+    background: #2E1A08;
+    overflow: hidden;
+    border-top-left-radius: 50px;
+    border-top-right-radius: 50px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 49px 70px 65px;
+}
+
+.footer-tagline {
+    color: white;
+    font-size: 32px;
+    font-family: 'Poppins', sans-serif;
+    font-weight: 600;
+    line-height: 1.25;
+}
+
+.footer-copyright {
+    color: white;
+    font-size: 24px;
+    font-family: 'Poppins', sans-serif;
+    font-weight: 600;
+    text-align: center;
+    border-top: 1px solid rgba(255, 255, 255, 0.2);
+    padding-top: 1rem;
+    font-size: 0.95rem;
+    color: #bbb;
+}
+
+/* Responsive Footer */
+@media (max-width: 1280px) {
+    .footer {
+        max-width: calc(100% - 40px);
+        margin-left: 20px;
+        margin-right: 20px;
+    }
+}
+
+@media (max-width: 768px) {
+    .footer {
+        height: 500px;
+    }
+
+    .footer-border {
+        height: 250px;
+        top: 100px;
+    }
+
+    .footer-content {
+        height: 240px;
+        top: 110px;
+        padding: 30px 40px 40px;
+    }
+
+    .footer-tagline {
+        font-size: 24px;
+    }
+
+    .footer-copyright {
+        font-size: 16px;
+    }
+}
