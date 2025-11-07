@@ -1,0 +1,258 @@
+       body {
+            margin: 0;
+            padding: 0;
+            background: #F2F8FC;
+            font-family: Poppins, sans-serif;
+            overflow-x: hidden;
+        }
+
+        .container {
+            width: 1280px;
+            height: 3084px;
+            position: relative;
+            background: #F2F8FC;
+            margin: 0 auto;
+        }
+
+        .title {
+            left: 332px;
+            top: 181px;
+            position: absolute;
+            text-align: center;
+            color: black;
+            font-size: 36px;
+            font-weight: 700;
+            word-wrap: break-word;
+        }
+
+        .card {
+            position: absolute;
+            background: white;
+            box-shadow: 4px 4px 4px rgba(0, 0, 0, 0.25);
+            border-radius: 30px;
+        }
+
+        .card-title {
+            position: absolute;
+            color: black;
+            font-size: 32px;
+            font-weight: 600;
+            word-wrap: break-word;
+        }
+
+        .card-content {
+            position: absolute;
+            text-align: justify;
+            color: black;
+            font-size: 20px;
+            word-wrap: break-word;
+        }
+
+        .card-content .bold {
+            font-weight: 700;
+        }
+
+        .card-content .normal {
+            font-weight: 600;
+        }
+
+        .pre-disaster {
+            width: 1095px;
+            height: 490px;
+            left: 92px;
+            top: 370px;
+        }
+
+        .pre-disaster .card-title {
+            width: 250px;
+            height: 47px;
+            left: 20px;
+            top: 20px;
+        }
+
+        .pre-disaster .card-content {
+            width: 630px;
+            height: 450px;
+            left: 430px;
+            top: 20px;
+        }
+
+        .during-disaster {
+            width: 1095px;
+            height: 610px;
+            left: 92px;
+            top: 935px;
+        }
+
+        .during-disaster .card-title {
+            width: 250px;
+            height: 47px;
+            left: 20px;
+            top: 20px;
+        }
+
+        .during-disaster .card-content {
+            width: 630px;
+            height: 570px;
+            left: 430px;
+            top: 20px;
+        }
+
+        .post-disaster {
+            width: 1095px;
+            height: 460px;
+            left: 92px;
+            top: 1620px;
+        }
+
+        .post-disaster .card-title {
+            width: 275px;
+            height: 47px;
+            left: 20px;
+            top: 20px;
+        }
+
+        .post-disaster .card-content {
+            width: 630px;
+            height: 420px;
+            left: 430px;
+            top: 20px;
+        }
+
+        .emergency-numbers {
+            width: 1095px;
+            padding: 30px 25.5px;
+            left: 92px;
+            top: 2155px;
+            position: absolute;
+            background: white;
+            box-shadow: 4px 4px 4px rgba(0, 0, 0, 0.25);
+            border-radius: 30px;
+            display: flex;
+            justify-content: flex-start;
+            align-items: center;
+            gap: 32px;
+        }
+
+        .number-card {
+            width: 237px;
+            padding: 37px 51px;
+            background: white;
+            box-shadow: 4px 4px 4px rgba(0, 0, 0, 0.25);
+            border-radius: 20px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .number-card .icon {
+            width: 120px;
+            height: 120px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .number-card .icon div {
+            position: absolute;
+            background: black;
+        }
+
+        .number-card .icon-118 div {
+            width: 60px;
+            height: 60px;
+            left: 30px;
+            top: 30px;
+        }
+
+        .number-card .icon-113 div {
+            width: 68px;
+            height: 87px;
+            left: 26px;
+            top: 16px;
+        }
+
+        .number-card .icon-115 div {
+            width: 72px;
+            height: 81px;
+            left: 24px;
+            top: 19px;
+        }
+
+        .number-card .icon-129 div {
+            width: 81px;
+            height: 72px;
+            left: 19px;
+            top: 24px;
+        }
+
+        .number-card .number {
+            text-align: center;
+            color: black;
+            font-size: 40px;
+            font-weight: 700;
+            word-wrap: break-word;
+        }
+
+        .footer {
+            width: 1280px;
+            height: 500px;
+            left: 0px;
+            top: 2600px;
+            position: absolute;
+            overflow: hidden;
+        }
+
+        .footer-shape {
+            width: 1280px;
+            height: 344px;
+            left: 0px;
+            top: 162px;
+            position: absolute;
+            border-top-left-radius: 50px;
+            border-top-right-radius: 50px;
+            border: 5px #2E1A08 solid;
+        }
+
+        .footer-bg {
+            width: 1280px;
+            height: 327px;
+            left: 0px;
+            top: 179px;
+            position: absolute;
+            background: #2E1A08;
+            overflow: hidden;
+            border-top-left-radius: 50px;
+            border-top-right-radius: 50px;
+        }
+
+        .footer-text {
+            width: 339px;
+            height: 80px;
+            left: 70px;
+            top: 49px;
+            position: absolute;
+            justify-content: center;
+            display: flex;
+            flex-direction: column;
+            color: white;
+            font-size: 32px;
+            font-weight: 600;
+            word-wrap: break-word;
+        }
+
+        .footer-copyright {
+            width: 445px;
+            height: 34px;
+            left: 417px;
+            top: 244px;
+            position: absolute;
+            justify-content: center;
+            display: flex;
+            flex-direction: column;
+            color: white;
+            font-size: 24px;
+            font-weight: 600;
+            word-wrap: break-word;
+        }
