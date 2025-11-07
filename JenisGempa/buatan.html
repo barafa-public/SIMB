@@ -1,68 +1,109 @@
 <!DOCTYPE html>
 <html lang="id">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Gempa Buatan Manusia</title>
-    <link rel="stylesheet" href="/JenisGempa/buatan.css">
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-
+    <title>Gempa Vulkanik - SeismoTech</title>
+    <link rel="stylesheet" href="buatan.css">
 </head>
+
 <body>
-    <div class="container">
-        <div class="title">Gempa Buatan Manusia</div>
-        <div class="image-main">
-            <img src="/assets/gempa/buatan.png" alt="Main Image">
+    <!-- Navigation -->
+    <header class="navbar">
+        <div class="nav-container">
+            <div class="logo">SeismoTech</div>
+            <nav class="nav-menu">
+                <a href="/HTML/dashboard.html" class="nav-link">Beranda</a>
+                <a href="/HTML/dashboard.html" class="nav-link">Gempa</a>
+                <a href="/HTML/dashboard.html#dampak" class="nav-link">Dampak</a>
+                <a href="/HTML/dashboard.html#pencegahan" class="nav-link">Pencegahan</a>
+                <a href="/HTML/dashboard.html#informasi" class="nav-link">Informasi</a>
+            </nav>
         </div>
-        <div class="causes">
-            <div class="causes-title">Penyebab</div>
-            <div class="causes-text">Gempa terinduksi, adalah gempa yang dipicu secara tidak langsung oleh aktivitas manusia yang mengganggu keseimbangan stress dan kestabilan pada kerak bumi. Aktivitas manusia “memicu” pelepasan energi stress yang sudah terakumulasi secara alami.</div>
+    </header>
+
+    <div class="kontainer-utama">
+        <div class="judul-halaman">Gempa Buatan</div>
+
+        <div class="gambar-utama">
+            <img src="/assets/gempa/buatan.png" alt="Gempa Vulkanik">
         </div>
-        <div class="examples-title">Contoh Peristiwa Gempa Bumi Vulkanik</div>
-        <div class="example-card card-1">
-            <img src="/assets/gempa/gambar buatan/crandall.png" alt="Tambang Crandall Canyon">
-            <div class="overlay"></div>
-            <div class="text">Tambang Crandall Cayon, 2007</div>
-        </div>
-        <div class="example-card card-2">
-            <img src="/assets/gempa/gambar buatan/bendunganC.png" alt="Bendungan China">
-            <div class="overlay"></div>
-            <div class="text">Bendungan China, 2008</div>
-        </div>
-        <div class="example-card card-3">
-            <img src="/assets/gempa/gambar buatan/Fracking.png" alt="Pengeboran Fracking">
-            <div class="overlay"></div>
-            <div class="text">Pengeboran Fracking, 2010</div>
-        </div>
-        <div class="example-card card-4">
-            <img src="/assets/gempa/gambar buatan/nuklir.png" alt="Bom nuklir Korea Utara">
-            <div class="overlay"></div>
-            <div class="text">Bom nuklir Korea Utara, 2017</div>
-        </div>
-        <div class="example-card card-5">
-            <img src="/assets/gempa/gambar buatan/elektromagnet.png" alt="Senjata elektromagnetik Kobe">
-            <div class="overlay"></div>
-            <div class="text">Senjata elektromagnetik Kobe, 1995</div>
-        </div>
-        <div class="example-card card-6">
-            <img src="/assets/gempa/gambar buatan/bendunganO.png" alt="Bendungan Oroville California">
-            <div class="overlay"></div>
-            <div class="text">Bendungan Oroville California, 1975</div>
-        </div>
-        <div class="dot dot-1"></div>
-        <div class="dot dot-2"></div>
-        <div class="dot dot-3"></div>
-        <div class="dot dot-4"></div>
-        <div class="dot dot-5"></div>
-        <div class="dot dot-6"></div>
-        <div class="dot dot-7"></div>
-        <div class="footer">
-            <div class="footer-shape"></div>
-            <div class="footer-bg">
-                <div class="footer-text">Sensing The Earth, <br/>Securing The Future</div>
-                <div class="footer-copyright">Copyright 2025. All Rights Reserved</div>
+
+        <div class="kontainer-penyebab">
+            <div class="judul-penyebab">Penyebab</div>
+            <div class="teks-penyebab">
+                Gempa terinduksi, adalah gempa yang dipicu secara tidak langsung oleh aktivitas manusia yang mengganggu keseimbangan stress dan kestabilan pada kerak bumi. Aktivitas manusia "memicu" pelepasan energi stress yang sudah terakumulasi secara alami
             </div>
         </div>
+
+        <div class="judul-contoh">Contoh Peristiwa Gempa Bumi Buatan</div>
+
+        <!-- Kartu Contoh 1 -->
+        <div class="kartu-contoh kartu-contoh-1">
+            <img src="/./assets/gempa/buatan/crandall.png" alt="Gunung Merapi">
+            <div class="overlay-kartu"></div>
+            <div class="teks-kartu">Tambang Crandall Cayon, 2007</div>
+        </div>
+
+        <!-- Kartu Contoh 2 -->
+        <div class="kartu-contoh kartu-contoh-2">
+            <img src="/./assets/gempa/buatan/bendunganC.png" alt="Gunung Kelud">
+            <div class="overlay-kartu"></div>
+            <div class="teks-kartu">Bendungan China, 2008</div>
+        </div>
+
+        <!-- Kartu Contoh 3 -->
+        <div class="kartu-contoh kartu-contoh-3">
+            <img src="/./assets/gempa/buatan/Fracking.png" alt="Anak Krakatau">
+            <div class="overlay-kartu"></div>
+            <div class="teks-kartu">Pengeboran Fracking, 2010</div>
+        </div>
+
+        <!-- Kartu Contoh 4 -->
+        <div class="kartu-contoh kartu-contoh-4">
+            <img src="/./assets/gempa/buatan/nuklir.png" alt="Gunung Klyuchevskoy">
+            <div class="overlay-kartu"></div>
+            <div class="teks-kartu">Bom Nuklir Korea Utara, 2017</div>
+        </div>
+
+        <!-- Kartu Contoh 5 -->
+        <div class="kartu-contoh kartu-contoh-5">
+            <img src="/assets/gempa/buatan/elektromagnet.png" alt="Gunung Sinabung">
+            <div class="overlay-kartu"></div>
+            <div class="teks-kartu">Senjata Elektromagnet Kobe, 1995</div>
+        </div>
+
+        <!-- Kartu Contoh 6 -->
+        <div class="kartu-contoh kartu-contoh-6">
+            <img src="/assets/gempa/buatan/bendunganO.png" alt="Gunung Bromo">
+            <div class="overlay-kartu"></div>
+            <div class="teks-kartu">Bendungan Oroville California, 1975</div>
+        </div>
+
+        <!-- Titik Timeline -->
+        <div class="titik-timeline titik-1"></div>
+        <div class="titik-timeline titik-2"></div>
+        <div class="titik-timeline titik-3"></div>
+        <div class="titik-timeline titik-4"></div>
+        <div class="titik-timeline titik-5"></div>
+        <div class="titik-timeline titik-6"></div>
+        <div class="titik-timeline titik-7"></div>
     </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-border"></div>
+        <div class="footer-content">
+            <div class="footer-tagline">
+                Sensing The Earth,<br />
+                Securing The Future
+            </div>
+            <div class="footer-copyright">
+                Copyright 2025. All Rights Reserved
+            </div>
+        </div>
+    </footer>
 </body>
+
 </html>
