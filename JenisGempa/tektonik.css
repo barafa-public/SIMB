@@ -11,6 +11,29 @@ body {
     background: #FBFBFB;
 }
 
+body::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 850px;
+    /* Sesuaikan sampai sebelum "Contoh Peristiwa Gempa" */
+    background:
+        linear-gradient(to bottom,
+            /* rgba(255, 255, 255, 0.562) 0%,
+            transparent 0%, */
+            rgba(255, 255, 255, 0.719) 70%,
+            rgba(255, 255, 255, 0.95) 90%,
+            #ffffff 100%),
+        url('/assets/gempa/vulkanik/bromo-bg.jpg');
+    background-size: cover;
+    background-position: center center;
+    background-repeat: no-repeat;
+    z-index: -1;
+    pointer-events: none;
+}
+
 .kontainer-utama {
     width: 1280px;
     height: 2428px;
