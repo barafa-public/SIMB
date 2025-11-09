@@ -1,258 +1,371 @@
-       body {
-            margin: 0;
-            padding: 0;
-            background: #F2F8FC;
-            font-family: Poppins, sans-serif;
-            overflow-x: hidden;
-        }
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
 
-        .container {
-            width: 1280px;
-            height: 3084px;
-            position: relative;
-            background: #F2F8FC;
-            margin: 0 auto;
-        }
+/* ========== RESET & BASE ========== */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
 
-        .title {
-            left: 332px;
-            top: 181px;
-            position: absolute;
-            text-align: center;
-            color: black;
-            font-size: 36px;
-            font-weight: 700;
-            word-wrap: break-word;
-        }
+html {
+    scroll-behavior: smooth;
+    overflow-x: hidden;
+    overflow-y: auto;
+}
 
-        .card {
-            position: absolute;
-            background: white;
-            box-shadow: 4px 4px 4px rgba(0, 0, 0, 0.25);
-            border-radius: 30px;
-        }
+body {
+    font-family: 'Poppins', sans-serif;
+    background:
+        radial-gradient(ellipse 800px 500px at 15% 15%, #f5e6d3 0%, rgba(245, 230, 211, 0.5) 35%, transparent 60%),
+        radial-gradient(ellipse 700px 700px at 85% 15%, #e8d5c4 0%, rgba(232, 213, 196, 0.5) 35%, transparent 65%),
+        radial-gradient(ellipse 900px 600px at 35% 65%, #d4b896 0%, rgba(212, 184, 150, 0.5) 35%, transparent 70%),
+        radial-gradient(ellipse 750px 750px at 92% 85%, #c9a88a 0%, rgba(201, 168, 138, 0.5) 35%, transparent 60%),
+        radial-gradient(ellipse 800px 650px at 8% 92%, #b8956f 0%, rgba(184, 149, 111, 0.5) 35%, transparent 65%),
+        #ffffff;
+    margin: 0;
+    padding: 0;
+    min-height: 100vh;
+}
 
-        .card-title {
-            position: absolute;
-            color: black;
-            font-size: 32px;
-            font-weight: 600;
-            word-wrap: break-word;
-        }
+.container {
+    width: 1280px;
+    position: relative;
+    background: transparent;
+    margin: 0 auto;
+    padding-bottom: 50px;
+}
 
-        .card-content {
-            position: absolute;
-            text-align: justify;
-            color: black;
-            font-size: 20px;
-            word-wrap: break-word;
-        }
 
-        .card-content .bold {
-            font-weight: 700;
-        }
+.container {
+    width: 1280px;
+    position: relative;
+    background: transparent;
+    margin: 0 auto;
+    padding-bottom: 50px;
+}
 
-        .card-content .normal {
-            font-weight: 600;
-        }
+/* ========== NAVIGATION ========== */
+.navbar {
+    background: transparent;
+    backdrop-filter: none;
+    padding: 1.5rem 0;
+    position: relative;
+    z-index: 100;
+    transition: background 0.3s ease, backdrop-filter 0.3s ease;
+}
 
-        .pre-disaster {
-            width: 1095px;
-            height: 490px;
-            left: 92px;
-            top: 370px;
-        }
+.navbar:hover {
+    background: rgba(0, 0, 0, 0.2);
+    backdrop-filter: blur(5px);
+}
 
-        .pre-disaster .card-title {
-            width: 250px;
-            height: 47px;
-            left: 20px;
-            top: 20px;
-        }
+.nav-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 2rem;
+}
 
-        .pre-disaster .card-content {
-            width: 630px;
-            height: 450px;
-            left: 430px;
-            top: 20px;
-        }
+.logo {
+    color: #000;
+    font-size: 1.8rem;
+    font-weight: bold;
+    letter-spacing: 1px;
+}
 
-        .during-disaster {
-            width: 1095px;
-            height: 610px;
-            left: 92px;
-            top: 935px;
-        }
+.nav-menu {
+    display: flex;
+    gap: 1rem;
+}
 
-        .during-disaster .card-title {
-            width: 250px;
-            height: 47px;
-            left: 20px;
-            top: 20px;
-        }
+.nav-link {
+    color: #fff;
+    text-decoration: none;
+    padding: 0.7rem 1.2rem;
+    border-radius: 25px;
+    background: #ff9800;
+    font-size: 0.9rem;
+    font-weight: 500;
+    transition: all 0.3s ease;
+}
 
-        .during-disaster .card-content {
-            width: 630px;
-            height: 570px;
-            left: 430px;
-            top: 20px;
-        }
+.nav-link:hover {
+    background: #e68900;
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(255, 152, 0, 0.4);
+}
 
-        .post-disaster {
-            width: 1095px;
-            height: 460px;
-            left: 92px;
-            top: 1620px;
-        }
+.nav-link.active {
+    color: #0077ff;
+    border-bottom: 2px solid #0077ff;
+}
 
-        .post-disaster .card-title {
-            width: 275px;
-            height: 47px;
-            left: 20px;
-            top: 20px;
-        }
+/* ========== MAIN CONTAINER ========== */
 
-        .post-disaster .card-content {
-            width: 630px;
-            height: 420px;
-            left: 430px;
-            top: 20px;
-        }
 
-        .emergency-numbers {
-            width: 1095px;
-            padding: 30px 25.5px;
-            left: 92px;
-            top: 2155px;
-            position: absolute;
-            background: white;
-            box-shadow: 4px 4px 4px rgba(0, 0, 0, 0.25);
-            border-radius: 30px;
-            display: flex;
-            justify-content: flex-start;
-            align-items: center;
-            gap: 32px;
-        }
+.title {
+    width: 100%;
+    text-align: center;
+    color: black;
+    font-size: 36px;
+    font-weight: 700;
+    padding: 100px 0 50px;
+}
 
-        .number-card {
-            width: 237px;
-            padding: 37px 51px;
-            background: white;
-            box-shadow: 4px 4px 4px rgba(0, 0, 0, 0.25);
-            border-radius: 20px;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            gap: 10px;
-        }
+/* ========== CARDS ========== */
+.card {
+    position: relative;
+    width: 1095px;
+    background: white;
+    box-shadow: 4px 4px 4px rgba(0, 0, 0, 0.25);
+    border-radius: 30px;
+    margin: 0 auto 75px;
+    padding: 20px;
+    display: flex;
+    gap: 30px;
+}
 
-        .number-card .icon {
-            width: 120px;
-            height: 120px;
-            position: relative;
-            overflow: hidden;
-        }
+.card-title {
+    min-width: 250px;
+    color: black;
+    font-size: 32px;
+    font-weight: 600;
+    padding: 20px;
+}
 
-        .number-card .icon div {
-            position: absolute;
-            background: black;
-        }
+.card-content {
+    flex: 1;
+    text-align: justify;
+    color: black;
+    font-size: 20px;
+    padding: 20px;
+}
 
-        .number-card .icon-118 div {
-            width: 60px;
-            height: 60px;
-            left: 30px;
-            top: 30px;
-        }
+.card-content .bold {
+    font-weight: 700;
+}
 
-        .number-card .icon-113 div {
-            width: 68px;
-            height: 87px;
-            left: 26px;
-            top: 16px;
-        }
+.card-content .normal {
+    font-weight: 600;
+}
 
-        .number-card .icon-115 div {
-            width: 72px;
-            height: 81px;
-            left: 24px;
-            top: 19px;
-        }
+/* Card specific heights */
+.pre-disaster {
+    min-height: 490px;
+}
 
-        .number-card .icon-129 div {
-            width: 81px;
-            height: 72px;
-            left: 19px;
-            top: 24px;
-        }
+.during-disaster {
+    min-height: 610px;
+}
 
-        .number-card .number {
-            text-align: center;
-            color: black;
-            font-size: 40px;
-            font-weight: 700;
-            word-wrap: break-word;
-        }
+.post-disaster {
+    min-height: 460px;
+}
 
-        .footer {
-            width: 1280px;
-            height: 500px;
-            left: 0px;
-            top: 2600px;
-            position: absolute;
-            overflow: hidden;
-        }
+/* ========== EMERGENCY NUMBERS ========== */
+.emergency-numbers {
+    width: 1095px;
+    padding: 30px;
+    margin: 75px auto;
+    background: white;
+    box-shadow: 4px 4px 4px rgba(0, 0, 0, 0.25);
+    border-radius: 30px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 32px;
+}
 
-        .footer-shape {
-            width: 1280px;
-            height: 344px;
-            left: 0px;
-            top: 162px;
-            position: absolute;
-            border-top-left-radius: 50px;
-            border-top-right-radius: 50px;
-            border: 5px #2E1A08 solid;
-        }
+.number-card {
+    width: 237px;
+    padding: 37px 51px;
+    background: white;
+    box-shadow: 4px 4px 4px rgba(0, 0, 0, 0.25);
+    border-radius: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+}
 
-        .footer-bg {
-            width: 1280px;
-            height: 327px;
-            left: 0px;
-            top: 179px;
-            position: absolute;
-            background: #2E1A08;
-            overflow: hidden;
-            border-top-left-radius: 50px;
-            border-top-right-radius: 50px;
-        }
+.number-card .icon {
+    width: 120px;
+    height: 120px;
+    position: relative;
+    overflow: hidden;
+}
 
-        .footer-text {
-            width: 339px;
-            height: 80px;
-            left: 70px;
-            top: 49px;
-            position: absolute;
-            justify-content: center;
-            display: flex;
-            flex-direction: column;
-            color: white;
-            font-size: 32px;
-            font-weight: 600;
-            word-wrap: break-word;
-        }
+.number-card .icon div {
+    position: absolute;
+    background: black;
+}
 
-        .footer-copyright {
-            width: 445px;
-            height: 34px;
-            left: 417px;
-            top: 244px;
-            position: absolute;
-            justify-content: center;
-            display: flex;
-            flex-direction: column;
-            color: white;
-            font-size: 24px;
-            font-weight: 600;
-            word-wrap: break-word;
-        }
+.number-card .icon-118 div {
+    width: 60px;
+    height: 60px;
+    left: 30px;
+    top: 30px;
+}
+
+.number-card .icon-113 div {
+    width: 68px;
+    height: 87px;
+    left: 26px;
+    top: 16px;
+}
+
+.number-card .icon-115 div {
+    width: 72px;
+    height: 81px;
+    left: 24px;
+    top: 19px;
+}
+
+.number-card .icon-129 div {
+    width: 81px;
+    height: 72px;
+    left: 19px;
+    top: 24px;
+}
+
+.number-card .number {
+    text-align: center;
+    color: black;
+    font-size: 40px;
+    font-weight: 700;
+}
+
+/* ========== FOOTER ========== */
+.footer {
+    width: 100vw;
+    max-width: none;
+    height: 506px;
+    position: relative;
+    overflow: hidden;
+    margin: 100px 0 0 0;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.footer-border {
+    width: 100%;
+    height: 344px;
+    position: absolute;
+    left: 0;
+    top: 162px;
+    border-top-left-radius: 50px;
+    border-top-right-radius: 50px;
+    border: 5px solid #2E1A08;
+}
+
+.footer-content {
+    width: 100%;
+    height: 327px;
+    position: absolute;
+    left: 0;
+    top: 179px;
+    background: #2E1A08;
+    overflow: hidden;
+    border-top-left-radius: 50px;
+    border-top-right-radius: 50px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 49px 70px 0;
+}
+
+.footer-tagline {
+    color: white;
+    font-size: 32px;
+    font-family: 'Poppins', sans-serif;
+    font-weight: 600;
+    line-height: 1.25;
+}
+
+.footer-copyright {
+    color: white;
+    font-size: 24px;
+    font-family: 'Poppins', sans-serif;
+    font-weight: 600;
+    text-align: center;
+    padding-bottom: 65px;
+}
+
+/* ========== RESPONSIVE ========== */
+@media (max-width: 1280px) {
+    .container {
+        max-width: calc(100% - 40px);
+        margin: 0 20px;
+    }
+
+    .card,
+    .emergency-numbers {
+        max-width: calc(100% - 40px);
+    }
+
+    .footer {
+        max-width: calc(100% - 40px);
+    }
+}
+
+@media (max-width: 768px) {
+    .title {
+        font-size: 28px;
+        padding: 80px 20px 40px;
+    }
+
+    .card {
+        flex-direction: column;
+        padding: 15px;
+    }
+
+    .card-title {
+        font-size: 24px;
+        min-width: auto;
+    }
+
+    .card-content {
+        font-size: 16px;
+    }
+
+    .emergency-numbers {
+        flex-wrap: wrap;
+        gap: 20px;
+    }
+
+    .number-card {
+        width: calc(50% - 10px);
+        padding: 20px;
+    }
+
+    .number-card .number {
+        font-size: 32px;
+    }
+
+    .footer {
+        height: 400px;
+    }
+
+    .footer-border {
+        height: 250px;
+        top: 100px;
+    }
+
+    .footer-content {
+        height: 240px;
+        top: 110px;
+        padding: 30px 40px 0;
+    }
+
+    .footer-tagline {
+        font-size: 24px;
+    }
+
+    .footer-copyright {
+        font-size: 16px;
+        padding-bottom: 40px;
+    }
+}
