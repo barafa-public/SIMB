@@ -1,502 +1,519 @@
-<!DOCTYPE html> 
-<html lang="id"> 
-<head> 
-    <meta charset="UTF-8"> 
-    <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
-    <title>Gempa Bumi - SeismoTech</title> <link rel="stylesheet" href="/CSS/dashboard.css"> 
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet"> 
-    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"> 
-    <style>
-        /* Styling untuk tombol Selengkapnya */
-        .btn-load-more {
-            background: linear-gradient(135deg, #ff9800 0%, #ff6b35 100%);
-            color: white;
-            border: none;
-            padding: 1rem 2.5rem;
-            border-radius: 30px;
-            font-size: 1rem;
-            font-weight: 600;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            box-shadow: 0 5px 15px rgba(255, 152, 0, 0.4);
-            margin: 2rem auto;
-            display: block;
-        }
+<!DOCTYPE html>
+<html lang="id">
 
-        .btn-load-more:hover {
-            background: linear-gradient(135deg, #e68900 0%, #e65a25 100%);
-            transform: translateY(-3px);
-            box-shadow: 0 8px 20px rgba(255, 152, 0, 0.6);
-        }
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Gempa Bumi - SeismoTech</title>
+  <link rel="stylesheet" href="/CSS/dashboard.css">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
+  <style>
+    /* Styling untuk tombol Selengkapnya */
+    .btn-load-more {
+      background: linear-gradient(135deg, #ff9800 0%, #ff6b35 100%);
+      color: white;
+      border: none;
+      padding: 1rem 2.5rem;
+      border-radius: 30px;
+      font-size: 1rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      box-shadow: 0 5px 15px rgba(255, 152, 0, 0.4);
+      margin: 2rem auto;
+      display: block;
+    }
 
-        .btn-load-more:disabled {
-            background: #ccc;
-            cursor: not-allowed;
-            transform: none;
-            box-shadow: none;
-        }
+    .btn-load-more:hover {
+      background: linear-gradient(135deg, #e68900 0%, #e65a25 100%);
+      transform: translateY(-3px);
+      box-shadow: 0 8px 20px rgba(255, 152, 0, 0.6);
+    }
 
-        .btn-load-more:disabled:hover {
-            background: #ccc;
-            transform: none;
-        }
+    .btn-load-more:disabled {
+      background: #ccc;
+      cursor: not-allowed;
+      transform: none;
+      box-shadow: none;
+    }
 
-        @media (max-width: 768px) {
-            .peta-container {
-                padding: 1rem;
-                border-radius: 10px;
-            }
+    .btn-load-more:disabled:hover {
+      background: #ccc;
+      transform: none;
+    }
 
-            .btn-load-more {
-                width: 90%;
-                padding: 0.9rem 2rem;
-            }
-        }
+    @media (max-width: 768px) {
+      .peta-container {
+        padding: 1rem;
+        border-radius: 10px;
+      }
 
-        
-        #map {
-        height: 550px;          
-        width: 90%;            
-        margin: 20px auto;        
-        display: block;        
-        border-radius: 10px;   
-        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3); 
-        }
-
-        .map-controls {
-        position: absolute;
-        top: 10px;
-        right: 10px;
-        z-index: 1000;
-        display: flex;
-        flex-direction: column;
-        gap: 8px;
-        background: white;
-        padding: 8px;
-        border-radius: 8px;
-        box-shadow: 0 2px 8px rgba(0,0,0,0.3);
-        }
-
-        .map-toggle {
-        padding: 8px 14px;
-        border: none;
-        background: white;
-        color: #333;
-        border-radius: 4px;
-        cursor: pointer;
-        font-weight: 600;
-        transition: all 0.2s;
-        font-size: 12px;
-        text-align: left;
-        }
-
-        .map-toggle:hover {
-        background: #f0f0f0;
-        }
-
-        .map-toggle.active {
-        background: linear-gradient(135deg, #ff9800 0%, #ff6b35 100%);
-        color: white;
-        }
-        .loading {
-        text-align: center;
-        padding: 20px;
-        color: #666;
-        }
-
-        /* Custom marker dengan pin */
-        /* --- Marker Gempa --- */
-        .gempa-marker-container {
-        position: relative;
-        width: 48px;
-        height: 58px;
-        }
-
-        .gempa-circle {
-        position: absolute;
-        top: 0;
-        left: 50%;
-        transform: translateX(-50%);
-        border-radius: 50%;
-        border: 3px solid white;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        font-weight: 700;
-        color: white;
-        font-size: 12px;
-        text-align: center;
-        text-shadow: 0 1px 2px rgba(0,0,0,0.5);
-        box-shadow: 0 3px 8px rgba(0,0,0,0.4);
-        }
-
-        .gempa-pin {
-        position: absolute;
-        bottom: 0;
-        left: 50%;
-        transform: translateX(-50%);
-        width: 0;
-        height: 0;
-        border-left: 6px solid transparent;
-        border-right: 6px solid transparent;
-        border-top: 14px solid;
-        }
+      .btn-load-more {
+        width: 90%;
+        padding: 0.9rem 2rem;
+      }
+    }
 
 
-        /* Tooltip hover */
-        .leaflet-tooltip {
-        background: white;
-        border: none;
-        border-radius: 8px;
-        box-shadow: 0 4px 12px rgba(0,0,0,0.2);
-        padding: 12px 15px;
-        font-size: 13px;
-        line-height: 1.6;
-        min-width: 220px;
-        }
+    #map {
+      height: 550px;
+      width: 90%;
+      margin: 20px auto;
+      display: block;
+      border-radius: 10px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+    }
 
-        .leaflet-tooltip::before {
-        display: none;
-        }
+    .map-controls {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      z-index: 1000;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      background: white;
+      padding: 8px;
+      border-radius: 8px;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+    }
 
-        .tooltip-title {
-        margin: 0 0 8px 0;
-        padding-bottom: 8px;
-        border-bottom: 2px solid;
-        font-weight: bold;
-        font-size: 14px;
-        }
+    .map-toggle {
+      padding: 8px 14px;
+      border: none;
+      background: white;
+      color: #333;
+      border-radius: 4px;
+      cursor: pointer;
+      font-weight: 600;
+      transition: all 0.2s;
+      font-size: 12px;
+      text-align: left;
+    }
 
-        .tooltip-row {
-        margin: 4px 0;
-        display: flex;
-        gap: 8px;
-        }
+    .map-toggle:hover {
+      background: #f0f0f0;
+    }
 
-        .tooltip-label {
-        font-weight: 600;
-        min-width: 80px;
-        }
-    </style>
-</head> 
-<body> 
-        <!-- Header & Hero Section Combined --> <section class="hero-section"> <!-- Navigation --> <header class="navbar"> <div class="nav-container"> <div class="logo">SeismoTech</div> <nav class="nav-menu"> <a href="#beranda" class="nav-link">Beranda</a> <a href="#gempa" class="nav-link">Gempa</a> <a href="#dampak" class="nav-link">Dampak</a> <a href="#pencegahan" class="nav-link">Pencegahan</a> <a href="#informasi" class="nav-link">Informasi</a> </nav> </div> </header>
-        <!-- Hero Content -->
-        <div class="hero-content">
-            <div>
-                <h1>Gempa Bumi</h1>
-                <p>Gempa bumi merupakan gejala alam yang ditimbulkan oleh tiba-tiba bergeraknya lempeng tektonik di
-                    dalam bumi. Gempa bumi dapat terjadi karena adanya pergerakan magma di dalam bumi, namun penyebab
-                    utama adalah kegiatan pergerakan lempeng tektonik bumi yang terus bergerak di atas mantel bumi yang
-                    panas.</p>
-            </div>
+    .map-toggle.active {
+      background: linear-gradient(135deg, #ff9800 0%, #ff6b35 100%);
+      color: white;
+    }
+
+    .loading {
+      text-align: center;
+      padding: 20px;
+      color: #666;
+    }
+
+    /* Custom marker dengan pin */
+    /* --- Marker Gempa --- */
+    .gempa-marker-container {
+      position: relative;
+      width: 48px;
+      height: 58px;
+    }
+
+    .gempa-circle {
+      position: absolute;
+      top: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      border-radius: 50%;
+      border: 3px solid white;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 700;
+      color: white;
+      font-size: 12px;
+      text-align: center;
+      text-shadow: 0 1px 2px rgba(0, 0, 0, 0.5);
+      box-shadow: 0 3px 8px rgba(0, 0, 0, 0.4);
+    }
+
+    .gempa-pin {
+      position: absolute;
+      bottom: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 0;
+      height: 0;
+      border-left: 6px solid transparent;
+      border-right: 6px solid transparent;
+      border-top: 14px solid;
+    }
+
+
+    /* Tooltip hover */
+    .leaflet-tooltip {
+      background: white;
+      border: none;
+      border-radius: 8px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+      padding: 12px 15px;
+      font-size: 13px;
+      line-height: 1.6;
+      min-width: 220px;
+    }
+
+    .leaflet-tooltip::before {
+      display: none;
+    }
+
+    .tooltip-title {
+      margin: 0 0 8px 0;
+      padding-bottom: 8px;
+      border-bottom: 2px solid;
+      font-weight: bold;
+      font-size: 14px;
+    }
+
+    .tooltip-row {
+      margin: 4px 0;
+      display: flex;
+      gap: 8px;
+    }
+
+    .tooltip-label {
+      font-weight: 600;
+      min-width: 80px;
+    }
+  </style>
+</head>
+
+<body>
+  <!-- Header & Hero Section Combined -->
+  <section class="hero-section"> <!-- Navigation -->
+    <header class="navbar">
+      <div class="nav-container">
+        <div class="logo">SeismoTech</div>
+        <nav class="nav-menu"> <a href="#beranda" class="nav-link">Beranda</a> <a href="#gempa"
+            class="nav-link">Gempa</a> <a href="#dampak" class="nav-link">Dampak</a> <a href="#pencegahan"
+            class="nav-link">Pencegahan</a> <a href="#informasi" class="nav-link">Informasi</a> </nav>
+      </div>
+    </header>
+    <!-- Hero Content -->
+    <div class="hero-content">
+      <div>
+        <h1>Gempa Bumi</h1>
+        <p>Gempa bumi merupakan gejala alam yang ditimbulkan oleh tiba-tiba bergeraknya lempeng tektonik di
+          dalam bumi. Gempa bumi dapat terjadi karena adanya pergerakan magma di dalam bumi, namun penyebab
+          utama adalah kegiatan pergerakan lempeng tektonik bumi yang terus bergerak di atas mantel bumi yang
+          panas.</p>
+      </div>
+    </div>
+
+    <div class="hero-overlay"></div>
+  </section>
+
+  <!-- Jenis-Jenis Gempa Section -->
+  <section id="jenis-gempa" class="jenis-gempa-section">
+    <h2>Jenis-Jenis Gempa</h2>
+    <div class="gempa-cards">
+      <div class="card">
+        <a href="/JenisGempa/tektonik.html">
+          <div class="card-image tektonik">
+            <img src="/assets/gempa/tektonik.png" alt="">
+            <h3>Gempa Tektonik</h3>
+          </div>
+        </a>
+      </div>
+      <div class="card">
+        <a href="/JenisGempa/vulkanik.html">
+          <div class="card-image vulkanik">
+            <img src="/assets/gempa/vulkanik.png" alt="">
+            <h3>Gempa Vulkanik</h3>
+          </div>
+        </a>
+      </div>
+      <div class="card">
+        <a href=""></a>
+        <div class="card-image buatan">
+          <img src="/assets/gempa/buatan.png" alt="">
+          <h3>Gempa Buatan</h3>
         </div>
+      </div>
+    </div>
+  </section>
 
-        <div class="hero-overlay"></div>
-    </section>
-
-    <!-- Jenis-Jenis Gempa Section -->
-    <section id="jenis-gempa" class="jenis-gempa-section">
-        <h2>Jenis-Jenis Gempa</h2>
-        <div class="gempa-cards">
-            <div class="card">
-              <a href="/JenisGempa/tektonik.html">
-                <div class="card-image tektonik">
-                    <img src="/assets/gempa/backgroundNavbar.png" alt="">
-                    <h3>Gempa Tektonik</h3>
-                </div>
-              </a>
-            </div>
-            <div class="card">
-                <a href="/JenisGempa/vulkanik.html">
-                    <div class="card-image vulkanik">
-                        <img src="/assets/gempa/vulkanik.png" alt="">
-                        <h3>Gempa Vulkanik</h3>
-                    </div>
-                </a>
-            </div>
-            <div class="card">
-              <a href="/JenisGempa/buatan.html">
-                <div class="card-image buatan">
-                    <img src="/assets/gempa/buatan.png" alt="">
-                    <h3>Gempa Buatan</h3>
-                </div>
-              </a>  
-            </div>
+  <!-- Dampak Section -->
+  <section id="dampak" class="dampak-section">
+    <h2>Dampak</h2>
+    <div class="dampak-container">
+      <div class="dampak-item dampak-positif">
+        <div class="dampak-image positif">
+          <img src="/assets/dampak/dampakPositive.jpg" alt="">
         </div>
-    </section>
-
-    <!-- Dampak Section -->
-    <section id="dampak" class="dampak-section">
-        <h2>Dampak</h2>
-        <div class="dampak-container">
-            <div class="dampak-item dampak-positif">
-                <div class="dampak-image positif">
-                    <img src="/assets/dampak/dampakPositive.jpg" alt="">
-                </div>
-                <div class="dampak-content">
-                    <h3>Dampak Positif</h3>
-                    <p>Munculnya sumber daya alam baru seperti mata air dan mineral. mendorong inovasi teknologi
-                        mitigasi bencana, terbentuknya daratan atau pulau baru, dan menambah pengetahuan ilmiah</p>
-                </div>
-            </div>
-
-            <div class="dampak-divider"></div>
-
-            <div class="dampak-item dampak-negatif">
-                <div class="dampak-content">
-                    <h3>Dampak Negatif</h3>
-                    <p>Menimbulkan kerusakan infrastruktur, kehilangan nyawa, dan gangguan sosial ekonomi di wilayah
-                        terdampak. Gempa besar juga dapat memicu tsunami di daerah pesisir.</p>
-                </div>
-                <div class="dampak-image negatif">
-                    <img src="/assets/dampak/dampakNegative.jpg" alt="">
-                </div>
-            </div>
+        <div class="dampak-content">
+          <h3>Dampak Positif</h3>
+          <p>Munculnya sumber daya alam baru seperti mata air dan mineral. mendorong inovasi teknologi
+            mitigasi bencana, terbentuknya daratan atau pulau baru, dan menambah pengetahuan ilmiah</p>
         </div>
-    </section>
+      </div>
 
-    <!-- Perencanaan Tindakan Bencana -->
-    <section id="pencegahan" class="pencegahan-section">
-        <h2>Perencanaan Tindakan Bencana Gempa Bumi</h2>
-        <p>Kita dapat mempersiapkan diri dengan perencanaan, pelatihan evakuasi, dan penguatan bangunan tahan gempa.</p>
-        <button class="btn-perencanaan">Selengkapnya ></button>
-    </section>
+      <div class="dampak-divider"></div>
 
-    <!-- Informasi Gempa Real-Time -->
-    <section id="informasi" class="informasi-section">
-        <div class="info-header">
-            <h2>Informasi Gempa Bumi Real-Time</h2>
-            <div class="refresh-info">
-                <button class="btn-refresh" onclick="refreshAllData()">
-                    <span class="refresh-icon">↻</span> Refresh
-                </button>
-                <span class="last-update" id="last-update">Terakhir diperbarui: -</span>
-            </div>
+      <div class="dampak-item dampak-negatif">
+        <div class="dampak-content">
+          <h3>Dampak Negatif</h3>
+          <p>Menimbulkan kerusakan infrastruktur, kehilangan nyawa, dan gangguan sosial ekonomi di wilayah
+            terdampak. Gempa besar juga dapat memicu tsunami di daerah pesisir.</p>
         </div>
-    <div id="map"> <div class="map-controls"> <button class="map-toggle active" id="btnSatelit" onclick="toggleMap('satelit')">🛰️ Satelit</button> <button class="map-toggle" id="btnStreet" onclick="toggleMap('street')">🗺️ Street</button> </div> </div> </section>
-    <!-- Tabel Beberapa Gempa -->
-    <section class="tabel-gempa-section">
-        <h2>Beberapa Gempa Bumi Real-Time</h2>
-        <div class="tabel-wrapper">
-            <div id="tabel-status" class="tabel-loading">
-                <div class="loading-spinner"></div>
-                <p>Memuat data gempa...</p>
-            </div>
-            <table class="tabel-gempa" id="tabel-gempa" style="display: none;">
-                <thead>
-                    <tr>
-                        <th>#</th>
-                        <th>Waktu</th>
-                        <th>Lokasi</th>
-                        <th>Magnitudo</th>
-                        <th>Kedalaman</th>
-                        <th>Koordinat</th>
-                        <th>Wilayah</th>
-                    </tr>
-                </thead>
-                <tbody id="tabel-body"></tbody>
-            </table>
+        <div class="dampak-image negatif">
+          <img src="/assets/dampak/dampakNegative.jpg" alt="">
         </div>
-        <button class="btn-load-more" id="btn-load-more" onclick="loadMoreData()" style="display: none;">
-            Selengkapnya
+      </div>
+    </div>
+  </section>
+
+  <!-- Perencanaan Tindakan Bencana -->
+  <section id="pencegahan" class="pencegahan-section">
+    <h2>Perencanaan Tindakan Bencana Gempa Bumi</h2>
+    <p>Kita dapat mempersiapkan diri dengan perencanaan, pelatihan evakuasi, dan penguatan bangunan tahan gempa.</p>
+    <button class="btn-perencanaan">Selengkapnya ></button>
+  </section>
+
+  <!-- Informasi Gempa Real-Time -->
+  <section id="informasi" class="informasi-section">
+    <div class="info-header">
+      <h2>Informasi Gempa Bumi Real-Time</h2>
+      <div class="refresh-info">
+        <button class="btn-refresh" onclick="refreshAllData()">
+          <span class="refresh-icon">↻</span> Refresh
         </button>
-    </section>
+        <span class="last-update" id="last-update">Terakhir diperbarui: -</span>
+      </div>
+    </div>
+    <div id="map">
+      <div class="map-controls"> <button class="map-toggle active" id="btnSatelit" onclick="toggleMap('satelit')">🛰️
+          Satelit</button> <button class="map-toggle" id="btnStreet" onclick="toggleMap('street')">🗺️ Street</button>
+      </div>
+    </div>
+  </section>
+  <!-- Tabel Beberapa Gempa -->
+  <section class="tabel-gempa-section">
+    <h2>Beberapa Gempa Bumi Real-Time</h2>
+    <div class="tabel-wrapper">
+      <div id="tabel-status" class="tabel-loading">
+        <div class="loading-spinner"></div>
+        <p>Memuat data gempa...</p>
+      </div>
+      <table class="tabel-gempa" id="tabel-gempa" style="display: none;">
+        <thead>
+          <tr>
+            <th>#</th>
+            <th>Waktu</th>
+            <th>Lokasi</th>
+            <th>Magnitudo</th>
+            <th>Kedalaman</th>
+            <th>Koordinat</th>
+            <th>Wilayah</th>
+          </tr>
+        </thead>
+        <tbody id="tabel-body"></tbody>
+      </table>
+    </div>
+    <button class="btn-load-more" id="btn-load-more" onclick="loadMoreData()" style="display: none;">
+      Selengkapnya
+    </button>
+  </section>
 
-    <!-- Dibalik Layar Section -->
-    <section class="dibalik-layar-section">
-        <h2>Dibalik Layar</h2>
-        <div class="dibalik-container">
-            <div class="dibalik-item">
-                <img src="/assets/fotoKelompok/Angga.png" alt="">
-                <div class="dibalik-label">Angga</div>
-            </div>
-            <div class="dibalik-item">
-                <img src="/assets/fotoKelompok/Ame.jpg" alt="">
-                <div class="dibalik-label">Ame</div>
-            </div>
-            <div class="dibalik-item">
-                <img src="/assets/fotoKelompok/Rama.jpg" alt="">
-                <div class="dibalik-label">Rama</div>
-            </div>
-            <div class="dibalik-item">
-                <img src="/assets/fotoKelompok/Sepi.png" alt="">
-                <div class="dibalik-label">Sepi</div>
-            </div>
-            <div class="dibalik-item">
-                <img src="/assets//fotoKelompok/Taufik.jpg" alt="">
-                <div class="dibalik-label">Taufik</div>
-            </div>
-        </div>
-    </section>
+  <!-- Dibalik Layar Section -->
+  <section class="dibalik-layar-section">
+    <h2>Dibalik Layar</h2>
+    <div class="dibalik-container">
+      <div class="dibalik-item">
+        <img src="/assets/fotoKelompok/Angga.png" alt="">
+        <div class="dibalik-label">Angga</div>
+      </div>
+      <div class="dibalik-item">
+        <img src="/assets/fotoKelompok/Ame.jpg" alt="">
+        <div class="dibalik-label">Ame</div>
+      </div>
+      <div class="dibalik-item">
+        <img src="/assets/fotoKelompok/Rama.jpg" alt="">
+        <div class="dibalik-label">Rama</div>
+      </div>
+      <div class="dibalik-item">
+        <img src="/assets/fotoKelompok/Sepi.png" alt="">
+        <div class="dibalik-label">Sepi</div>
+      </div>
+      <div class="dibalik-item">
+        <img src="/assets//fotoKelompok/Taufik.jpg" alt="">
+        <div class="dibalik-label">Taufik</div>
+      </div>
+    </div>
+  </section>
 
-    <!-- Footer -->
-    <footer class="footer">
-        <div class="kata-kata">
-            <p>"Sensing The Earth, Securing The Future"</p>
-        </div>
-        <div class="copyright">
-            <p>Copyright 2025. All rights Reserved</p>
-        </div>
-    </footer>
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="kata-kata">
+      <p>"Sensing The Earth, Securing The Future"</p>
+    </div>
+    <div class="copyright">
+      <p>Copyright 2025. All rights Reserved</p>
+    </div>
+  </footer>
 
-   <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
-<script>
-/* ======= util & map init (sama seperti sebelumnya) ======= */
-const map = L.map('map').setView([-2.5, 118], 5);
-const satelitLayer = L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}');
-const labelLayer   = L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/Reference/World_Boundaries_and_Places/MapServer/tile/{z}/{y}/{x}');
-const streetLayer  = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png');
-satelitLayer.addTo(map); labelLayer.addTo(map);
-let markersLayer = L.layerGroup().addTo(map);
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+  <script>
+    /* ======= util & map init (sama seperti sebelumnya) ======= */
+    const map = L.map('map').setView([-2.5, 118], 5);
+    const satelitLayer = L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}');
+    const labelLayer = L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/Reference/World_Boundaries_and_Places/MapServer/tile/{z}/{y}/{x}');
+    const streetLayer = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png');
+    satelitLayer.addTo(map); labelLayer.addTo(map);
+    let markersLayer = L.layerGroup().addTo(map);
 
-// Tombol toggle map
-let currentMap = 'satelit';
-window.toggleMap = function(type) {
-  const btnSatelit = document.getElementById('btnSatelit');
-  const btnStreet = document.getElementById('btnStreet');
+    // Tombol toggle map
+    let currentMap = 'satelit';
+    window.toggleMap = function (type) {
+      const btnSatelit = document.getElementById('btnSatelit');
+      const btnStreet = document.getElementById('btnStreet');
 
-  if (type === 'satelit' && currentMap !== 'satelit') {
-    map.removeLayer(streetLayer);
-    satelitLayer.addTo(map);
-    labelLayer.addTo(map);
-    btnSatelit.classList.add('active');
-    btnStreet.classList.remove('active');
-    currentMap = 'satelit';
-  } else if (type === 'street' && currentMap !== 'street') {
-    map.removeLayer(satelitLayer);
-    map.removeLayer(labelLayer);
-    streetLayer.addTo(map);
-    btnStreet.classList.add('active');
-    btnSatelit.classList.remove('active');
-    currentMap = 'street';
-  }
-};
+      if (type === 'satelit' && currentMap !== 'satelit') {
+        map.removeLayer(streetLayer);
+        satelitLayer.addTo(map);
+        labelLayer.addTo(map);
+        btnSatelit.classList.add('active');
+        btnStreet.classList.remove('active');
+        currentMap = 'satelit';
+      } else if (type === 'street' && currentMap !== 'street') {
+        map.removeLayer(satelitLayer);
+        map.removeLayer(labelLayer);
+        streetLayer.addTo(map);
+        btnStreet.classList.add('active');
+        btnSatelit.classList.remove('active');
+        currentMap = 'street';
+      }
+    };
 
-function getColor(mag){
-  if (mag >= 6) return '#f02314';
-  if (mag >= 5) return '#ff7118';
-  if (mag >= 4) return '#eec913';
-  return '#4caf50';
-}
-function getSize(mag){
-  if (mag >= 6) return 38;
-  if (mag >= 5) return 34;
-  if (mag >= 4) return 30;
-  return 26;
-}
-function formatTanggalBMKG(date){
-  const day = String(date.getDate()).padStart(2,'0');
-  const monthNames = ['Jan','Feb','Mar','Apr','Mei','Jun','Jul','Agu','Sep','Okt','Nov','Des'];
-  return `${day} ${monthNames[date.getMonth()]} ${date.getFullYear()}`;
-}
-function formatJamBMKG(date){
-  return `${String(date.getHours()).padStart(2,'0')}:${String(date.getMinutes()).padStart(2,'0')} WIB`;
-}
-function calculateDistance(lat1,lon1,lat2,lon2){
-  const R = 6371;
-  const dLat = (lat2-lat1)*Math.PI/180;
-  const dLon = (lon2-lon1)*Math.PI/180;
-  const a = Math.sin(dLat/2)**2 + Math.cos(lat1*Math.PI/180)*Math.cos(lat2*Math.PI/180)*Math.sin(dLon/2)**2;
-  return R * 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a));
-}
-function deduplicateGempa(data){
-  const unique = [];
-  for(const item of data){
-    const dup = unique.find(u =>
-      Math.abs(item.timestamp - u.timestamp) < 10*60*1000 &&
-      calculateDistance(item.lat,item.lon,u.lat,u.lon) < 20 &&
-      Math.abs((item.mag||0)-(u.mag||0)) < 0.5
-    );
-    if(!dup) unique.push(item);
-  }
-  return unique;
-}
+    function getColor(mag) {
+      if (mag >= 6) return '#f02314';
+      if (mag >= 5) return '#ff7118';
+      if (mag >= 4) return '#eec913';
+      return '#4caf50';
+    }
+    function getSize(mag) {
+      if (mag >= 6) return 38;
+      if (mag >= 5) return 34;
+      if (mag >= 4) return 30;
+      return 26;
+    }
+    function formatTanggalBMKG(date) {
+      const day = String(date.getDate()).padStart(2, '0');
+      const monthNames = ['Jan', 'Feb', 'Mar', 'Apr', 'Mei', 'Jun', 'Jul', 'Agu', 'Sep', 'Okt', 'Nov', 'Des'];
+      return `${day} ${monthNames[date.getMonth()]} ${date.getFullYear()}`;
+    }
+    function formatJamBMKG(date) {
+      return `${String(date.getHours()).padStart(2, '0')}:${String(date.getMinutes()).padStart(2, '0')} WIB`;
+    }
+    function calculateDistance(lat1, lon1, lat2, lon2) {
+      const R = 6371;
+      const dLat = (lat2 - lat1) * Math.PI / 180;
+      const dLon = (lon2 - lon1) * Math.PI / 180;
+      const a = Math.sin(dLat / 2) ** 2 + Math.cos(lat1 * Math.PI / 180) * Math.cos(lat2 * Math.PI / 180) * Math.sin(dLon / 2) ** 2;
+      return R * 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+    }
+    function deduplicateGempa(data) {
+      const unique = [];
+      for (const item of data) {
+        const dup = unique.find(u =>
+          Math.abs(item.timestamp - u.timestamp) < 10 * 60 * 1000 &&
+          calculateDistance(item.lat, item.lon, u.lat, u.lon) < 20 &&
+          Math.abs((item.mag || 0) - (u.mag || 0)) < 0.5
+        );
+        if (!dup) unique.push(item);
+      }
+      return unique;
+    }
 
-/* ======= fungsi yang menampilkan markers (50 data gabungan) ======= */
-async function tampilkanSemuaGempa(){
-  try{
-    const [resBMKG, resUSGS] = await Promise.all([
-      fetch('https://data.bmkg.go.id/DataMKG/TEWS/gempaterkini.json'),
-      fetch('https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/all_month.geojson')
-    ]);
-    if(!resBMKG.ok || !resUSGS.ok) throw new Error('Fetch error');
+    /* ======= fungsi yang menampilkan markers (50 data gabungan) ======= */
+    async function tampilkanSemuaGempa() {
+      try {
+        const [resBMKG, resUSGS] = await Promise.all([
+          fetch('https://data.bmkg.go.id/DataMKG/TEWS/gempaterkini.json'),
+          fetch('https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/all_month.geojson')
+        ]);
+        if (!resBMKG.ok || !resUSGS.ok) throw new Error('Fetch error');
 
-    const dataBMKG = await resBMKG.json();
-    const dataUSGS = await resUSGS.json();
+        const dataBMKG = await resBMKG.json();
+        const dataUSGS = await resUSGS.json();
 
-    const daftarBMKG = Array.isArray(dataBMKG.Infogempa?.gempa) ? dataBMKG.Infogempa.gempa : (dataBMKG.Infogempa?.gempa ? [dataBMKG.Infogempa.gempa] : []);
-    const daftarUSGS = Array.isArray(dataUSGS.features) ? dataUSGS.features : [];
+        const daftarBMKG = Array.isArray(dataBMKG.Infogempa?.gempa) ? dataBMKG.Infogempa.gempa : (dataBMKG.Infogempa?.gempa ? [dataBMKG.Infogempa.gempa] : []);
+        const daftarUSGS = Array.isArray(dataUSGS.features) ? dataUSGS.features : [];
 
-    let gabungan = [];
+        let gabungan = [];
 
-    // proses BMKG
-    daftarBMKG.forEach(g => {
-      if (!g.Coordinates) return;
-      const [latStr, lonStr] = g.Coordinates.split(',');
-      const lat = parseFloat(latStr), lon = parseFloat(lonStr);
-      const mag = parseFloat(g.Magnitude) || 0;
-      gabungan.push({
-        lat, lon, mag,
-        wilayah: g.Wilayah || '-',
-        tanggal: g.Tanggal || '-',
-        jam: g.Jam || '-',
-        kedalaman: g.Kedalaman || '-',
-        potensi: g.Potensi || '-',
-        sumber: 'BMKG',
-        timestamp: new Date(`${g.Tanggal} ${g.Jam}`).getTime()
-      });
-    });
+        // proses BMKG
+        daftarBMKG.forEach(g => {
+          if (!g.Coordinates) return;
+          const [latStr, lonStr] = g.Coordinates.split(',');
+          const lat = parseFloat(latStr), lon = parseFloat(lonStr);
+          const mag = parseFloat(g.Magnitude) || 0;
+          gabungan.push({
+            lat, lon, mag,
+            wilayah: g.Wilayah || '-',
+            tanggal: g.Tanggal || '-',
+            jam: g.Jam || '-',
+            kedalaman: g.Kedalaman || '-',
+            potensi: g.Potensi || '-',
+            sumber: 'BMKG',
+            timestamp: new Date(`${g.Tanggal} ${g.Jam}`).getTime()
+          });
+        });
 
-    // proses USGS (filter area Indonesia)
-    daftarUSGS.forEach(f => {
-      const coords = f.geometry?.coordinates;
-      if(!coords || coords.length < 2) return;
-      const lon = coords[0], lat = coords[1], depth = coords[2];
-      if(!(lat >= -11 && lat <= 6 && lon >= 95 && lon <= 141)) return;
-      const mag = f.properties?.mag || 0;
-      const dateObj = new Date((f.properties?.time || Date.now()) + 7*3600*1000); // konversi ke WIB
-      gabungan.push({
-        lat, lon, mag,
-        wilayah: f.properties?.place || '-',
-        tanggal: formatTanggalBMKG(dateObj),
-        jam: formatJamBMKG(dateObj),
-        kedalaman: depth ? `${depth} km` : '-',
-        potensi: f.properties?.tsunami === 1 ? 'Ada potensi tsunami' : 'Tidak ada potensi tsunami',
-        sumber: 'USGS',
-        timestamp: f.properties?.time || Date.now()
-      });
-    });
+        // proses USGS (filter area Indonesia)
+        daftarUSGS.forEach(f => {
+          const coords = f.geometry?.coordinates;
+          if (!coords || coords.length < 2) return;
+          const lon = coords[0], lat = coords[1], depth = coords[2];
+          if (!(lat >= -11 && lat <= 6 && lon >= 95 && lon <= 141)) return;
+          const mag = f.properties?.mag || 0;
+          const dateObj = new Date((f.properties?.time || Date.now()) + 7 * 3600 * 1000); // konversi ke WIB
+          gabungan.push({
+            lat, lon, mag,
+            wilayah: f.properties?.place || '-',
+            tanggal: formatTanggalBMKG(dateObj),
+            jam: formatJamBMKG(dateObj),
+            kedalaman: depth ? `${depth} km` : '-',
+            potensi: f.properties?.tsunami === 1 ? 'Ada potensi tsunami' : 'Tidak ada potensi tsunami',
+            sumber: 'USGS',
+            timestamp: f.properties?.time || Date.now()
+          });
+        });
 
-    // dedupe & sort
-    gabungan = deduplicateGempa(gabungan).sort((a,b)=>b.timestamp - a.timestamp);
+        // dedupe & sort
+        gabungan = deduplicateGempa(gabungan).sort((a, b) => b.timestamp - a.timestamp);
 
-    // tampilkan 50 data terbaru di map
-    markersLayer.clearLayers();
-    gabungan.slice(0,50).forEach(g => {
-      const warna = getColor(g.mag);
-      const ukuran = getSize(g.mag);
+        // tampilkan 50 data terbaru di map
+        markersLayer.clearLayers();
+        gabungan.slice(0, 50).forEach(g => {
+          const warna = getColor(g.mag);
+          const ukuran = getSize(g.mag);
 
-      const html = `
+          const html = `
         <div class="gempa-marker-container">
           <div class="gempa-circle" style="background:${warna}; width:${ukuran}px; height:${ukuran}px;">
-            <span style="display:flex;align-items:center;justify-content:center;width:100%;height:100%;font-size:${Math.max(10, Math.round(ukuran*0.28))}px;font-weight:700;">
+            <span style="display:flex;align-items:center;justify-content:center;width:100%;height:100%;font-size:${Math.max(10, Math.round(ukuran * 0.28))}px;font-weight:700;">
               ${Number.isFinite(g.mag) ? g.mag.toFixed(1) : '-'}
             </span>
           </div>
           <div class="gempa-pin" style="border-top-color:${warna};"></div>
         </div>`;
 
-      const icon = L.divIcon({
-        className: 'custom-div-icon',
-        html,
-        iconSize: [ukuran, ukuran + 18],
-        iconAnchor: [ukuran/2, ukuran + 6]
-      });
+          const icon = L.divIcon({
+            className: 'custom-div-icon',
+            html,
+            iconSize: [ukuran, ukuran + 18],
+            iconAnchor: [ukuran / 2, ukuran + 6]
+          });
 
-      const marker = L.marker([g.lat, g.lon], { icon }).addTo(markersLayer);
+          const marker = L.marker([g.lat, g.lon], { icon }).addTo(markersLayer);
 
-      const tip = `
+          const tip = `
         <div class="tooltip-title" style="color:${warna}; border-color:${warna};">Magnitudo ${g.mag} (${g.sumber})</div>
         <div><b>📍 Lokasi:</b> ${g.wilayah}</div>
         <div><b>📅 Tanggal:</b> ${g.tanggal}</div>
@@ -504,36 +521,36 @@ async function tampilkanSemuaGempa(){
         <div><b>📏 Kedalaman:</b> ${g.kedalaman}</div>
         <div><b>🌊 Potensi:</b> ${g.potensi}</div>
       `;
-      marker.bindTooltip(tip, { direction:'top', offset:[0,-42], opacity:0.95 });
-    });
+          marker.bindTooltip(tip, { direction: 'top', offset: [0, -42], opacity: 0.95 });
+        });
 
-  }catch(err){
-    console.error('tampilkanSemuaGempa error', err);
-  }
-}
+      } catch (err) {
+        console.error('tampilkanSemuaGempa error', err);
+      }
+    }
 
-/* ======= fungsi load tabel BMKG (10 data terbaru) ======= */
-async function loadGempaData(){
-  const tabelStatus = document.getElementById('tabel-status');
-  const tabelGempa  = document.getElementById('tabel-gempa');
-  const tbody = document.getElementById('tabel-body');
-  try{
-    tabelStatus.style.display = 'block';
-    tabelGempa.style.display = 'none';
-    const res = await fetch('https://data.bmkg.go.id/DataMKG/TEWS/gempaterkini.json');
-    if(!res.ok) throw new Error('BMKG fetch failed');
-    const data = await res.json();
-    const daftar = Array.isArray(data.Infogempa?.gempa) ? data.Infogempa.gempa.slice(0,10) : (data.Infogempa?.gempa ? [data.Infogempa.gempa] : []);
-    tbody.innerHTML = '';
-    daftar.forEach((g,i)=>{
-      const mag = parseFloat(g.Magnitude) || 0;
-      let cls = 'magnitudo-low';
-      if(mag >= 6) cls = 'magnitudo-high';
-      else if(mag >= 5) cls = 'magnitudo-medium';
+    /* ======= fungsi load tabel BMKG (10 data terbaru) ======= */
+    async function loadGempaData() {
+      const tabelStatus = document.getElementById('tabel-status');
+      const tabelGempa = document.getElementById('tabel-gempa');
+      const tbody = document.getElementById('tabel-body');
+      try {
+        tabelStatus.style.display = 'block';
+        tabelGempa.style.display = 'none';
+        const res = await fetch('https://data.bmkg.go.id/DataMKG/TEWS/gempaterkini.json');
+        if (!res.ok) throw new Error('BMKG fetch failed');
+        const data = await res.json();
+        const daftar = Array.isArray(data.Infogempa?.gempa) ? data.Infogempa.gempa.slice(0, 10) : (data.Infogempa?.gempa ? [data.Infogempa.gempa] : []);
+        tbody.innerHTML = '';
+        daftar.forEach((g, i) => {
+          const mag = parseFloat(g.Magnitude) || 0;
+          let cls = 'magnitudo-low';
+          if (mag >= 6) cls = 'magnitudo-high';
+          else if (mag >= 5) cls = 'magnitudo-medium';
 
-      tbody.innerHTML += `
+          tbody.innerHTML += `
         <tr>
-          <td>${i+1}</td>
+          <td>${i + 1}</td>
           <td>${g.Tanggal || '-'} ${g.Jam || '-'}</td>
           <td>${g.Wilayah || '-'}</td>
           <td><span class="magnitudo-badge ${cls}">${mag.toFixed(1)}</span></td>
@@ -542,58 +559,59 @@ async function loadGempaData(){
           <td>${g.Wilayah || '-'}</td>
         </tr>
       `;
-    });
-    tabelStatus.style.display = 'none';
-    tabelGempa.style.display = 'table';
-    updateLastRefreshTime();
-  }catch(err){
-    console.error('loadGempaData error', err);
-    tabelStatus.innerHTML = '<p>⚠️ Gagal memuat data BMKG.</p>';
-  }
-}
-
-/* ======= helper update last refresh time ======= */
-function updateLastRefreshTime(){
-  const now = new Date();
-  document.getElementById('last-update').textContent = 'Terakhir diperbarui: ' + now.toLocaleTimeString('id-ID',{hour:'2-digit',minute:'2-digit',second:'2-digit'});
-}
-
-/* ======= refreshAllData dengan UI feedback ======= */
-async function refreshAllData(){
-  const btn = document.querySelector('.btn-refresh');
-  try{
-    // disable tombol + tampilkan spinner
-    btn.disabled = true;
-    if(!btn.querySelector('.spinner')){
-      const s = document.createElement('span'); s.className = 'spinner'; btn.appendChild(s);
+        });
+        tabelStatus.style.display = 'none';
+        tabelGempa.style.display = 'table';
+        updateLastRefreshTime();
+      } catch (err) {
+        console.error('loadGempaData error', err);
+        tabelStatus.innerHTML = '<p>⚠️ Gagal memuat data BMKG.</p>';
+      }
     }
-    await Promise.all([ loadGempaData(), tampilkanSemuaGempa() ]);
-    updateLastRefreshTime();
-  }catch(err){
-    console.error('refreshAllData error', err);
-  }finally{
-    // enable dan remove spinner
-    btn.disabled = false;
-    const sp = btn.querySelector('.spinner'); if(sp) sp.remove();
-  }
-}
 
-/* ======= hook tombol & auto refresh ======= */
-document.addEventListener('DOMContentLoaded', () => {
-  // jika tombol punya onclick inline, ini hanya menambahkan safety listener
-  const btn = document.querySelector('.btn-refresh');
-  if(btn) {
-    btn.addEventListener('click', (e)=>{
-      e.preventDefault();
+    /* ======= helper update last refresh time ======= */
+    function updateLastRefreshTime() {
+      const now = new Date();
+      document.getElementById('last-update').textContent = 'Terakhir diperbarui: ' + now.toLocaleTimeString('id-ID', { hour: '2-digit', minute: '2-digit', second: '2-digit' });
+    }
+
+    /* ======= refreshAllData dengan UI feedback ======= */
+    async function refreshAllData() {
+      const btn = document.querySelector('.btn-refresh');
+      try {
+        // disable tombol + tampilkan spinner
+        btn.disabled = true;
+        if (!btn.querySelector('.spinner')) {
+          const s = document.createElement('span'); s.className = 'spinner'; btn.appendChild(s);
+        }
+        await Promise.all([loadGempaData(), tampilkanSemuaGempa()]);
+        updateLastRefreshTime();
+      } catch (err) {
+        console.error('refreshAllData error', err);
+      } finally {
+        // enable dan remove spinner
+        btn.disabled = false;
+        const sp = btn.querySelector('.spinner'); if (sp) sp.remove();
+      }
+    }
+
+    /* ======= hook tombol & auto refresh ======= */
+    document.addEventListener('DOMContentLoaded', () => {
+      // jika tombol punya onclick inline, ini hanya menambahkan safety listener
+      const btn = document.querySelector('.btn-refresh');
+      if (btn) {
+        btn.addEventListener('click', (e) => {
+          e.preventDefault();
+          refreshAllData();
+        });
+      }
+      // load pertama kali
       refreshAllData();
+      // auto refresh 5 menit
+      setInterval(refreshAllData, 300000);
     });
-  }
-  // load pertama kali
-  refreshAllData();
-  // auto refresh 5 menit
-  setInterval(refreshAllData, 300000);
-});
-</script>
+  </script>
 
 </body>
+
 </html>
