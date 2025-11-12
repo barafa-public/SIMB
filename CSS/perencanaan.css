@@ -367,76 +367,113 @@ body {
     }
 }
 
+/* Tablet Portrait - 768px */
+/* Tablet Portrait - 768px */
 @media (max-width: 768px) {
-        .logo {
+    .logo {
         font-size: 1.5rem;
     }
 
     .nav-container {
         flex-direction: column;
         gap: 1rem;
-        padding: 0 1rem;
+        padding: 1rem;
     }
 
     .nav-menu {
         justify-content: center;
-        gap: 0.6rem;
+        width: 100%;
     }
 
-    .nav-link {
-        font-size: 0.85rem;
-        padding: 0.6rem 1rem;
+    body#vulkanik-page::before,
+    body#tektonik-page::before,
+    body#buatan-page::before {
+        height: 600px;
     }
-    
-    .title {
+
+    .kontainer-utama {
+        padding: 0 20px 60px;
+    }
+
+    .judul-halaman {
         font-size: 28px;
-        padding: 60px 20px 30px;
+        top: 60px;
+        max-width: 90%;
     }
 
-    .card {
-        flex-direction: column;
-        padding: 15px;
-        gap: 15px;
+    .gambar-utama {
+        position: relative;
+        left: 0;
+        top: 0;
+        max-width: 100%;
+        aspect-ratio: 474.46 / 307;
+        margin: 150px auto 30px;
+        display: block;
     }
 
-    .card-title {
-        font-size: 24px;
-        min-width: auto;
+    .kontainer-penyebab {
+        position: relative;
+        right: auto;
+        top: auto;
+        max-width: 100%;
+        margin: 0 auto 50px;
+    }
+
+    .judul-penyebab {
+        font-size: 22px;
         text-align: center;
     }
 
-    .card-content {
-        font-size: 16px;
+    .teks-penyebab {
+        font-size: 14px;
     }
 
-    .emergency-numbers {
-        flex-wrap: wrap;
-        gap: 20px;
-        padding: 20px;
+    .judul-contoh {
+        position: relative;
+        top: auto;
+        font-size: 22px;
+        margin: 40px auto 30px;
+        max-width: 90%;
     }
 
-    .number-card {
-        width: calc(50% - 10px);
-        padding: 20px;
+    .kartu-contoh {
+        position: relative;
+        left: 0 !important;
+        right: 0 !important;
+        top: auto !important;
+        max-width: 100%;
+        margin: 0 auto 30px;
+        /* GANTI: dari 60px jadi 30px karena tidak ada titik */
+        display: block;
     }
 
-    .number-card .number {
-        font-size: 32px;
+    .teks-kartu {
+        font-size: 17px;
+        white-space: normal;
+    }
+
+    .titik-timeline {
+        display: none;
+        /* TAMBAHKAN: sembunyikan titik timeline */
     }
 
     .footer {
-        height: 400px;
+        height: 450px;
     }
 
     .footer-border {
-        height: 250px;
-        top: 100px;
+        top: 140px;
+        height: 300px;
+        border-top-left-radius: 40px;
+        border-top-right-radius: 40px;
     }
 
     .footer-content {
-        height: 240px;
-        top: 110px;
-        padding: 30px 40px 0;
+        top: 157px;
+        height: 280px;
+        padding: 35px 40px 0;
+        border-top-left-radius: 40px;
+        border-top-right-radius: 40px;
     }
 
     .footer-tagline {
@@ -445,10 +482,11 @@ body {
 
     .footer-copyright {
         font-size: 16px;
-        padding-bottom: 40px;
+        padding: 15px 0 35px;
     }
 }
 
+/* Mobile Large - 480px */
 @media (max-width: 480px) {
     .logo {
         font-size: 1.3rem;
@@ -456,9 +494,7 @@ body {
 
     .nav-menu {
         flex-direction: column;
-        align-items: center;
         gap: 0.5rem;
-        width: 100%;
     }
 
     .nav-link {
@@ -469,76 +505,147 @@ body {
         padding: 0.5rem 0.8rem;
     }
 
+    body#vulkanik-page::before,
+    body#tektonik-page::before,
+    body#buatan-page::before {
+        height: 500px;
+    }
 
-    .title {
+    .kontainer-utama {
+        padding: 0 15px 50px;
+    }
+
+    .judul-halaman {
         font-size: 24px;
-        padding: 50px 10px 20px;
+        top: 50px;
     }
 
-    .card {
-        padding: 10px;
-        margin-bottom: 50px;
+    .gambar-utama {
+        margin: 130px auto 25px;
+        aspect-ratio: 474.46 / 307;
+        box-shadow: -15px 15px 4px rgba(0, 0, 0, 0.50);
     }
 
-    .card-title {
+    .judul-penyebab {
         font-size: 20px;
-        padding: 10px;
+        margin-bottom: 20px;
     }
 
-    .card-content {
-        font-size: 14px;
-        padding: 10px;
+    .teks-penyebab {
+        font-size: 13px;
+        line-height: 1.5;
     }
 
-    .emergency-numbers {
-        padding: 15px;
-        gap: 15px;
+    .judul-contoh {
+        font-size: 20px;
+        margin: 30px auto 25px;
     }
 
-    .number-card {
-        width: calc(100% - 20px);
-        padding: 15px;
+    .kartu-contoh {
+        height: 110px;
+        margin-bottom: 25px;
+        /* GANTI: dari 50px jadi 25px */
     }
 
-    .number-card .number {
-        font-size: 28px;
+    .teks-kartu {
+        font-size: 15px;
+    }
+
+    .titik-timeline {
+        display: none;
+        /* PASTIKAN tetap hidden */
     }
 
     .footer {
-        height: 300px;
-        margin-top: 50px;
+        height: 400px;
     }
 
     .footer-border {
-        height: 200px;
-        top: 80px;
+        top: 120px;
+        height: 270px;
+        border-top-left-radius: 35px;
+        border-top-right-radius: 35px;
+        border: 4px solid #2E1A08;
     }
 
     .footer-content {
-        height: 180px;
-        top: 90px;
-        padding: 20px 30px 0;
+        top: 135px;
+        height: 250px;
+        padding: 30px 25px 0;
+        border-top-left-radius: 35px;
+        border-top-right-radius: 35px;
     }
 
     .footer-tagline {
         font-size: 20px;
+        text-align: center;
     }
 
     .footer-copyright {
         font-size: 14px;
-        padding-bottom: 30px;
+        padding: 12px 0 30px;
     }
+}
 
-    .nav-container {
-        padding: 0 1rem;
-    }
-
-    .nav-menu {
-        gap: 0.5rem;
+/* Mobile Small - 360px */
+@media (max-width: 360px) {
+    .logo {
+        font-size: 1.2rem;
     }
 
     .nav-link {
-        padding: 0.5rem 1rem;
-        font-size: 0.8rem;
+        font-size: 0.75rem;
+        padding: 0.5rem 0.7rem;
     }
+
+    .judul-halaman {
+        font-size: 22px;
+    }
+
+    .gambar-utama {
+        margin: 120px auto 20px;
+        aspect-ratio: 474.46 / 307;
+        box-shadow: -10px 10px 4px rgba(0, 0, 0, 0.50);
+    }
+
+    .judul-penyebab {
+        font-size: 18px;
+    }
+
+    .teks-penyebab {
+        font-size: 12px;
+    }
+
+    .judul-contoh {
+        font-size: 18px;
+    }
+
+    .kartu-contoh {
+        height: 100px;
+        margin-bottom: 20px;
+        /* GANTI: dari 45px jadi 20px */
+    }
+
+    .teks-kartu {
+        font-size: 14px;
+    }
+
+    .titik-timeline {
+        display: none;
+        /* PASTIKAN tetap hidden */
+    }
+
+    .footer {
+        height: 370px;
+    }
+
+    .footer-tagline {
+        font-size: 18px;
+    }
+
+    .footer-copyright {
+        font-size: 12px;
+        padding: 10px 0 25px;
+    }
+
 }

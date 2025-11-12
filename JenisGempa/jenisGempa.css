@@ -6,7 +6,84 @@
     box-sizing: border-box;
 }
 
-/* Navigation */
+html {
+    scroll-behavior: smooth;
+    overflow-x: hidden;
+    overflow-y: auto;
+    overscroll-behavior: none;
+}
+
+body {
+    font-family: 'Poppins', sans-serif;
+    background: #FBFBFB;
+    margin: 0;
+    padding: 0;
+}
+
+/* Background untuk halaman vulkanik */
+body#vulkanik-page::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 850px;
+    background:
+        linear-gradient(to bottom,
+            rgba(255, 255, 255, 0.719) 70%,
+            rgba(255, 255, 255, 0.95) 90%,
+            #ffffff 100%),
+        url('/assets/gempa/vulkanik/bromo-bg.jpg');
+    background-size: cover;
+    background-position: center center;
+    background-repeat: no-repeat;
+    z-index: -1;
+    pointer-events: none;
+}
+
+/* Background untuk halaman tektonik */
+body#tektonik-page::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 850px;
+    background:
+        linear-gradient(to bottom,
+            rgba(255, 255, 255, 0.719) 70%,
+            rgba(255, 255, 255, 0.95) 90%,
+            #ffffff 100%),
+        url('/assets/gempa/tektonik/ihlara-valley-1.jpg');
+    background-size: cover;
+    background-position: center center;
+    background-repeat: no-repeat;
+    z-index: -1;
+    pointer-events: none;
+}
+
+/* Background untuk halaman buatan */
+body#buatan-page::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 850px;
+    background:
+        linear-gradient(to bottom,
+            rgba(255, 255, 255, 0.719) 70%,
+            rgba(255, 255, 255, 0.95) 90%,
+            #ffffff 100%),
+        url('/assets/gempa/buatan/Rock-blasting.webp');
+    background-size: cover;
+    background-position: center center;
+    background-repeat: no-repeat;
+    z-index: -1;
+    pointer-events: none;
+}
+
+/* ========== NAVIGATION ========== */
 .navbar {
     background: transparent;
     backdrop-filter: none;
@@ -28,23 +105,6 @@
     justify-content: space-between;
     align-items: center;
     padding: 0 2rem;
-}
-
-html {
-    scroll-behavior: smooth;
-    overflow-x: hidden;
-    overflow-y: auto;
-    overscroll-behavior: none;
-}
-
-/* Efek aktif pada navbar saat diklik */
-.nav-link {
-    transition: color 0.3s ease, border-bottom 0.3s ease;
-}
-
-.nav-link.active {
-    color: #0077ff;
-    border-bottom: 2px solid #0077ff;
 }
 
 .logo {
@@ -76,101 +136,41 @@ html {
     box-shadow: 0 5px 15px rgba(255, 152, 0, 0.4);
 }
 
-
-body {
-    font-family: 'Poppins', sans-serif;
-    background: #FBFBFB;
-    margin: 0;
-    padding: 0;
+.nav-link.active {
+    background: #0077ff;
+    color: #fff;
 }
 
-body#vulkanik-page::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    height: 850px;
-    /* Sesuaikan sampai sebelum "Contoh Peristiwa Gempa" */
-    background:
-        linear-gradient(to bottom,
-            /* rgba(255, 255, 255, 0.562) 0%,
-            transparent 0%, */
-            rgba(255, 255, 255, 0.719) 70%,
-            rgba(255, 255, 255, 0.95) 90%,
-            #ffffff 100%),
-        url('/assets/gempa/vulkanik/bromo-bg.jpg');
-    background-size: cover;
-    background-position: center center;
-    background-repeat: no-repeat;
-    z-index: -1;
-    pointer-events: none;
-}
-
-body#tektonik-page::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    height: 850px;
-    background:
-        linear-gradient(to bottom,
-            rgba(255, 255, 255, 0.719) 70%,
-            rgba(255, 255, 255, 0.95) 90%,
-            #ffffff 100%),
-        url('/assets/gempa/tektonik/ihlara-valley-1.jpg');
-    background-size: cover;
-    background-position: center center;
-    background-repeat: no-repeat;
-    z-index: -1;
-    pointer-events: none;
-}
-
-body#buatan-page::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    height: 850px;
-    background:
-        linear-gradient(to bottom,
-            rgba(255, 255, 255, 0.719) 70%,
-            rgba(255, 255, 255, 0.95) 90%,
-            #ffffff 100%),
-        url('/assets/gempa/buatan/Rock-blasting.webp');
-    background-size: cover;
-    background-position: center center;
-    background-repeat: no-repeat;
-    z-index: -1;
-    pointer-events: none;
-}
-
+/* ========== MAIN CONTAINER ========== */
 .kontainer-utama {
-    width: 1280px;
+    width: 100%;
+    max-width: 1280px;
     height: auto;
     min-height: 1500px;
     position: relative;
     overflow: visible;
     margin: 0 auto;
-    padding-bottom: 100px;
+    padding: 0 20px 100px;
 }
 
 .judul-halaman {
-    width: 330px;
-    height: 47px;
-    left: 475px;
-    top: 100px;
+    width: 100%;
+    max-width: 330px;
     position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    top: 100px;
     color: black;
     font-size: 36px;
     font-weight: 700;
+    text-align: center;
 }
 
 .gambar-utama {
-    width: 474.46px;
-    height: 307px;
+    width: 100%;
+    max-width: 474.46px;
+    aspect-ratio: 474.46 / 307;
+    /* Tambahkan ini */
     left: 135px;
     top: 286px;
     position: absolute;
@@ -180,56 +180,57 @@ body#buatan-page::before {
 }
 
 .gambar-utama img {
-    width: 647px;
-    height: 432px;
-    left: -92px;
-    top: -85px;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+    /* Tambahkan ini */
     position: absolute;
+    /* Sudah ada */
+    top: 0;
+    left: 0;
 }
 
 .kontainer-penyebab {
-    width: 429.37px;
-    height: 247px;
-    left: 740.63px;
-    top: 323px;
+    width: 100%;
+    max-width: 429.37px;
     position: absolute;
+    right: 70px;
+    top: 323px;
 }
 
 .judul-penyebab {
-    width: 190px;
-    height: 47px;
     color: black;
     font-size: 24px;
     font-weight: 700;
-    margin-bottom: 47px;
+    margin-bottom: 30px;
 }
 
 .teks-penyebab {
-    width: 419px;
-    height: 200px;
     text-align: justify;
-    display: flex;
-    justify-content: center;
-    flex-direction: column;
     color: black;
     font-size: 16px;
     font-weight: 500;
+    line-height: 1.6;
 }
 
 .judul-contoh {
-    width: 369px;
-    height: 87px;
-    left: 455px;
-    top: 743px;
+    width: 100%;
+    max-width: 369px;
     position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    top: 743px;
     text-align: center;
     color: black;
     font-size: 24px;
     font-weight: 700;
 }
 
+/* ========== KARTU CONTOH ========== */
 .kartu-contoh {
-    width: 400px;
+    width: 100%;
+    max-width: 400px;
     height: 129px;
     position: absolute;
     overflow: hidden;
@@ -243,7 +244,7 @@ body#buatan-page::before {
 }
 
 .kartu-contoh-2 {
-    left: 770px;
+    right: 110px;
     top: 956px;
 }
 
@@ -253,7 +254,7 @@ body#buatan-page::before {
 }
 
 .kartu-contoh-4 {
-    left: 770px;
+    right: 110px;
     top: 1165px;
 }
 
@@ -263,62 +264,22 @@ body#buatan-page::before {
 }
 
 .kartu-contoh-6 {
-    left: 770px;
+    right: 110px;
     top: 1374px;
 }
 
 .kartu-contoh img {
-    position: absolute;
-}
-
-.kartu-contoh-1 img {
-    width: 417px;
-    height: 362px;
-    left: -9px;
-    top: -102px;
-}
-
-.kartu-contoh-2 img {
-    width: 418px;
-    height: 297px;
-    left: -18px;
-    top: -168px;
-}
-
-.kartu-contoh-3 img {
-    width: 404px;
-    height: 222px;
-    left: -4px;
-    top: -20px;
-}
-
-.kartu-contoh-4 img {
-    width: 413px;
-    height: 275px;
-    left: -13px;
-    top: -43px;
-}
-
-.kartu-contoh-5 img {
-    width: 406px;
-    height: 304px;
-    left: -6px;
-    top: -97px;
-}
-
-.kartu-contoh-6 img {
-    width: 405px;
-    height: 269px;
-    left: -5px;
-    top: -111px;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
 }
 
 .overlay-kartu {
-    width: 400px;
-    height: 129px;
-    left: 0px;
-    top: 0px;
+    width: 100%;
+    height: 100%;
     position: absolute;
+    top: 0;
+    left: 0;
     background: rgba(31.87, 31.87, 31.87, 0.47);
     border-radius: 20px;
 }
@@ -333,15 +294,18 @@ body#buatan-page::before {
     font-weight: 500;
     text-align: center;
     white-space: nowrap;
+    padding: 0 15px;
 }
 
+/* ========== TIMELINE ========== */
 .titik-timeline {
     width: 29.67px;
     height: 29.86px;
     position: absolute;
     background: linear-gradient(180deg, #EE8F13 0%, #BF450C 100%);
     border-radius: 9999px;
-    left: 626px;
+    left: 50%;
+    transform: translateX(-50%);
 }
 
 .titik-1 {
@@ -372,17 +336,16 @@ body#buatan-page::before {
     top: 1433.17px;
 }
 
-/* Footer Styles */
+/* ========== FOOTER ========== */
 .footer {
     width: 100vw;
     max-width: none;
-    height: 500px;
+    height: 506px;
     position: relative;
     overflow: hidden;
     margin: 0 auto;
     left: 50%;
     transform: translateX(-50%);
-    margin-bottom: 0;
 }
 
 .footer-border {
@@ -409,7 +372,7 @@ body#buatan-page::before {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    padding: 49px 70px 65px;
+    padding: 49px 70px 0px;
 }
 
 .footer-tagline {
@@ -421,21 +384,45 @@ body#buatan-page::before {
 }
 
 .footer-copyright {
-    color: white;
-    font-size: 24px;
+    color: #bbb;
+    font-size: 20px;
     font-family: 'Poppins', sans-serif;
     font-weight: 600;
     text-align: center;
     border-top: 1px solid rgba(255, 255, 255, 0.2);
-    padding-top: 1rem;
-    font-size: 0.95rem;
-    color: #bbb;
+    padding: 20px 0 40px;
 }
 
+/* ========== RESPONSIVE ========== */
 
-/* ===== RESPONSIVE BREAKPOINTS ===== */
+/* Tablet Landscape - 1024px */
+@media (max-width: 1280px) {
+    .kontainer-utama {
+        max-width: 100%;
+        padding: 0 40px 100px;
+    }
 
-/* Tablet Landscape (1024px) */
+    .gambar-utama {
+        left: 40px;
+    }
+
+    .kontainer-penyebab {
+        right: 40px;
+    }
+
+    .kartu-contoh-1,
+    .kartu-contoh-3,
+    .kartu-contoh-5 {
+        left: 40px;
+    }
+
+    .kartu-contoh-2,
+    .kartu-contoh-4,
+    .kartu-contoh-6 {
+        right: 40px;
+    }
+}
+
 @media (max-width: 1024px) {
     .nav-container {
         padding: 0 1.5rem;
@@ -443,44 +430,120 @@ body#buatan-page::before {
 
     .nav-menu {
         gap: 0.8rem;
+        flex-wrap: wrap;
+    }
+
+    .nav-link {
+        font-size: 0.85rem;
+        padding: 0.6rem 1rem;
+    }
+
+    body#vulkanik-page::before,
+    body#tektonik-page::before,
+    body#buatan-page::before {
+        height: 700px;
+    }
+
+    .kontainer-utama {
+        padding: 0 30px 80px;
     }
 
     .judul-halaman {
         font-size: 32px;
-        margin: 80px auto 40px;
+        top: 80px;
     }
 
     .gambar-utama {
         max-width: 420px;
-        box-shadow: -20px 20px 4px rgba(0, 0, 0, 0.50);
+        aspect-ratio: 474.46 / 307;
+        /* GANTI: hapus height: 280px */
+        left: 30px;
+        top: 250px;
     }
 
     .kontainer-penyebab {
-        max-width: 420px;
+        max-width: 400px;
+        right: 30px;
+        top: 290px;
     }
 
     .teks-penyebab {
         font-size: 15px;
     }
 
+    .judul-contoh {
+        top: 650px;
+        font-size: 22px;
+    }
+
     .kartu-contoh {
         max-width: 380px;
     }
 
-    .teks-kartu {
-        font-size: 18px;
+    .kartu-contoh-1 {
+        left: 30px;
+        top: 760px;
     }
 
-    .footer-content {
-        padding: 40px 50px 50px;
+    .kartu-contoh-2 {
+        right: 30px;
+        top: 840px;
     }
 
-    .footer-tagline {
-        font-size: 28px;
+    .kartu-contoh-3 {
+        left: 30px;
+        top: 930px;
+    }
+
+    .kartu-contoh-4 {
+        right: 30px;
+        top: 1010px;
+    }
+
+    .kartu-contoh-5 {
+        left: 30px;
+        top: 1100px;
+    }
+
+    .kartu-contoh-6 {
+        right: 30px;
+        top: 1180px;
+    }
+
+    .titik-timeline {
+        background: transparent;
+    }
+
+    .titik-1 {
+        top: 794px;
+    }
+
+    .titik-2 {
+        top: 874px;
+    }
+
+    .titik-3 {
+        top: 964px;
+    }
+
+    .titik-4 {
+        top: 1044px;
+    }
+
+    .titik-5 {
+        top: 1134px;
+    }
+
+    .titik-6 {
+        top: 1214px;
+    }
+
+    .titik-7 {
+        top: 1294px;
     }
 }
 
-/* Tablet Portrait (768px) */
+/* Tablet Portrait - 768px */
 @media (max-width: 768px) {
     .logo {
         font-size: 1.5rem;
@@ -489,40 +552,52 @@ body#buatan-page::before {
     .nav-container {
         flex-direction: column;
         gap: 1rem;
-        padding: 0 1rem;
+        padding: 1rem;
     }
 
     .nav-menu {
         justify-content: center;
-        gap: 0.6rem;
+        width: 100%;
     }
 
-    .nav-link {
-        font-size: 0.85rem;
-        padding: 0.6rem 1rem;
-    }
-
-    body::before {
+    body#vulkanik-page::before,
+    body#tektonik-page::before,
+    body#buatan-page::before {
         height: 600px;
+    }
+
+    .kontainer-utama {
+        padding: 0 20px 60px;
     }
 
     .judul-halaman {
         font-size: 28px;
-        margin: 60px auto 30px;
+        top: 60px;
+        max-width: 90%;
     }
 
     .gambar-utama {
-        max-width: 90%;
-        box-shadow: -15px 15px 4px rgba(0, 0, 0, 0.50);
+        position: relative;
+        left: 0;
+        top: 0;
+        max-width: 100%;
+        aspect-ratio: 474.46 / 307;
+        /* GANTI: hapus height: auto dan min-height: 250px */
+        margin: 150px auto 30px;
+        display: block;
     }
 
     .kontainer-penyebab {
-        max-width: 90%;
-        padding: 15px;
+        position: relative;
+        right: auto;
+        top: auto;
+        max-width: 100%;
+        margin: 0 auto 50px;
     }
 
     .judul-penyebab {
         font-size: 22px;
+        text-align: center;
     }
 
     .teks-penyebab {
@@ -530,21 +605,54 @@ body#buatan-page::before {
     }
 
     .judul-contoh {
+        position: relative;
+        top: auto;
         font-size: 22px;
+        margin: 40px auto 30px;
         max-width: 90%;
     }
 
     .kartu-contoh {
-        max-width: 90%;
-        margin: 25px auto;
+        position: relative;
+        left: 0 !important;
+        right: 0 !important;
+        top: auto !important;
+        max-width: 100%;
+        margin: 0 auto 60px;
+        display: block;
     }
 
     .teks-kartu {
         font-size: 17px;
+        white-space: normal;
+    }
+
+    .titik-timeline {
+        background: transparent;
+        position: relative;
+        left: 50%;
+        top: auto !important;
+        margin: -40px auto 20px;
+        display: block;
+    }
+
+    .footer {
+        height: 450px;
+    }
+
+    .footer-border {
+        top: 140px;
+        height: 300px;
+        border-top-left-radius: 40px;
+        border-top-right-radius: 40px;
     }
 
     .footer-content {
-        padding: 35px 40px 45px;
+        top: 157px;
+        height: 280px;
+        padding: 35px 40px 0;
+        border-top-left-radius: 40px;
+        border-top-right-radius: 40px;
     }
 
     .footer-tagline {
@@ -552,11 +660,12 @@ body#buatan-page::before {
     }
 
     .footer-copyright {
-        font-size: 0.9rem;
+        font-size: 16px;
+        padding: 15px 0 35px;
     }
 }
 
-/* Mobile Large (480px) */
+/* Mobile Large - 480px */
 @media (max-width: 480px) {
     .logo {
         font-size: 1.3rem;
@@ -564,9 +673,7 @@ body#buatan-page::before {
 
     .nav-menu {
         flex-direction: column;
-        align-items: center;
         gap: 0.5rem;
-        width: 100%;
     }
 
     .nav-link {
@@ -577,32 +684,31 @@ body#buatan-page::before {
         padding: 0.5rem 0.8rem;
     }
 
-    body::before {
+    body#vulkanik-page::before,
+    body#tektonik-page::before,
+    body#buatan-page::before {
         height: 500px;
     }
 
     .kontainer-utama {
-        padding: 10px;
+        padding: 0 15px 50px;
     }
 
     .judul-halaman {
         font-size: 24px;
-        margin: 40px auto 20px;
+        top: 50px;
     }
 
     .gambar-utama {
-        max-width: 95%;
-        box-shadow: -10px 10px 4px rgba(0, 0, 0, 0.50);
-    }
-
-    .kontainer-penyebab {
-        max-width: 95%;
-        padding: 10px;
+        margin: 130px auto 25px;
+        aspect-ratio: 474.46 / 307;
+        /* GANTI: hapus min-height: 200px */
+        box-shadow: -15px 15px 4px rgba(0, 0, 0, 0.50);
     }
 
     .judul-penyebab {
         font-size: 20px;
-        margin-bottom: 15px;
+        margin-bottom: 20px;
     }
 
     .teks-penyebab {
@@ -612,37 +718,43 @@ body#buatan-page::before {
 
     .judul-contoh {
         font-size: 20px;
-        margin: 40px auto 30px;
-        max-width: 95%;
+        margin: 30px auto 25px;
     }
 
     .kartu-contoh {
-        max-width: 95%;
         height: 110px;
-        margin: 20px auto;
+        margin-bottom: 50px;
     }
 
     .teks-kartu {
         font-size: 15px;
-        padding: 0 15px;
+    }
+
+    .titik-timeline {
+        background: transparent;
+        width: 25px;
+        height: 25px;
+        margin: -35px auto 15px;
     }
 
     .footer {
-        min-height: 350px;
-        margin-top: 60px;
+        height: 400px;
     }
 
     .footer-border {
         top: 120px;
-        border-top-left-radius: 30px;
-        border-top-right-radius: 30px;
+        height: 270px;
+        border-top-left-radius: 35px;
+        border-top-right-radius: 35px;
+        border: 4px solid #2E1A08;
     }
 
     .footer-content {
-        top: 137px;
-        padding: 25px 20px 35px;
-        border-top-left-radius: 30px;
-        border-top-right-radius: 30px;
+        top: 135px;
+        height: 250px;
+        padding: 30px 25px 0;
+        border-top-left-radius: 35px;
+        border-top-right-radius: 35px;
     }
 
     .footer-tagline {
@@ -651,11 +763,12 @@ body#buatan-page::before {
     }
 
     .footer-copyright {
-        font-size: 0.8rem;
+        font-size: 14px;
+        padding: 12px 0 30px;
     }
 }
 
-/* Mobile Small (360px) */
+/* Mobile Small - 360px */
 @media (max-width: 360px) {
     .logo {
         font-size: 1.2rem;
@@ -668,6 +781,13 @@ body#buatan-page::before {
 
     .judul-halaman {
         font-size: 22px;
+    }
+
+    .gambar-utama {
+        margin: 120px auto 20px;
+        aspect-ratio: 474.46 / 307;
+        /* GANTI: hapus min-height: 180px */
+        box-shadow: -10px 10px 4px rgba(0, 0, 0, 0.50);
     }
 
     .judul-penyebab {
@@ -684,10 +804,21 @@ body#buatan-page::before {
 
     .kartu-contoh {
         height: 100px;
+        margin-bottom: 45px;
     }
 
     .teks-kartu {
         font-size: 14px;
+    }
+
+    .titik-timeline {
+        background: transparent;
+        width: 22px;
+        height: 22px;
+    }
+
+    .footer {
+        height: 370px;
     }
 
     .footer-tagline {
@@ -695,6 +826,7 @@ body#buatan-page::before {
     }
 
     .footer-copyright {
-        font-size: 0.75rem;
+        font-size: 12px;
+        padding: 10px 0 25px;
     }
 }
