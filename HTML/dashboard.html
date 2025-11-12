@@ -362,259 +362,332 @@
   </footer>
 
   <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
-  <script>
-    /* ======= util & map init (sama seperti sebelumnya) ======= */
-    const map = L.map('map').setView([-2.5, 118], 5);
-    const satelitLayer = L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}');
-    const labelLayer = L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/Reference/World_Boundaries_and_Places/MapServer/tile/{z}/{y}/{x}');
-    const streetLayer = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png');
-    satelitLayer.addTo(map); labelLayer.addTo(map);
-    let markersLayer = L.layerGroup().addTo(map);
+<script>
+  /* ======= util & map init ======= */
+  const map = L.map('map').setView([-2.5, 118], 5);
+  const satelitLayer = L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}');
+  const labelLayer = L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/Reference/World_Boundaries_and_Places/MapServer/tile/{z}/{y}/{x}');
+  const streetLayer = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png');
+  satelitLayer.addTo(map); labelLayer.addTo(map);
+  let markersLayer = L.layerGroup().addTo(map);
 
-    // Tombol toggle map
-    let currentMap = 'satelit';
-    window.toggleMap = function (type) {
-      const btnSatelit = document.getElementById('btnSatelit');
-      const btnStreet = document.getElementById('btnStreet');
+  // Tombol toggle map
+  let currentMap = 'satelit';
+  window.toggleMap = function (type) {
+    const btnSatelit = document.getElementById('btnSatelit');
+    const btnStreet = document.getElementById('btnStreet');
 
-      if (type === 'satelit' && currentMap !== 'satelit') {
-        map.removeLayer(streetLayer);
-        satelitLayer.addTo(map);
-        labelLayer.addTo(map);
-        btnSatelit.classList.add('active');
-        btnStreet.classList.remove('active');
-        currentMap = 'satelit';
-      } else if (type === 'street' && currentMap !== 'street') {
-        map.removeLayer(satelitLayer);
-        map.removeLayer(labelLayer);
-        streetLayer.addTo(map);
-        btnStreet.classList.add('active');
-        btnSatelit.classList.remove('active');
-        currentMap = 'street';
-      }
+    if (type === 'satelit' && currentMap !== 'satelit') {
+      map.removeLayer(streetLayer);
+      satelitLayer.addTo(map);
+      labelLayer.addTo(map);
+      btnSatelit.classList.add('active');
+      btnStreet.classList.remove('active');
+      currentMap = 'satelit';
+    } else if (type === 'street' && currentMap !== 'street') {
+      map.removeLayer(satelitLayer);
+      map.removeLayer(labelLayer);
+      streetLayer.addTo(map);
+      btnStreet.classList.add('active');
+      btnSatelit.classList.remove('active');
+      currentMap = 'street';
+    }
+  };
+
+  function getColor(mag) {
+    if (mag >= 6) return '#f02314';
+    if (mag >= 5) return '#ff7118';
+    if (mag >= 4) return '#eec913';
+    return '#4caf50';
+  }
+  function getSize(mag) {
+    if (mag >= 6) return 38;
+    if (mag >= 5) return 34;
+    if (mag >= 4) return 30;
+    return 26;
+  }
+  function formatTanggalBMKG(date) {
+    const day = String(date.getDate()).padStart(2, '0');
+    const monthNames = ['Jan', 'Feb', 'Mar', 'Apr', 'Mei', 'Jun', 'Jul', 'Agu', 'Sep', 'Okt', 'Nov', 'Des'];
+    return `${day} ${monthNames[date.getMonth()]} ${date.getFullYear()}`;
+  }
+  function formatJamBMKG(date) {
+    return `${String(date.getHours()).padStart(2, '0')}:${String(date.getMinutes()).padStart(2, '0')} WIB`;
+  }
+  function calculateDistance(lat1, lon1, lat2, lon2) {
+    const R = 6371;
+    const dLat = (lat2 - lat1) * Math.PI / 180;
+    const dLon = (lon2 - lon1) * Math.PI / 180;
+    const a = Math.sin(dLat / 2) ** 2 + Math.cos(lat1 * Math.PI / 180) * Math.cos(lat2 * Math.PI / 180) * Math.sin(dLon / 2) ** 2;
+    return R * 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+  }
+  function deduplicateGempa(data) {
+    const unique = [];
+    for (const item of data) {
+      const dup = unique.find(u =>
+        Math.abs(item.timestamp - u.timestamp) < 10 * 60 * 1000 &&
+        calculateDistance(item.lat, item.lon, u.lat, u.lon) < 20 &&
+        Math.abs((item.mag || 0) - (u.mag || 0)) < 0.5
+      );
+      if (!dup) unique.push(item);
+    }
+    return unique;
+  }
+
+  /* ======= Fungsi ekstrak provinsi/wilayah ======= */
+  function ekstrakProvinsi(lokasi) {
+    if (!lokasi) return '-';
+    
+    const provinsiMap = {
+      'Aceh': ['Aceh', 'NAD'],
+      'Sumatra Utara': ['Sumut', 'Sumatra Utara', 'Sumatera Utara', 'Nias', 'Medan'],
+      'Sumatra Barat': ['Sumbar', 'Sumatra Barat', 'Sumatera Barat', 'Padang', 'Mentawai'],
+      'Riau': ['Riau', 'Pekanbaru'],
+      'Kepulauan Riau': ['Kepri', 'Kepulauan Riau', 'Batam', 'Tanjungpinang'],
+      'Jambi': ['Jambi'],
+      'Sumatra Selatan': ['Sumsel', 'Sumatra Selatan', 'Sumatera Selatan', 'Palembang'],
+      'Bengkulu': ['Bengkulu', 'Enggano'],
+      'Lampung': ['Lampung', 'Bandar Lampung'],
+      'Bangka Belitung': ['Babel', 'Bangka Belitung', 'Bangka', 'Belitung'],
+      'Banten': ['Banten', 'Serang', 'Tangerang', 'Pandeglang'],
+      'DKI Jakarta': ['Jakarta', 'DKI'],
+      'Jawa Barat': ['Jabar', 'Jawa Barat', 'Bandung', 'Sukabumi', 'Tasikmalaya', 'Garut'],
+      'Jawa Tengah': ['Jateng', 'Jawa Tengah', 'Semarang', 'Solo', 'Wonogiri', 'Kebumen'],
+      'DI Yogyakarta': ['Yogyakarta', 'DIY', 'Jogja', 'Gunung Kidul'],
+      'Jawa Timur': ['Jatim', 'Jawa Timur', 'Surabaya', 'Malang', 'Blitar', 'Banyuwangi', 'Situbondo'],
+      'Bali': ['Bali', 'Denpasar', 'Singaraja', 'Karangasem'],
+      'Nusa Tenggara Barat': ['NTB', 'Nusa Tenggara Barat', 'Lombok', 'Sumbawa', 'Mataram'],
+      'Nusa Tenggara Timur': ['NTT', 'Nusa Tenggara Timur', 'Flores', 'Kupang', 'Sumba', 'Timor'],
+      'Kalimantan Barat': ['Kalbar', 'Kalimantan Barat', 'Pontianak', 'Ketapang'],
+      'Kalimantan Tengah': ['Kalteng', 'Kalimantan Tengah', 'Palangkaraya'],
+      'Kalimantan Selatan': ['Kalsel', 'Kalimantan Selatan', 'Banjarmasin'],
+      'Kalimantan Timur': ['Kaltim', 'Kalimantan Timur', 'Samarinda', 'Balikpapan'],
+      'Kalimantan Utara': ['Kaltara', 'Kalimantan Utara', 'Tarakan'],
+      'Sulawesi Utara': ['Sulut', 'Sulawesi Utara', 'Manado', 'Sangihe', 'Talaud'],
+      'Sulawesi Tengah': ['Sulteng', 'Sulawesi Tengah', 'Palu', 'Donggala', 'Banggai'],
+      'Sulawesi Selatan': ['Sulsel', 'Sulawesi Selatan', 'Makassar', 'Bone', 'Selayar'],
+      'Sulawesi Tenggara': ['Sultra', 'Sulawesi Tenggara', 'Kendari', 'Kolaka', 'Wakatobi'],
+      'Gorontalo': ['Gorontalo'],
+      'Sulawesi Barat': ['Sulbar', 'Sulawesi Barat', 'Mamuju'],
+      'Maluku': ['Maluku', 'Ambon', 'Seram', 'Buru'],
+      'Maluku Utara': ['Malut', 'Maluku Utara', 'Ternate', 'Halmahera'],
+      'Papua': ['Papua', 'Jayapura', 'Merauke'],
+      'Papua Barat': ['Papua Barat', 'Manokwari', 'Sorong', 'Raja Ampat'],
+      'Papua Tengah': ['Papua Tengah'],
+      'Papua Pegunungan': ['Papua Pegunungan'],
+      'Papua Selatan': ['Papua Selatan'],
+      'Papua Barat Daya': ['Papua Barat Daya']
     };
-
-    function getColor(mag) {
-      if (mag >= 6) return '#f02314';
-      if (mag >= 5) return '#ff7118';
-      if (mag >= 4) return '#eec913';
-      return '#4caf50';
-    }
-    function getSize(mag) {
-      if (mag >= 6) return 38;
-      if (mag >= 5) return 34;
-      if (mag >= 4) return 30;
-      return 26;
-    }
-    function formatTanggalBMKG(date) {
-      const day = String(date.getDate()).padStart(2, '0');
-      const monthNames = ['Jan', 'Feb', 'Mar', 'Apr', 'Mei', 'Jun', 'Jul', 'Agu', 'Sep', 'Okt', 'Nov', 'Des'];
-      return `${day} ${monthNames[date.getMonth()]} ${date.getFullYear()}`;
-    }
-    function formatJamBMKG(date) {
-      return `${String(date.getHours()).padStart(2, '0')}:${String(date.getMinutes()).padStart(2, '0')} WIB`;
-    }
-    function calculateDistance(lat1, lon1, lat2, lon2) {
-      const R = 6371;
-      const dLat = (lat2 - lat1) * Math.PI / 180;
-      const dLon = (lon2 - lon1) * Math.PI / 180;
-      const a = Math.sin(dLat / 2) ** 2 + Math.cos(lat1 * Math.PI / 180) * Math.cos(lat2 * Math.PI / 180) * Math.sin(dLon / 2) ** 2;
-      return R * 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
-    }
-    function deduplicateGempa(data) {
-      const unique = [];
-      for (const item of data) {
-        const dup = unique.find(u =>
-          Math.abs(item.timestamp - u.timestamp) < 10 * 60 * 1000 &&
-          calculateDistance(item.lat, item.lon, u.lat, u.lon) < 20 &&
-          Math.abs((item.mag || 0) - (u.mag || 0)) < 0.5
-        );
-        if (!dup) unique.push(item);
-      }
-      return unique;
-    }
-
-    /* ======= fungsi yang menampilkan markers (50 data gabungan) ======= */
-    async function tampilkanSemuaGempa() {
-      try {
-        const [resBMKG, resUSGS] = await Promise.all([
-          fetch('https://data.bmkg.go.id/DataMKG/TEWS/gempaterkini.json'),
-          fetch('https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/all_month.geojson')
-        ]);
-        if (!resBMKG.ok || !resUSGS.ok) throw new Error('Fetch error');
-
-        const dataBMKG = await resBMKG.json();
-        const dataUSGS = await resUSGS.json();
-
-        const daftarBMKG = Array.isArray(dataBMKG.Infogempa?.gempa) ? dataBMKG.Infogempa.gempa : (dataBMKG.Infogempa?.gempa ? [dataBMKG.Infogempa.gempa] : []);
-        const daftarUSGS = Array.isArray(dataUSGS.features) ? dataUSGS.features : [];
-
-        let gabungan = [];
-
-        // proses BMKG
-        daftarBMKG.forEach(g => {
-          if (!g.Coordinates) return;
-          const [latStr, lonStr] = g.Coordinates.split(',');
-          const lat = parseFloat(latStr), lon = parseFloat(lonStr);
-          const mag = parseFloat(g.Magnitude) || 0;
-          gabungan.push({
-            lat, lon, mag,
-            wilayah: g.Wilayah || '-',
-            tanggal: g.Tanggal || '-',
-            jam: g.Jam || '-',
-            kedalaman: g.Kedalaman || '-',
-            potensi: g.Potensi || '-',
-            sumber: 'BMKG',
-            timestamp: new Date(`${g.Tanggal} ${g.Jam}`).getTime()
-          });
-        });
-
-        // proses USGS (filter area Indonesia)
-        daftarUSGS.forEach(f => {
-          const coords = f.geometry?.coordinates;
-          if (!coords || coords.length < 2) return;
-          const lon = coords[0], lat = coords[1], depth = coords[2];
-          if (!(lat >= -11 && lat <= 6 && lon >= 95 && lon <= 141)) return;
-          const mag = f.properties?.mag || 0;
-          const dateObj = new Date((f.properties?.time || Date.now()) + 7 * 3600 * 1000); // konversi ke WIB
-          gabungan.push({
-            lat, lon, mag,
-            wilayah: f.properties?.place || '-',
-            tanggal: formatTanggalBMKG(dateObj),
-            jam: formatJamBMKG(dateObj),
-            kedalaman: depth ? `${depth} km` : '-',
-            potensi: f.properties?.tsunami === 1 ? 'Ada potensi tsunami' : 'Tidak ada potensi tsunami',
-            sumber: 'USGS',
-            timestamp: f.properties?.time || Date.now()
-          });
-        });
-
-        // dedupe & sort
-        gabungan = deduplicateGempa(gabungan).sort((a, b) => b.timestamp - a.timestamp);
-
-        // tampilkan 50 data terbaru di map
-        markersLayer.clearLayers();
-        gabungan.slice(0, 50).forEach(g => {
-          const warna = getColor(g.mag);
-          const ukuran = getSize(g.mag);
-
-          const html = `
-        <div class="gempa-marker-container">
-          <div class="gempa-circle" style="background:${warna}; width:${ukuran}px; height:${ukuran}px;">
-            <span style="display:flex;align-items:center;justify-content:center;width:100%;height:100%;font-size:${Math.max(10, Math.round(ukuran * 0.28))}px;font-weight:700;">
-              ${Number.isFinite(g.mag) ? g.mag.toFixed(1) : '-'}
-            </span>
-          </div>
-          <div class="gempa-pin" style="border-top-color:${warna};"></div>
-        </div>`;
-
-          const icon = L.divIcon({
-            className: 'custom-div-icon',
-            html,
-            iconSize: [ukuran, ukuran + 18],
-            iconAnchor: [ukuran / 2, ukuran + 6]
-          });
-
-          const marker = L.marker([g.lat, g.lon], { icon }).addTo(markersLayer);
-
-          const tip = `
-        <div class="tooltip-title" style="color:${warna}; border-color:${warna};">Magnitudo ${g.mag} (${g.sumber})</div>
-        <div><b>📍 Lokasi:</b> ${g.wilayah}</div>
-        <div><b>📅 Tanggal:</b> ${g.tanggal}</div>
-        <div><b>🕐 Waktu:</b> ${g.jam}</div>
-        <div><b>📏 Kedalaman:</b> ${g.kedalaman}</div>
-        <div><b>🌊 Potensi:</b> ${g.potensi}</div>
-      `;
-          marker.bindTooltip(tip, { direction: 'top', offset: [0, -42], opacity: 0.95 });
-        });
-
-      } catch (err) {
-        console.error('tampilkanSemuaGempa error', err);
-      }
-    }
-
-    /* ======= fungsi load tabel BMKG (10 data terbaru) ======= */
-    async function loadGempaData() {
-      const tabelStatus = document.getElementById('tabel-status');
-      const tabelGempa = document.getElementById('tabel-gempa');
-      const tbody = document.getElementById('tabel-body');
-      try {
-        tabelStatus.style.display = 'block';
-        tabelGempa.style.display = 'none';
-        const res = await fetch('https://data.bmkg.go.id/DataMKG/TEWS/gempaterkini.json');
-        if (!res.ok) throw new Error('BMKG fetch failed');
-        const data = await res.json();
-        const daftar = Array.isArray(data.Infogempa?.gempa) ? data.Infogempa.gempa.slice(0, 10) : (data.Infogempa?.gempa ? [data.Infogempa.gempa] : []);
-        tbody.innerHTML = '';
-        daftar.forEach((g, i) => {
-          const mag = parseFloat(g.Magnitude) || 0;
-          let cls = 'magnitudo-low';
-          if (mag >= 6) cls = 'magnitudo-high';
-          else if (mag >= 5) cls = 'magnitudo-medium';
-
-          tbody.innerHTML += `
-        <tr>
-          <td>${i + 1}</td>
-          <td>${g.Tanggal || '-'} ${g.Jam || '-'}</td>
-          <td>${g.Wilayah || '-'}</td>
-          <td><span class="magnitudo-badge ${cls}">${mag.toFixed(1)}</span></td>
-          <td>${g.Kedalaman || '-'}</td>
-          <td>${g.Lintang || '-'}, ${g.Bujur || '-'}</td>
-          <td>${g.Wilayah || '-'}</td>
-        </tr>
-      `;
-        });
-        tabelStatus.style.display = 'none';
-        tabelGempa.style.display = 'table';
-        updateLastRefreshTime();
-      } catch (err) {
-        console.error('loadGempaData error', err);
-        tabelStatus.innerHTML = '<p>⚠️ Gagal memuat data BMKG.</p>';
-      }
-    }
-
-    /* ======= helper update last refresh time ======= */
-    function updateLastRefreshTime() {
-      const now = new Date();
-      document.getElementById('last-update').textContent = 'Terakhir diperbarui: ' + now.toLocaleTimeString('id-ID', { hour: '2-digit', minute: '2-digit', second: '2-digit' });
-    }
-
-    /* ======= refreshAllData dengan UI feedback ======= */
-    async function refreshAllData() {
-      const btn = document.querySelector('.btn-refresh');
-      try {
-        // disable tombol + tampilkan spinner
-        btn.disabled = true;
-        if (!btn.querySelector('.spinner')) {
-          const s = document.createElement('span'); s.className = 'spinner'; btn.appendChild(s);
+    
+    const lokasiUpper = lokasi.toUpperCase();
+    for (const [provinsi, keywords] of Object.entries(provinsiMap)) {
+      for (const keyword of keywords) {
+        if (lokasiUpper.includes(keyword.toUpperCase())) {
+          return provinsi;
         }
-        await Promise.all([loadGempaData(), tampilkanSemuaGempa()]);
-        updateLastRefreshTime();
-      } catch (err) {
-        console.error('refreshAllData error', err);
-      } finally {
-        // enable dan remove spinner
-        btn.disabled = false;
-        const sp = btn.querySelector('.spinner'); if (sp) sp.remove();
       }
     }
+    
+    // Deteksi wilayah laut
+    if (lokasiUpper.includes('LAUT')) {
+      if (lokasiUpper.includes('BANDA')) return 'Laut Banda';
+      if (lokasiUpper.includes('FLORES')) return 'Laut Flores';
+      if (lokasiUpper.includes('JAWA')) return 'Laut Jawa';
+      if (lokasiUpper.includes('MALUKU')) return 'Laut Maluku';
+      if (lokasiUpper.includes('SULAWESI')) return 'Laut Sulawesi';
+      if (lokasiUpper.includes('SERAM')) return 'Laut Seram';
+      if (lokasiUpper.includes('SAWU')) return 'Laut Sawu';
+      if (lokasiUpper.includes('TIMOR')) return 'Laut Timor';
+      if (lokasiUpper.includes('HALMAHERA')) return 'Laut Halmahera';
+      return 'Perairan Indonesia';
+    }
+    
+    if (lokasiUpper.includes('SELAT')) {
+      if (lokasiUpper.includes('SUNDA')) return 'Selat Sunda';
+      if (lokasiUpper.includes('BALI')) return 'Selat Bali';
+      if (lokasiUpper.includes('LOMBOK')) return 'Selat Lombok';
+      if (lokasiUpper.includes('MAKASSAR')) return 'Selat Makassar';
+      return 'Selat Indonesia';
+    }
+    
+    // Default
+    const words = lokasi.split(/[\s,-]+/).filter(w => w.length > 2);
+    return words.length > 2 ? words.slice(-2).join(' ') : lokasi;
+  }
 
-    /* ======= hook tombol & auto refresh ======= */
-    document.addEventListener('DOMContentLoaded', () => {
-      // jika tombol punya onclick inline, ini hanya menambahkan safety listener
-      const btn = document.querySelector('.btn-refresh');
-      if (btn) {
-        btn.addEventListener('click', (e) => {
-          e.preventDefault();
-          refreshAllData();
+  /* ======= fungsi yang menampilkan markers (50 data gabungan) ======= */
+  async function tampilkanSemuaGempa() {
+    try {
+      const [resBMKG, resUSGS] = await Promise.all([
+        fetch('https://data.bmkg.go.id/DataMKG/TEWS/gempaterkini.json'),
+        fetch('https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/all_month.geojson')
+      ]);
+      if (!resBMKG.ok || !resUSGS.ok) throw new Error('Fetch error');
+
+      const dataBMKG = await resBMKG.json();
+      const dataUSGS = await resUSGS.json();
+
+      const daftarBMKG = Array.isArray(dataBMKG.Infogempa?.gempa) ? dataBMKG.Infogempa.gempa : (dataBMKG.Infogempa?.gempa ? [dataBMKG.Infogempa.gempa] : []);
+      const daftarUSGS = Array.isArray(dataUSGS.features) ? dataUSGS.features : [];
+
+      let gabungan = [];
+
+      // proses BMKG
+      daftarBMKG.forEach(g => {
+        if (!g.Coordinates) return;
+        const [latStr, lonStr] = g.Coordinates.split(',');
+        const lat = parseFloat(latStr), lon = parseFloat(lonStr);
+        const mag = parseFloat(g.Magnitude) || 0;
+        gabungan.push({
+          lat, lon, mag,
+          wilayah: g.Wilayah || '-',
+          tanggal: g.Tanggal || '-',
+          jam: g.Jam || '-',
+          kedalaman: g.Kedalaman || '-',
+          potensi: g.Potensi || '-',
+          sumber: 'BMKG',
+          timestamp: new Date(`${g.Tanggal} ${g.Jam}`).getTime()
         });
+      });
+
+      // proses USGS (filter area Indonesia)
+      daftarUSGS.forEach(f => {
+        const coords = f.geometry?.coordinates;
+        if (!coords || coords.length < 2) return;
+        const lon = coords[0], lat = coords[1], depth = coords[2];
+        if (!(lat >= -11 && lat <= 6 && lon >= 95 && lon <= 141)) return;
+        const mag = f.properties?.mag || 0;
+        const dateObj = new Date((f.properties?.time || Date.now()) + 7 * 3600 * 1000);
+        gabungan.push({
+          lat, lon, mag,
+          wilayah: f.properties?.place || '-',
+          tanggal: formatTanggalBMKG(dateObj),
+          jam: formatJamBMKG(dateObj),
+          kedalaman: depth ? `${depth} km` : '-',
+          potensi: f.properties?.tsunami === 1 ? 'Ada potensi tsunami' : 'Tidak ada potensi tsunami',
+          sumber: 'USGS',
+          timestamp: f.properties?.time || Date.now()
+        });
+      });
+
+      gabungan = deduplicateGempa(gabungan).sort((a, b) => b.timestamp - a.timestamp);
+
+      markersLayer.clearLayers();
+      gabungan.slice(0, 50).forEach(g => {
+        const warna = getColor(g.mag);
+        const ukuran = getSize(g.mag);
+
+        const html = `
+          <div class="gempa-marker-container">
+            <div class="gempa-circle" style="background:${warna}; width:${ukuran}px; height:${ukuran}px;">
+              <span style="display:flex;align-items:center;justify-content:center;width:100%;height:100%;font-size:${Math.max(10, Math.round(ukuran * 0.28))}px;font-weight:700;">
+                ${Number.isFinite(g.mag) ? g.mag.toFixed(1) : '-'}
+              </span>
+            </div>
+            <div class="gempa-pin" style="border-top-color:${warna};"></div>
+          </div>`;
+
+        const icon = L.divIcon({
+          className: 'custom-div-icon',
+          html,
+          iconSize: [ukuran, ukuran + 18],
+          iconAnchor: [ukuran / 2, ukuran + 6]
+        });
+
+        const marker = L.marker([g.lat, g.lon], { icon }).addTo(markersLayer);
+
+        const tip = `
+          <div class="tooltip-title" style="color:${warna}; border-color:${warna};">Magnitudo ${g.mag} (${g.sumber})</div>
+          <div><b>📍 Lokasi:</b> ${g.wilayah}</div>
+          <div><b>📅 Tanggal:</b> ${g.tanggal}</div>
+          <div><b>🕐 Waktu:</b> ${g.jam}</div>
+          <div><b>📏 Kedalaman:</b> ${g.kedalaman}</div>
+          <div><b>🌊 Potensi:</b> ${g.potensi}</div>
+        `;
+        marker.bindTooltip(tip, { direction: 'top', offset: [0, -42], opacity: 0.95 });
+      });
+
+    } catch (err) {
+      console.error('tampilkanSemuaGempa error', err);
+    }
+  }
+
+  /* ======= fungsi load tabel BMKG (10 data terbaru) ======= */
+  async function loadGempaData() {
+    const tabelStatus = document.getElementById('tabel-status');
+    const tabelGempa = document.getElementById('tabel-gempa');
+    const tbody = document.getElementById('tabel-body');
+    try {
+      tabelStatus.style.display = 'block';
+      tabelGempa.style.display = 'none';
+      const res = await fetch('https://data.bmkg.go.id/DataMKG/TEWS/gempaterkini.json');
+      if (!res.ok) throw new Error('BMKG fetch failed');
+      const data = await res.json();
+      const daftar = Array.isArray(data.Infogempa?.gempa) ? data.Infogempa.gempa.slice(0, 10) : (data.Infogempa?.gempa ? [data.Infogempa.gempa] : []);
+      tbody.innerHTML = '';
+      daftar.forEach((g, i) => {
+        const mag = parseFloat(g.Magnitude) || 0;
+        let cls = 'magnitudo-low';
+        if (mag >= 6) cls = 'magnitudo-high';
+        else if (mag >= 5) cls = 'magnitudo-medium';
+        
+        const wilayah = ekstrakProvinsi(g.Wilayah);
+
+        tbody.innerHTML += `
+          <tr>
+            <td>${i + 1}</td>
+            <td>${g.Tanggal || '-'} ${g.Jam || '-'}</td>
+            <td>${g.Wilayah || '-'}</td>
+            <td><span class="magnitudo-badge ${cls}">${mag.toFixed(1)}</span></td>
+            <td>${g.Kedalaman || '-'}</td>
+            <td>${g.Lintang || '-'}, ${g.Bujur || '-'}</td>
+            <td><p>${wilayah}</p></td>
+          </tr>
+        `;
+      });
+      tabelStatus.style.display = 'none';
+      tabelGempa.style.display = 'table';
+      updateLastRefreshTime();
+    } catch (err) {
+      console.error('loadGempaData error', err);
+      tabelStatus.innerHTML = '<p>⚠️ Gagal memuat data BMKG.</p>';
+    }
+  }
+
+  function updateLastRefreshTime() {
+    const now = new Date();
+    document.getElementById('last-update').textContent = 'Terakhir diperbarui: ' + now.toLocaleTimeString('id-ID', { hour: '2-digit', minute: '2-digit', second: '2-digit' });
+  }
+
+  async function refreshAllData() {
+    const btn = document.querySelector('.btn-refresh');
+    try {
+      btn.disabled = true;
+      if (!btn.querySelector('.spinner')) {
+        const s = document.createElement('span'); s.className = 'spinner'; btn.appendChild(s);
       }
-      // load pertama kali
-      refreshAllData();
-      // auto refresh 5 menit
-      setInterval(refreshAllData, 300000);
-    });
-  </script>
+      await Promise.all([loadGempaData(), tampilkanSemuaGempa()]);
+      updateLastRefreshTime();
+    } catch (err) {
+      console.error('refreshAllData error', err);
+    } finally {
+      btn.disabled = false;
+      const sp = btn.querySelector('.spinner'); if (sp) sp.remove();
+    }
+  }
+
+  document.addEventListener('DOMContentLoaded', () => {
+    const btn = document.querySelector('.btn-refresh');
+    if (btn) {
+      btn.addEventListener('click', (e) => {
+        e.preventDefault();
+        refreshAllData();
+      });
+    }
+    refreshAllData();
+    setInterval(refreshAllData, 300000);
+  });
+</script>
 
 </body>
 
