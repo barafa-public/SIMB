@@ -57,8 +57,6 @@ html {
 .nav-menu {
     display: flex;
     gap: 1rem;
-    flex-wrap: wrap;
-    justify-content: center;
 }
 
 .nav-link {
@@ -78,6 +76,7 @@ html {
     box-shadow: 0 5px 15px rgba(255, 152, 0, 0.4);
 }
 
+
 body {
     font-family: 'Poppins', sans-serif;
     background: #FBFBFB;
@@ -92,8 +91,11 @@ body#vulkanik-page::before {
     left: 0;
     right: 0;
     height: 850px;
+    /* Sesuaikan sampai sebelum "Contoh Peristiwa Gempa" */
     background:
         linear-gradient(to bottom,
+            /* rgba(255, 255, 255, 0.562) 0%,
+            transparent 0%, */
             rgba(255, 255, 255, 0.719) 70%,
             rgba(255, 255, 255, 0.95) 90%,
             #ffffff 100%),
@@ -146,143 +148,179 @@ body#buatan-page::before {
 }
 
 .kontainer-utama {
-    width: 100%;
-    max-width: 1280px;
+    width: 1280px;
     height: auto;
     min-height: 1500px;
     position: relative;
     overflow: visible;
     margin: 0 auto;
     padding-bottom: 100px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
 }
 
 .judul-halaman {
-    width: 100%;
-    max-width: 330px;
-    height: auto;
-    margin-top: 100px;
+    width: 330px;
+    height: 47px;
+    left: 475px;
+    top: 100px;
+    position: absolute;
     color: black;
-    font-size: clamp(24px, 6vw, 36px);
+    font-size: 36px;
     font-weight: 700;
-    text-align: center;
 }
 
 .gambar-utama {
-    width: 100%;
-    max-width: 474px;
-    height: auto;
-    aspect-ratio: 474 / 307;
-    margin: 2rem auto 0;
+    width: 474.46px;
+    height: 307px;
+    left: 135px;
+    top: 286px;
+    position: absolute;
     box-shadow: -25px 25px 4px rgba(0, 0, 0, 0.50);
     overflow: hidden;
     border-radius: 30px;
 }
 
 .gambar-utama img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
+    width: 647px;
+    height: 432px;
+    left: -92px;
+    top: -85px;
+    position: absolute;
 }
 
 .kontainer-penyebab {
-    width: 100%;
-    max-width: 429px;
-    height: auto;
-    margin: 2rem auto;
-    padding: 0 2rem;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
+    width: 429.37px;
+    height: 247px;
+    left: 740.63px;
+    top: 323px;
+    position: absolute;
 }
 
 .judul-penyebab {
-    width: 100%;
-    height: auto;
+    width: 190px;
+    height: 47px;
     color: black;
-    font-size: clamp(18px, 5vw, 24px);
+    font-size: 24px;
     font-weight: 700;
-    margin-bottom: 1.5rem;
+    margin-bottom: 47px;
 }
 
 .teks-penyebab {
-    width: 100%;
-    height: auto;
+    width: 419px;
+    height: 200px;
     text-align: justify;
     display: flex;
     justify-content: center;
     flex-direction: column;
     color: black;
-    font-size: clamp(14px, 3vw, 16px);
+    font-size: 16px;
     font-weight: 500;
-    line-height: 1.6;
 }
 
 .judul-contoh {
-    width: 100%;
-    max-width: 369px;
-    height: auto;
-    margin-top: 3rem;
-    padding: 0 1rem;
+    width: 369px;
+    height: 87px;
+    left: 455px;
+    top: 743px;
+    position: absolute;
     text-align: center;
     color: black;
-    font-size: clamp(18px, 5vw, 24px);
+    font-size: 24px;
     font-weight: 700;
 }
 
 .kartu-contoh {
-    width: 100%;
-    max-width: 400px;
+    width: 400px;
     height: 129px;
-    position: relative;
+    position: absolute;
     overflow: hidden;
     border-radius: 20px;
     outline: 2px #EE8F13 solid;
-    margin: 1.5rem auto;
 }
 
-.kartu-contoh-1,
-.kartu-contoh-2,
-.kartu-contoh-3,
-.kartu-contoh-4,
-.kartu-contoh-5,
+.kartu-contoh-1 {
+    left: 110px;
+    top: 860px;
+}
+
+.kartu-contoh-2 {
+    left: 770px;
+    top: 956px;
+}
+
+.kartu-contoh-3 {
+    left: 110px;
+    top: 1068px;
+}
+
+.kartu-contoh-4 {
+    left: 770px;
+    top: 1165px;
+}
+
+.kartu-contoh-5 {
+    left: 110px;
+    top: 1278px;
+}
+
 .kartu-contoh-6 {
-    position: relative;
-    left: auto;
-    top: auto;
+    left: 770px;
+    top: 1374px;
 }
 
 .kartu-contoh img {
     position: absolute;
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    left: 0;
-    top: 0;
 }
 
-.kartu-contoh-1 img,
-.kartu-contoh-2 img,
-.kartu-contoh-3 img,
-.kartu-contoh-4 img,
-.kartu-contoh-5 img,
+.kartu-contoh-1 img {
+    width: 417px;
+    height: 362px;
+    left: -9px;
+    top: -102px;
+}
+
+.kartu-contoh-2 img {
+    width: 418px;
+    height: 297px;
+    left: -18px;
+    top: -168px;
+}
+
+.kartu-contoh-3 img {
+    width: 404px;
+    height: 222px;
+    left: -4px;
+    top: -20px;
+}
+
+.kartu-contoh-4 img {
+    width: 413px;
+    height: 275px;
+    left: -13px;
+    top: -43px;
+}
+
+.kartu-contoh-5 img {
+    width: 406px;
+    height: 304px;
+    left: -6px;
+    top: -97px;
+}
+
 .kartu-contoh-6 img {
-    width: 100%;
-    height: 100%;
-    left: 0;
-    top: 0;
+    width: 405px;
+    height: 269px;
+    left: -5px;
+    top: -111px;
 }
 
 .overlay-kartu {
-    width: 100%;
-    height: 100%;
+    width: 400px;
+    height: 129px;
+    left: 0px;
+    top: 0px;
     position: absolute;
     background: rgba(31.87, 31.87, 31.87, 0.47);
     border-radius: 20px;
-    left: 0px;
-    top: 0px;
 }
 
 .teks-kartu {
@@ -291,34 +329,47 @@ body#buatan-page::before {
     top: 50%;
     transform: translate(-50%, -50%);
     color: white;
-    font-size: clamp(14px, 4vw, 20px);
+    font-size: 20px;
     font-weight: 500;
     text-align: center;
-    white-space: normal;
-    padding: 0 1rem;
-    width: 90%;
+    white-space: nowrap;
 }
 
 .titik-timeline {
     width: 29.67px;
     height: 29.86px;
-    position: relative;
+    position: absolute;
     background: linear-gradient(180deg, #EE8F13 0%, #BF450C 100%);
     border-radius: 9999px;
-    margin: -15px auto 0;
-    display: none;
+    left: 626px;
 }
 
-.titik-1,
-.titik-2,
-.titik-3,
-.titik-4,
-.titik-5,
-.titik-6,
+.titik-1 {
+    top: 894px;
+}
+
+.titik-2 {
+    top: 983.86px;
+}
+
+.titik-3 {
+    top: 1073.72px;
+}
+
+.titik-4 {
+    top: 1163.58px;
+}
+
+.titik-5 {
+    top: 1253.45px;
+}
+
+.titik-6 {
+    top: 1343.31px;
+}
+
 .titik-7 {
-    position: relative;
-    left: auto;
-    top: auto;
+    top: 1433.17px;
 }
 
 /* Footer Styles */
@@ -381,6 +432,7 @@ body#buatan-page::before {
     color: #bbb;
 }
 
+
 /* ===== RESPONSIVE BREAKPOINTS ===== */
 
 /* Tablet Landscape (1024px) */
@@ -393,20 +445,18 @@ body#buatan-page::before {
         gap: 0.8rem;
     }
 
-    .kontainer-utama {
-        padding: 0 1.5rem 100px;
-    }
-
     .judul-halaman {
         font-size: 32px;
+        margin: 80px auto 40px;
     }
 
     .gambar-utama {
+        max-width: 420px;
         box-shadow: -20px 20px 4px rgba(0, 0, 0, 0.50);
     }
 
     .kontainer-penyebab {
-        padding: 0 1.5rem;
+        max-width: 420px;
     }
 
     .teks-penyebab {
@@ -456,22 +506,19 @@ body#buatan-page::before {
         height: 600px;
     }
 
-    .kontainer-utama {
-        padding: 0 1rem 100px;
-    }
-
     .judul-halaman {
         font-size: 28px;
-        margin-top: 60px;
+        margin: 60px auto 30px;
     }
 
     .gambar-utama {
+        max-width: 90%;
         box-shadow: -15px 15px 4px rgba(0, 0, 0, 0.50);
     }
 
     .kontainer-penyebab {
-        padding: 0 1rem;
-        margin: 2rem auto;
+        max-width: 90%;
+        padding: 15px;
     }
 
     .judul-penyebab {
@@ -484,10 +531,12 @@ body#buatan-page::before {
 
     .judul-contoh {
         font-size: 22px;
+        max-width: 90%;
     }
 
     .kartu-contoh {
-        margin: 1.5rem auto;
+        max-width: 90%;
+        margin: 25px auto;
     }
 
     .teks-kartu {
@@ -533,28 +582,27 @@ body#buatan-page::before {
     }
 
     .kontainer-utama {
-        padding: 0 1rem 60px;
-        min-height: auto;
+        padding: 10px;
     }
 
     .judul-halaman {
         font-size: 24px;
-        margin-top: 40px;
+        margin: 40px auto 20px;
     }
 
     .gambar-utama {
+        max-width: 95%;
         box-shadow: -10px 10px 4px rgba(0, 0, 0, 0.50);
-        margin: 1.5rem auto 0;
     }
 
     .kontainer-penyebab {
-        padding: 0 1rem;
-        margin: 1.5rem auto;
+        max-width: 95%;
+        padding: 10px;
     }
 
     .judul-penyebab {
         font-size: 20px;
-        margin-bottom: 1rem;
+        margin-bottom: 15px;
     }
 
     .teks-penyebab {
@@ -564,18 +612,19 @@ body#buatan-page::before {
 
     .judul-contoh {
         font-size: 20px;
-        margin-top: 2.5rem;
+        margin: 40px auto 30px;
+        max-width: 95%;
     }
 
     .kartu-contoh {
-        height: auto;
-        aspect-ratio: 400 / 129;
-        margin: 1rem auto;
+        max-width: 95%;
+        height: 110px;
+        margin: 20px auto;
     }
 
     .teks-kartu {
         font-size: 15px;
-        padding: 0 1rem;
+        padding: 0 15px;
     }
 
     .footer {
@@ -634,8 +683,7 @@ body#buatan-page::before {
     }
 
     .kartu-contoh {
-        height: auto;
-        aspect-ratio: 400 / 129;
+        height: 100px;
     }
 
     .teks-kartu {
