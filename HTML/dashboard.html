@@ -58,7 +58,7 @@
 
     #map {
       height: 550px;
-      width: 90%;
+      width: 100%;
       margin: 20px auto;
       display: block;
       border-radius: 10px;
@@ -295,6 +295,7 @@
           Satelit</button> <button class="map-toggle" id="btnStreet" onclick="toggleMap('street')">🗺️ Street</button>
       </div>
     </div>
+    <p class="sumber-data">Sumber data: BMKG & USGS</p>
   </section>
   <!-- Tabel Beberapa Gempa -->
   <section class="tabel-gempa-section">
@@ -353,12 +354,16 @@
 
   <!-- Footer -->
   <footer class="footer">
-    <div class="kata-kata">
-      <p>"Sensing The Earth, Securing The Future"</p>
-    </div>
-    <div class="copyright">
-      <p>Copyright 2025. All rights Reserved</p>
-    </div>
+        <div class="footer-border"></div>
+        <div class="footer-content">
+            <div class="footer-tagline">
+                Sensing The Earth,<br />
+                Securing The Future
+            </div>
+            <div class="footer-copyright">
+                Copyright 2025. All Rights Reserved
+            </div>
+        </div>
   </footer>
 
   <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
